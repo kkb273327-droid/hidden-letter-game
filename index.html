@@ -96,13 +96,13 @@
         padding: clamp(16px, 4vw, 28px);
         border: 1px solid rgb(158 175 190 / 58%);
         border-radius: 8px;
-        background: rgb(255 255 255 / 88%);
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
         box-shadow: var(--shadow);
       }
 
       .view--play .screen,
       .view--wrong .screen {
-        background: rgb(255 255 255 / 82%);
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
         backdrop-filter: blur(2px);
       }
 
@@ -874,7 +874,7 @@
       </section>
     </main>
 
-    <audio id="backgroundAudio" src="./assets/audio/background_music.mp3" preload="auto" loop></audio>
+    <audio id="backgroundAudio" src="./assets/audio/background_music.mp3" preload="auto" loop autoplay></audio>
 
     <div class="modal" id="hintModal" role="dialog" aria-modal="true" aria-labelledby="hintTitle" aria-hidden="true">
       <div class="hint-card">
@@ -901,7 +901,7 @@
       const confettiContext = confettiCanvas.getContext("2d");
       const correctAnswer = "LOVE";
       let activeView = "home";
-      let audioUnlocked = false;
+      let audioUnlocked = true;
       let confettiPieces = [];
       let confettiAnimationId = 0;
 
@@ -964,16 +964,21 @@
       }
 
       function playBackgroundAudio() {
-        if (!audioUnlocked || !backgroundAudio || activeView === "correct" || activeView === "wrong") return;
+        if (!audioUnlocked || !backgroundAudio || activeView === "correct" || activeView === "wrong") return Promise.resolve();
 
         backgroundAudio.volume = 0.38;
-        backgroundAudio.play().catch(() => {});
+        return backgroundAudio.play().catch(() => {});
       }
 
       function pauseBackgroundAudio() {
         if (!backgroundAudio) return;
 
         backgroundAudio.pause();
+      }
+
+      function unlockAndPlayBackgroundAudio() {
+        audioUnlocked = true;
+        playBackgroundAudio();
       }
 
       function playCorrectAudio() {
@@ -1051,7 +1056,7 @@
       }
 
       document.addEventListener("click", (event) => {
-        audioUnlocked = true;
+        unlockAndPlayBackgroundAudio();
         const routeButton = event.target.closest("[data-go]");
         const submitButton = event.target.closest("[data-submit]");
 
@@ -1063,6 +1068,12 @@
           submitAnswer();
         }
 
+        playBackgroundAudio();
+      });
+
+      document.addEventListener("pointerdown", unlockAndPlayBackgroundAudio, { once: true });
+      document.addEventListener("keydown", unlockAndPlayBackgroundAudio, { once: true });
+      window.addEventListener("load", () => {
         playBackgroundAudio();
       });
 
