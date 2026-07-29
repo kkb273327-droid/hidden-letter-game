@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#eef7ff" />
+    <title>숨겨진 글자를 찾아라!</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+
+      :root {
+        --blue: #2297eb;
+        --blue-dark: #1374c9;
+        --blue-soft: #dff2ff;
+        --yellow: #ffd84d;
+        --red: #ff5b5b;
+        --ink: #101820;
+        --muted: #6d7782;
+        --line: #9aa6af;
+        --disabled: #cfd4d8;
+        --panel: #ffffff;
+        --shadow: 0 14px 30px rgb(33 64 97 / 15%);
+        font-family:
+          "Arial Rounded MT Bold",
+          "Segoe UI",
+          "Malgun Gothic",
+          "Apple SD Gothic Neo",
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow-x: hidden;
+        background:
+          linear-gradient(90deg, rgb(255 255 255 / 66%) 1px, transparent 1px),
+          linear-gradient(rgb(255 255 255 / 70%) 1px, transparent 1px),
+          linear-gradient(150deg, #eef7ff 0%, #f7fbff 48%, #e8edf2 100%);
+        background-size: 34px 34px, 34px 34px, 100% 100%;
+        color: var(--ink);
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      .app {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+      }
+
+      .view {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 14px;
+        width: 100%;
+        min-height: 100svh;
+        padding: clamp(12px, 3vw, 26px);
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(12px) scale(0.985);
+        overflow-y: auto;
+        transition:
+          opacity 240ms ease,
+          transform 240ms ease,
+          visibility 240ms ease;
+      }
+
+      .view.is-active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .screen {
+        width: min(100%, 680px);
+        min-height: min(760px, calc(100svh - 24px));
+        margin: auto;
+        padding: clamp(16px, 4vw, 28px);
+        border: 1px solid rgb(158 175 190 / 58%);
+        border-radius: 8px;
+        background: rgb(255 255 255 / 94%);
+        box-shadow: var(--shadow);
+      }
+
+      .view--play .screen,
+      .view--wrong .screen {
+        background: rgb(255 255 255 / 82%);
+        backdrop-filter: blur(2px);
+      }
+
+      .topbar {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .topbar__left {
+        justify-self: start;
+      }
+
+      .topbar__center {
+        justify-self: center;
+      }
+
+      .topbar__right {
+        justify-self: end;
+      }
+
+      .title {
+        margin: 0;
+        text-align: center;
+        font-weight: 900;
+        line-height: 1.08;
+        color: #0d1821;
+      }
+
+      .title--main {
+        font-family: "Jua", "Arial Rounded MT Bold", "Malgun Gothic", sans-serif;
+        font-size: clamp(42px, 12vw, 80px);
+        font-weight: 900;
+        letter-spacing: 0;
+      }
+
+      .title--blue {
+        color: #1786db;
+        -webkit-text-stroke: 0;
+        text-shadow: none;
+      }
+
+      .title--yellow {
+        color: var(--yellow);
+        -webkit-text-stroke: 0;
+        text-shadow: none;
+      }
+
+      .page-title {
+        margin: 0;
+        text-align: center;
+        font-size: clamp(32px, 8vw, 52px);
+        font-weight: 900;
+        line-height: 1.1;
+      }
+
+      .page-title::after {
+        display: block;
+        width: 120px;
+        height: 4px;
+        margin: 8px auto 0;
+        border-radius: 999px;
+        background: #0f1720;
+        content: "";
+      }
+
+      .btn {
+        min-height: 44px;
+        padding: 8px 18px;
+        border: 2px solid #1d2933;
+        border-radius: 8px;
+        background: linear-gradient(#ffffff, #edf2f5);
+        color: #111;
+        box-shadow: 0 3px 0 rgb(28 41 51 / 20%);
+        font-weight: 900;
+        cursor: pointer;
+        transition:
+          transform 140ms ease,
+          box-shadow 140ms ease,
+          filter 140ms ease;
+      }
+
+      .btn:hover:not(:disabled) {
+        filter: brightness(1.03);
+        transform: translateY(-1px);
+      }
+
+      .btn:active:not(:disabled) {
+        box-shadow: 0 1px 0 rgb(28 41 51 / 20%);
+        transform: translateY(2px);
+      }
+
+      .btn:focus-visible,
+      input:focus-visible {
+        outline: 4px solid rgb(34 151 235 / 30%);
+        outline-offset: 2px;
+      }
+
+      .btn--primary {
+        border-color: #1675c5;
+        background: linear-gradient(#4db6ff, var(--blue));
+        color: #fff;
+        box-shadow: 0 5px 0 var(--blue-dark), 0 10px 18px rgb(19 116 201 / 24%);
+        text-shadow: 0 1px 0 rgb(0 0 0 / 18%);
+      }
+
+      .btn--start {
+        min-width: min(280px, 72vw);
+        min-height: 68px;
+        border-radius: 16px;
+        font-size: clamp(26px, 7vw, 42px);
+      }
+
+      .btn--submit:disabled,
+      .btn:disabled {
+        border-color: #aeb6bd;
+        background: linear-gradient(#d9dde0, #c8cdd1);
+        color: #888f96;
+        box-shadow: none;
+        cursor: not-allowed;
+        text-shadow: none;
+      }
+
+      .main-screen {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .magnifier-stage {
+        position: relative;
+        display: grid;
+        min-height: min(38svh, 300px);
+        place-items: center;
+      }
+
+      .magnifier {
+        width: clamp(150px, 37vw, 240px);
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 14px 16px rgb(39 72 98 / 20%));
+        animation: searchMove 5.5s ease-in-out infinite;
+      }
+
+      .magnifier::after {
+        content: none;
+      }
+
+      @keyframes searchMove {
+        0%,
+        100% {
+          transform: translate(-22px, 6px) rotate(-5deg);
+        }
+        35% {
+          transform: translate(28px, -18px) rotate(6deg);
+        }
+        70% {
+          transform: translate(6px, 24px) rotate(-12deg);
+        }
+      }
+
+      .description {
+        width: min(100%, 500px);
+        margin: clamp(18px, 7svh, 58px) auto 0;
+        padding-left: 28px;
+        font-size: clamp(17px, 3.8vw, 22px);
+        font-weight: 800;
+        line-height: 1.45;
+      }
+
+      .description li {
+        margin: 0 0 12px;
+      }
+
+      .stage-list {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(48px, 1fr));
+        gap: clamp(8px, 2vw, 16px);
+        width: min(100%, 520px);
+        margin: clamp(26px, 8svh, 72px) auto 28px;
+      }
+
+      .stage-card {
+        position: relative;
+        display: grid;
+        min-height: clamp(56px, 12vw, 76px);
+        place-items: center;
+        border: 2px solid #74808a;
+        border-radius: 12px;
+        background: linear-gradient(#f5f8fb, #cbd2d8);
+        color: #767d84;
+        box-shadow: inset 0 2px 2px rgb(255 255 255 / 70%);
+        font-size: clamp(23px, 6vw, 36px);
+        font-weight: 900;
+      }
+
+      .stage-card--active {
+        border-color: #1177ce;
+        background: linear-gradient(#45b8ff, #1395e6);
+        color: #fff;
+        box-shadow: 0 6px 12px rgb(19 149 230 / 26%);
+        cursor: pointer;
+      }
+
+      .stage-card--locked {
+        cursor: not-allowed;
+      }
+
+      .lock {
+        width: clamp(26px, 7vw, 36px);
+        height: clamp(26px, 7vw, 36px);
+      }
+
+      .coming-soon {
+        display: flex;
+        width: fit-content;
+        margin: 0 auto;
+        padding: 9px 18px;
+        border: 4px solid #878d92;
+        border-radius: 7px;
+        background: #f4f5f6;
+        color: #80868c;
+        font-size: clamp(24px, 6vw, 34px);
+        font-weight: 900;
+        transform: rotate(-7deg);
+      }
+
+      .stage-badge {
+        display: grid;
+        width: 46px;
+        height: 42px;
+        margin: 6px auto -3px;
+        place-items: center;
+        border: 2px solid #1f2933;
+        border-radius: 7px;
+        background: linear-gradient(#e4f1ff, #bedbfa);
+        font-size: 24px;
+        font-weight: 900;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+        width: min(100%, 560px);
+        margin: 0 auto;
+        overflow: hidden;
+        border: 2px solid #1d2933;
+        border-radius: 8px;
+        background: #1d2933;
+      }
+
+      .photo-grid img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        background: #dbe2e8;
+      }
+
+      .answer-bar {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 8px;
+        width: min(100%, 560px);
+        margin: 18px auto 0;
+      }
+
+      .answer-label {
+        font-size: clamp(21px, 5vw, 28px);
+        font-weight: 900;
+      }
+
+      .answer-input {
+        min-width: 0;
+        height: 48px;
+        padding: 6px 12px;
+        border: 2px solid #1d2933;
+        border-radius: 9px;
+        background: #fff;
+        font-size: clamp(20px, 5vw, 28px);
+        font-weight: 900;
+      }
+
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        visibility: hidden;
+        background: rgb(12 22 31 / 55%);
+        opacity: 0;
+        transition: opacity 200ms ease, visibility 200ms ease;
+      }
+
+      .modal.is-open {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .hint-card {
+        width: min(92vw, 420px);
+        padding: 14px;
+        border: 2px solid #111;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 18px 40px rgb(0 0 0 / 20%);
+        transform: scale(0.96);
+        transition: transform 200ms ease;
+      }
+
+      .modal.is-open .hint-card {
+        transform: scale(1);
+      }
+
+      .hint-card img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border: 2px solid #24313b;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .hint-copy {
+        margin: 12px 0 8px;
+        text-align: center;
+        font-size: clamp(24px, 7vw, 34px);
+        font-weight: 900;
+      }
+
+      .hint-actions {
+        display: flex;
+        justify-content: center;
+      }
+
+      .success-screen {
+        position: relative;
+        overflow: hidden;
+        border-color: transparent;
+        background: #fff;
+        box-shadow: none;
+      }
+
+      .view--correct {
+        background: #fff;
+        overflow: hidden;
+        padding: 8px;
+      }
+
+      .view--correct .screen {
+        width: min(100%, 980px);
+        height: calc(100svh - 16px);
+        min-height: 0;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        padding: 10px clamp(10px, 2vw, 18px);
+      }
+
+      .success-content {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
+        gap: clamp(8px, 1.5svh, 14px);
+        place-items: center;
+        min-height: 0;
+      }
+
+      .success-screen .topbar {
+        position: relative;
+        z-index: 6;
+      }
+
+      .success-title {
+        margin: 0;
+        text-align: center;
+        font-size: clamp(40px, 10svh, 72px);
+        font-weight: 900;
+        color: var(--red);
+        -webkit-text-stroke: 1px #761414;
+        text-shadow:
+          0 4px 0 #ffe164,
+          0 7px 0 #2862b8,
+          0 13px 20px rgb(20 60 120 / 16%);
+      }
+
+      .gif-frame {
+        width: min(88vw, 620px);
+        height: min(52svh, 520px);
+        overflow: hidden;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .gif-frame img {
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        object-fit: contain;
+      }
+
+      .answer-check-screen {
+        background: #fff;
+      }
+
+      .answer-check-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        width: min(100%, 620px);
+        margin: clamp(36px, 8svh, 70px) auto 0;
+      }
+
+      .answer-check-grid img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        background: #f4f7fa;
+      }
+
+      .wrong-title {
+        margin: clamp(30px, 8svh, 64px) 0 20px;
+        text-align: center;
+        font-size: clamp(34px, 9vw, 58px);
+        font-weight: 900;
+      }
+
+      .wrong-visual {
+        position: relative;
+        width: min(72vw, 360px);
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+
+      .wrong-visual img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+
+      .wrong-dim {
+        filter: grayscale(0.85);
+        opacity: 0.34;
+      }
+
+      .confetti-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (max-width: 520px) {
+        .screen {
+          min-height: calc(100svh - 16px);
+          padding: 12px;
+        }
+
+        .view {
+          padding: 8px;
+        }
+
+        .topbar {
+          grid-template-columns: auto 1fr auto;
+        }
+
+        .topbar .page-title {
+          font-size: 32px;
+        }
+
+        .btn {
+          min-height: 38px;
+          padding: 6px 10px;
+          font-size: 16px;
+        }
+
+        .description {
+          padding-left: 24px;
+          font-size: 16px;
+          line-height: 1.4;
+        }
+
+        .answer-bar {
+          grid-template-columns: auto minmax(0, 1fr) 66px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      GitHub Pages asset guide
+      - Main magnifier: ./assets/images/magnifier.png
+      - Stage 1 photos: ./assets/images/stage1_photo1.jpg ... stage1_photo4.jpg
+      - Stage 1 hint: ./assets/images/stage1_hint.jpg
+      - Correct GIF: ./assets/images/correct_animation.gif
+      - Correct song: ./assets/audio/correct_song.mp3
+      - Answer check photos: ./assets/images/answer_1.jpg, answer_o.jpg, answer_v.jpg, answer_e.jpg
+      Replace files with the same names after upload; no local Windows paths are used.
+    -->
+    <main class="app" aria-live="polite">
+      <section class="view view--home is-active" data-view="home" aria-label="메인 화면">
+        <div class="screen main-screen">
+          <h1 class="title title--main">
+            <span class="title--blue">숨겨진 글자를</span><br />
+            <span class="title--yellow">찾아라!</span>
+          </h1>
+          <div class="magnifier-stage" aria-hidden="true">
+            <img class="magnifier" src="./assets/images/magnifier.png?v=3" alt="" />
+          </div>
+          <button class="btn btn--primary btn--start" type="button" data-go="rules">시작</button>
+        </div>
+      </section>
+
+      <section class="view view--rules" data-view="rules" aria-label="게임 설명 화면" aria-hidden="true">
+        <div class="screen">
+          <header class="topbar">
+            <div></div>
+            <h2 class="page-title">게임 설명</h2>
+            <button class="btn topbar__right" type="button" data-go="stages">다음</button>
+          </header>
+          <ol class="description">
+            <li>이 게임은 현실과 연동되어 있습니다.</li>
+            <li>현실에서 제작자가 보낸 사진에서 숨겨진 글자들을 찾아 정답을 찾는 게임입니다.</li>
+            <li>영어로 된 정답은 사진 속에서 정답을 찾으면 되고, 한글로 된 정답은 사진 속에서 초성을 찾아 단어를 유추하면 됩니다.</li>
+            <li>영어는 대문자로 작성해야 합니다.</li>
+            <li>스테이지는 점차 업데이트 될 예정입니다.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="view view--stages" data-view="stages" aria-label="스테이지 선택 화면" aria-hidden="true">
+        <div class="screen">
+          <h2 class="page-title">스테이지</h2>
+          <div class="stage-list" aria-label="스테이지 목록">
+            <button class="stage-card stage-card--active" type="button" data-go="stage1">1</button>
+            <button class="stage-card stage-card--locked" type="button" disabled>2</button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="3 준비 중">
+              <svg class="lock" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M17 10h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V8a5 5 0 0 1 10 0v2Zm-8 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V18h1.5v-1.2A1.5 1.5 0 0 0 12 14Z" />
+              </svg>
+            </button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="4 준비 중">
+              <svg class="lock" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M17 10h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V8a5 5 0 0 1 10 0v2Zm-8 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V18h1.5v-1.2A1.5 1.5 0 0 0 12 14Z" />
+              </svg>
+            </button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 준비 중">
+              <svg class="lock" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M17 10h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V8a5 5 0 0 1 10 0v2Zm-8 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V18h1.5v-1.2A1.5 1.5 0 0 0 12 14Z" />
+              </svg>
+            </button>
+          </div>
+          <div class="coming-soon">준비 중</div>
+        </div>
+      </section>
+
+      <section class="view view--play" data-view="stage1" aria-label="Stage 1 플레이 화면" aria-hidden="true">
+        <div class="screen">
+          <header class="topbar">
+            <button class="btn topbar__left" type="button" data-go="stages">돌아가기</button>
+            <button class="btn topbar__center" type="button" id="hintButton">힌트</button>
+            <div></div>
+          </header>
+          <div class="stage-badge">1</div>
+          <div class="photo-grid" aria-label="Stage 1 사진 네 장">
+            <img src="./assets/images/stage1_photo1.jpg?v=2" alt="Stage 1 단서 사진 1" />
+            <img src="./assets/images/stage1_photo2.jpg?v=2" alt="Stage 1 단서 사진 2" />
+            <img src="./assets/images/stage1_photo3.jpg?v=2" alt="Stage 1 단서 사진 3" />
+            <img src="./assets/images/stage1_photo4.jpg?v=2" alt="Stage 1 단서 사진 4" />
+          </div>
+          <form class="answer-bar" id="answerForm" autocomplete="off">
+            <label class="answer-label" for="answerInput">정답:</label>
+            <input class="answer-input" id="answerInput" name="answer" type="text" inputmode="latin" aria-label="정답 입력" />
+            <button class="btn btn--primary btn--submit" type="submit" data-submit disabled>제출</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="view view--correct" data-view="correct" aria-label="정답 화면" aria-hidden="true">
+        <div class="screen success-screen">
+          <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+          <header class="topbar">
+            <div></div>
+            <div></div>
+            <button class="btn topbar__right" type="button" data-go="home">홈</button>
+          </header>
+          <div class="success-content">
+            <button class="btn btn--primary" type="button" data-go="answerCheck">정답 확인하기</button>
+            <h2 class="success-title">정답!!</h2>
+            <div class="gif-frame">
+              <img src="./assets/images/correct_animation.gif?v=4" alt="정답 축하 애니메이션" />
+            </div>
+            <audio id="correctAudio" src="./assets/audio/correct_song.mp3" preload="none"></audio>
+          </div>
+        </div>
+      </section>
+
+      <section class="view view--answer-check" data-view="answerCheck" aria-label="정답 확인 화면" aria-hidden="true">
+        <div class="screen answer-check-screen">
+          <header class="topbar">
+            <button class="btn topbar__left" type="button" data-go="correct">돌아가기</button>
+            <div></div>
+            <div></div>
+          </header>
+          <div class="answer-check-grid" aria-label="정답 확인 사진 네 장">
+            <img src="./assets/images/answer_1.jpg?v=1" alt="정답 확인 사진 1" />
+            <img src="./assets/images/answer_o.jpg?v=1" alt="정답 확인 사진 O" />
+            <img src="./assets/images/answer_v.jpg?v=1" alt="정답 확인 사진 V" />
+            <img src="./assets/images/answer_e.jpg?v=1" alt="정답 확인 사진 E" />
+          </div>
+        </div>
+      </section>
+
+      <section class="view view--wrong" data-view="wrong" aria-label="오답 화면" aria-hidden="true">
+        <div class="screen">
+          <header class="topbar">
+            <button class="btn topbar__left" type="button" data-go="stage1">돌아가기</button>
+            <div></div>
+            <button class="btn topbar__right" type="button" data-go="home">홈</button>
+          </header>
+          <h2 class="wrong-title">다시 생각해봐요</h2>
+          <div class="wrong-visual">
+            <img src="./assets/images/incorrect.jpg" alt="오답 캐릭터 이미지" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="modal" id="hintModal" role="dialog" aria-modal="true" aria-labelledby="hintTitle" aria-hidden="true">
+      <div class="hint-card">
+        <h2 class="sr-only" id="hintTitle">Stage 1 힌트</h2>
+        <img src="./assets/images/stage1_hint.jpg?v=2" alt="Stage 1 힌트 이미지" />
+        <p class="hint-copy">힌트: 영어</p>
+        <div class="hint-actions">
+          <button class="btn" type="button" id="closeHintButton">닫기</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const views = [...document.querySelectorAll(".view")];
+      const answerInput = document.querySelector("#answerInput");
+      const answerForm = document.querySelector("#answerForm");
+      const submitButtons = [...document.querySelectorAll("[data-submit]")];
+      const hintModal = document.querySelector("#hintModal");
+      const hintButton = document.querySelector("#hintButton");
+      const closeHintButton = document.querySelector("#closeHintButton");
+      const correctAudio = document.querySelector("#correctAudio");
+      const confettiCanvas = document.querySelector("#confettiCanvas");
+      const confettiContext = confettiCanvas.getContext("2d");
+      const correctAnswer = "LOVE";
+      let activeView = "home";
+      let confettiPieces = [];
+      let confettiAnimationId = 0;
+
+      function setView(viewName) {
+        activeView = viewName;
+
+        views.forEach((view) => {
+          const isActive = view.dataset.view === viewName;
+          view.classList.toggle("is-active", isActive);
+          view.setAttribute("aria-hidden", String(!isActive));
+        });
+
+        if (viewName === "home") {
+          answerInput.value = "";
+          syncSubmitState();
+        }
+
+        if (viewName === "correct") {
+          startConfetti();
+          playCorrectAudio();
+          return;
+        }
+
+        stopConfetti();
+        pauseCorrectAudio();
+      }
+
+      function syncSubmitState() {
+        const hasAnswer = answerInput.value.trim().length > 0;
+        submitButtons.forEach((button) => {
+          button.disabled = !hasAnswer;
+        });
+      }
+
+      function submitAnswer() {
+        if (!answerInput.value.trim()) return;
+
+        const normalizedAnswer = answerInput.value.trim().toUpperCase();
+        setView(normalizedAnswer === correctAnswer ? "correct" : "wrong");
+      }
+
+      function openHint() {
+        hintModal.classList.add("is-open");
+        hintModal.setAttribute("aria-hidden", "false");
+        closeHintButton.focus();
+      }
+
+      function closeHint() {
+        hintModal.classList.remove("is-open");
+        hintModal.setAttribute("aria-hidden", "true");
+        hintButton.focus();
+      }
+
+      function playCorrectAudio() {
+        correctAudio.currentTime = 0;
+        correctAudio.play().catch(() => {
+          // Mobile browsers may require the user's next tap before audio can play.
+        });
+      }
+
+      function pauseCorrectAudio() {
+        correctAudio.pause();
+        correctAudio.currentTime = 0;
+      }
+
+      function resizeConfettiCanvas() {
+        const rect = confettiCanvas.getBoundingClientRect();
+        const ratio = window.devicePixelRatio || 1;
+        confettiCanvas.width = Math.max(1, Math.floor(rect.width * ratio));
+        confettiCanvas.height = Math.max(1, Math.floor(rect.height * ratio));
+        confettiContext.setTransform(ratio, 0, 0, ratio, 0, 0);
+      }
+
+      function createConfettiPieces() {
+        const rect = confettiCanvas.getBoundingClientRect();
+        const colors = ["#2297eb", "#ffd84d", "#ff5b5b", "#65c879", "#9057d8"];
+
+        confettiPieces = Array.from({ length: 120 }, () => ({
+          x: Math.random() * rect.width,
+          y: Math.random() * -rect.height,
+          width: 6 + Math.random() * 8,
+          height: 10 + Math.random() * 12,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speed: 1.8 + Math.random() * 3.2,
+          drift: -1.4 + Math.random() * 2.8,
+          rotation: Math.random() * Math.PI,
+          rotationSpeed: -0.08 + Math.random() * 0.16,
+        }));
+      }
+
+      function drawConfetti() {
+        const rect = confettiCanvas.getBoundingClientRect();
+        confettiContext.clearRect(0, 0, rect.width, rect.height);
+
+        confettiPieces.forEach((piece) => {
+          piece.y += piece.speed;
+          piece.x += piece.drift;
+          piece.rotation += piece.rotationSpeed;
+
+          if (piece.y > rect.height + 20) {
+            piece.y = -20;
+            piece.x = Math.random() * rect.width;
+          }
+
+          confettiContext.save();
+          confettiContext.translate(piece.x, piece.y);
+          confettiContext.rotate(piece.rotation);
+          confettiContext.fillStyle = piece.color;
+          confettiContext.fillRect(-piece.width / 2, -piece.height / 2, piece.width, piece.height);
+          confettiContext.restore();
+        });
+
+        confettiAnimationId = requestAnimationFrame(drawConfetti);
+      }
+
+      function startConfetti() {
+        stopConfetti();
+        resizeConfettiCanvas();
+        createConfettiPieces();
+        drawConfetti();
+      }
+
+      function stopConfetti() {
+        cancelAnimationFrame(confettiAnimationId);
+        confettiContext.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      }
+
+      document.addEventListener("click", (event) => {
+        const routeButton = event.target.closest("[data-go]");
+        const submitButton = event.target.closest("[data-submit]");
+
+        if (routeButton) {
+          setView(routeButton.dataset.go);
+        }
+
+        if (submitButton && submitButton.type !== "submit") {
+          submitAnswer();
+        }
+      });
+
+      answerInput.addEventListener("input", syncSubmitState);
+
+      answerForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        submitAnswer();
+      });
+
+      hintButton.addEventListener("click", openHint);
+      closeHintButton.addEventListener("click", closeHint);
+
+      hintModal.addEventListener("click", (event) => {
+        if (event.target === hintModal) closeHint();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && hintModal.classList.contains("is-open")) {
+          closeHint();
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (activeView === "correct") {
+          resizeConfettiCanvas();
+          createConfettiPieces();
+        }
+      });
+
+      syncSubmitState();
+    </script>
+  </body>
+</html>
