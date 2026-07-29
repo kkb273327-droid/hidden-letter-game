@@ -40,11 +40,7 @@
 
       body {
         overflow-x: hidden;
-        background:
-          linear-gradient(90deg, rgb(255 255 255 / 66%) 1px, transparent 1px),
-          linear-gradient(rgb(255 255 255 / 70%) 1px, transparent 1px),
-          linear-gradient(150deg, #eef7ff 0%, #f7fbff 48%, #e8edf2 100%);
-        background-size: 34px 34px, 34px 34px, 100% 100%;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
         color: var(--ink);
       }
 
@@ -100,7 +96,7 @@
         padding: clamp(16px, 4vw, 28px);
         border: 1px solid rgb(158 175 190 / 58%);
         border-radius: 8px;
-        background: rgb(255 255 255 / 94%);
+        background: rgb(255 255 255 / 88%);
         box-shadow: var(--shadow);
       }
 
@@ -145,13 +141,13 @@
       }
 
       .title--blue {
-        color: #1786db;
+        color: #ff72a5;
         -webkit-text-stroke: 0;
         text-shadow: none;
       }
 
       .title--yellow {
-        color: var(--yellow);
+        color: #ff9bbf;
         -webkit-text-stroke: 0;
         text-shadow: none;
       }
@@ -233,9 +229,15 @@
 
       .main-screen {
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto auto minmax(0, 1fr) auto;
         align-items: center;
-        gap: 24px;
+        gap: 14px;
+      }
+
+      .home-family {
+        width: min(46vw, 260px);
+        justify-self: center;
+        filter: drop-shadow(0 12px 14px rgb(168 72 100 / 20%));
       }
 
       .magnifier-stage {
@@ -281,6 +283,84 @@
 
       .description li {
         margin: 0 0 12px;
+      }
+
+      .rules-travel {
+        width: min(58vw, 250px);
+        margin: 14px auto 0;
+        filter: drop-shadow(0 10px 12px rgb(168 72 100 / 18%));
+      }
+
+      .stage-screen,
+      .play-screen,
+      .wrong-screen,
+      .success-screen {
+        position: relative;
+      }
+
+      .stage-decoration,
+      .play-decoration,
+      .wrong-extra,
+      .correct-proud {
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .stage-decoration {
+        position: absolute;
+        z-index: 0;
+        width: clamp(74px, 18vw, 130px);
+        filter: drop-shadow(0 8px 10px rgb(168 72 100 / 16%));
+      }
+
+      .stage-decoration--cute {
+        left: 8%;
+        bottom: 12%;
+      }
+
+      .stage-decoration--food {
+        right: 6%;
+        top: 22%;
+      }
+
+      .stage-decoration--strawberry {
+        right: 14%;
+        bottom: 7%;
+      }
+
+      .stage-screen > :not(.stage-decoration) {
+        position: relative;
+        z-index: 1;
+      }
+
+      .play-decoration {
+        position: absolute;
+        z-index: 0;
+        width: clamp(42px, 10vw, 76px);
+        opacity: 0.95;
+        filter: drop-shadow(0 6px 8px rgb(168 72 100 / 14%));
+      }
+
+      .play-decoration--one {
+        left: 5%;
+        top: 18%;
+      }
+
+      .play-decoration--two {
+        right: 5%;
+        top: 42%;
+        transform: rotate(12deg);
+      }
+
+      .play-decoration--three {
+        left: 8%;
+        bottom: 11%;
+        transform: rotate(-10deg);
+      }
+
+      .play-screen > :not(.play-decoration) {
+        position: relative;
+        z-index: 1;
       }
 
       .stage-list {
@@ -447,7 +527,6 @@
       }
 
       .success-screen {
-        position: relative;
         overflow: hidden;
         border-color: transparent;
         background: #fff;
@@ -570,6 +649,22 @@
         pointer-events: none;
       }
 
+      .wrong-extra {
+        display: block;
+        width: min(40vw, 190px);
+        margin: 10px auto 0;
+        filter: drop-shadow(0 9px 10px rgb(90 45 60 / 16%));
+      }
+
+      .correct-proud {
+        position: absolute;
+        z-index: 4;
+        right: clamp(12px, 5vw, 46px);
+        bottom: clamp(12px, 4svh, 32px);
+        width: clamp(70px, 16vw, 145px);
+        filter: drop-shadow(0 9px 12px rgb(168 72 100 / 15%));
+      }
+
       .sr-only {
         position: absolute;
         width: 1px;
@@ -636,6 +731,7 @@
       - Stage 1 hint: ./assets/images/stage1_hint.jpg
       - Correct GIF: ./assets/images/correct_animation.gif
       - Correct song: ./assets/audio/correct_song.mp3
+      - Background music: ./assets/audio/background_music.mp3
       - Answer check photos: ./assets/images/answer_1.jpg, answer_o.jpg, answer_v.jpg, answer_e.jpg
       Replace files with the same names after upload; no local Windows paths are used.
     -->
@@ -646,6 +742,7 @@
             <span class="title--blue">숨겨진 글자를</span><br />
             <span class="title--yellow">찾아라!</span>
           </h1>
+          <img class="home-family" src="./assets/images/home_family.png?v=1" alt="코리락쿠마 가족" />
           <div class="magnifier-stage" aria-hidden="true">
             <img class="magnifier" src="./assets/images/magnifier.png?v=3" alt="" />
           </div>
@@ -667,11 +764,15 @@
             <li>영어는 대문자로 작성해야 합니다.</li>
             <li>스테이지는 점차 업데이트 될 예정입니다.</li>
           </ol>
+          <img class="rules-travel" src="./assets/images/rules_travel.png?v=1" alt="여행 중인 코리락쿠마" />
         </div>
       </section>
 
       <section class="view view--stages" data-view="stages" aria-label="스테이지 선택 화면" aria-hidden="true">
-        <div class="screen">
+        <div class="screen stage-screen">
+          <img class="stage-decoration stage-decoration--cute" src="./assets/images/stage_cute.png?v=1" alt="" />
+          <img class="stage-decoration stage-decoration--food" src="./assets/images/stage_food.png?v=1" alt="" />
+          <img class="stage-decoration stage-decoration--strawberry" src="./assets/images/stage_strawberry.png?v=1" alt="" />
           <h2 class="page-title">스테이지</h2>
           <div class="stage-list" aria-label="스테이지 목록">
             <button class="stage-card stage-card--active" type="button" data-go="stage1">1</button>
@@ -697,7 +798,10 @@
       </section>
 
       <section class="view view--play" data-view="stage1" aria-label="Stage 1 플레이 화면" aria-hidden="true">
-        <div class="screen">
+        <div class="screen play-screen">
+          <img class="play-decoration play-decoration--one" src="./assets/images/play_bunny.png?v=1" alt="" />
+          <img class="play-decoration play-decoration--two" src="./assets/images/play_bunny.png?v=1" alt="" />
+          <img class="play-decoration play-decoration--three" src="./assets/images/play_bunny.png?v=1" alt="" />
           <header class="topbar">
             <button class="btn topbar__left" type="button" data-go="stages">돌아가기</button>
             <button class="btn topbar__center" type="button" id="hintButton">힌트</button>
@@ -721,6 +825,7 @@
       <section class="view view--correct" data-view="correct" aria-label="정답 화면" aria-hidden="true">
         <div class="screen success-screen">
           <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
+          <img class="correct-proud" src="./assets/images/correct_proud.png?v=1" alt="의기양양한 코리락쿠마" />
           <header class="topbar">
             <div></div>
             <div></div>
@@ -754,7 +859,7 @@
       </section>
 
       <section class="view view--wrong" data-view="wrong" aria-label="오답 화면" aria-hidden="true">
-        <div class="screen">
+        <div class="screen wrong-screen">
           <header class="topbar">
             <button class="btn topbar__left" type="button" data-go="stage1">돌아가기</button>
             <div></div>
@@ -764,9 +869,12 @@
           <div class="wrong-visual">
             <img src="./assets/images/incorrect.jpg" alt="오답 캐릭터 이미지" />
           </div>
+          <img class="wrong-extra" src="./assets/images/wrong_messy.png?v=1" alt="꼬질꼬질한 코리락쿠마" />
         </div>
       </section>
     </main>
+
+    <audio id="backgroundAudio" src="./assets/audio/background_music.mp3" preload="auto" loop></audio>
 
     <div class="modal" id="hintModal" role="dialog" aria-modal="true" aria-labelledby="hintTitle" aria-hidden="true">
       <div class="hint-card">
@@ -787,11 +895,13 @@
       const hintModal = document.querySelector("#hintModal");
       const hintButton = document.querySelector("#hintButton");
       const closeHintButton = document.querySelector("#closeHintButton");
+      const backgroundAudio = document.querySelector("#backgroundAudio");
       const correctAudio = document.querySelector("#correctAudio");
       const confettiCanvas = document.querySelector("#confettiCanvas");
       const confettiContext = confettiCanvas.getContext("2d");
       const correctAnswer = "LOVE";
       let activeView = "home";
+      let audioUnlocked = false;
       let confettiPieces = [];
       let confettiAnimationId = 0;
 
@@ -810,6 +920,7 @@
         }
 
         if (viewName === "correct") {
+          pauseBackgroundAudio();
           startConfetti();
           playCorrectAudio();
           return;
@@ -817,6 +928,13 @@
 
         stopConfetti();
         pauseCorrectAudio();
+
+        if (viewName === "wrong") {
+          pauseBackgroundAudio();
+          return;
+        }
+
+        playBackgroundAudio();
       }
 
       function syncSubmitState() {
@@ -843,6 +961,19 @@
         hintModal.classList.remove("is-open");
         hintModal.setAttribute("aria-hidden", "true");
         hintButton.focus();
+      }
+
+      function playBackgroundAudio() {
+        if (!audioUnlocked || !backgroundAudio || activeView === "correct" || activeView === "wrong") return;
+
+        backgroundAudio.volume = 0.38;
+        backgroundAudio.play().catch(() => {});
+      }
+
+      function pauseBackgroundAudio() {
+        if (!backgroundAudio) return;
+
+        backgroundAudio.pause();
       }
 
       function playCorrectAudio() {
@@ -920,6 +1051,7 @@
       }
 
       document.addEventListener("click", (event) => {
+        audioUnlocked = true;
         const routeButton = event.target.closest("[data-go]");
         const submitButton = event.target.closest("[data-submit]");
 
@@ -930,6 +1062,8 @@
         if (submitButton && submitButton.type !== "submit") {
           submitAnswer();
         }
+
+        playBackgroundAudio();
       });
 
       answerInput.addEventListener("input", syncSubmitState);
