@@ -454,12 +454,12 @@
       .success-screen {
         overflow: hidden;
         border-color: transparent;
-        background: #fff;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
         box-shadow: none;
       }
 
       .view--correct {
-        background: #fff;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
         overflow: hidden;
         padding: 8px;
       }
@@ -542,22 +542,6 @@
         text-align: center;
         font-size: clamp(34px, 9vw, 58px);
         font-weight: 900;
-      }
-
-      .wrong-visual {
-        position: relative;
-        width: min(72vw, 360px);
-        margin: 0 auto;
-        overflow: hidden;
-        border-radius: 0;
-        background: transparent;
-        box-shadow: none;
-      }
-
-      .wrong-visual img {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
       }
 
       .wrong-dim {
@@ -767,9 +751,6 @@
             <button class="btn topbar__right" type="button" data-go="home">홈</button>
           </header>
           <h2 class="wrong-title">다시 생각해봐요</h2>
-          <div class="wrong-visual">
-            <img src="./assets/images/incorrect.jpg" alt="오답 캐릭터 이미지" />
-          </div>
         </div>
       </section>
     </main>
