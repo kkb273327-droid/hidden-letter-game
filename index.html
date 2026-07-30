@@ -6,8 +6,6 @@
     <meta name="theme-color" content="#eef7ff" />
     <title>숨겨진 글자를 찾아라!</title>
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
-
       :root {
         --blue: #2297eb;
         --blue-dark: #1374c9;
@@ -21,8 +19,10 @@
         --panel: #ffffff;
         --shadow: 0 14px 30px rgb(33 64 97 / 15%);
         font-family:
-          "Arial Rounded MT Bold",
-          "Segoe UI",
+          "210 러블리베이비 Bold",
+          "210 러블리베이비 B",
+          "210 러블리베이비",
+          "LovelyBaby",
           "Malgun Gothic",
           "Apple SD Gothic Neo",
           sans-serif;
@@ -134,7 +134,6 @@
       }
 
       .title--main {
-        font-family: "Jua", "Arial Rounded MT Bold", "Malgun Gothic", sans-serif;
         font-size: clamp(42px, 12vw, 80px);
         font-weight: 900;
         letter-spacing: 0;
@@ -229,15 +228,9 @@
 
       .main-screen {
         display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr) auto;
+        grid-template-rows: auto 1fr auto;
         align-items: center;
-        gap: 14px;
-      }
-
-      .home-family {
-        width: min(46vw, 260px);
-        justify-self: center;
-        filter: drop-shadow(0 12px 14px rgb(168 72 100 / 20%));
+        gap: 24px;
       }
 
       .magnifier-stage {
@@ -285,82 +278,8 @@
         margin: 0 0 12px;
       }
 
-      .rules-travel {
-        width: min(58vw, 250px);
-        margin: 14px auto 0;
-        filter: drop-shadow(0 10px 12px rgb(168 72 100 / 18%));
-      }
-
-      .stage-screen,
-      .play-screen,
-      .wrong-screen,
       .success-screen {
         position: relative;
-      }
-
-      .stage-decoration,
-      .play-decoration,
-      .wrong-extra,
-      .correct-proud {
-        pointer-events: none;
-        user-select: none;
-      }
-
-      .stage-decoration {
-        position: absolute;
-        z-index: 0;
-        width: clamp(74px, 18vw, 130px);
-        filter: drop-shadow(0 8px 10px rgb(168 72 100 / 16%));
-      }
-
-      .stage-decoration--cute {
-        left: 8%;
-        bottom: 12%;
-      }
-
-      .stage-decoration--food {
-        right: 6%;
-        top: 22%;
-      }
-
-      .stage-decoration--strawberry {
-        right: 14%;
-        bottom: 7%;
-      }
-
-      .stage-screen > :not(.stage-decoration) {
-        position: relative;
-        z-index: 1;
-      }
-
-      .play-decoration {
-        position: absolute;
-        z-index: 0;
-        width: clamp(42px, 10vw, 76px);
-        opacity: 0.95;
-        filter: drop-shadow(0 6px 8px rgb(168 72 100 / 14%));
-      }
-
-      .play-decoration--one {
-        left: 5%;
-        top: 18%;
-      }
-
-      .play-decoration--two {
-        right: 5%;
-        top: 42%;
-        transform: rotate(12deg);
-      }
-
-      .play-decoration--three {
-        left: 8%;
-        bottom: 11%;
-        transform: rotate(-10deg);
-      }
-
-      .play-screen > :not(.play-decoration) {
-        position: relative;
-        z-index: 1;
       }
 
       .stage-list {
@@ -649,21 +568,6 @@
         pointer-events: none;
       }
 
-      .wrong-extra {
-        display: block;
-        width: min(40vw, 190px);
-        margin: 10px auto 0;
-        filter: drop-shadow(0 9px 10px rgb(90 45 60 / 16%));
-      }
-
-      .correct-proud {
-        position: absolute;
-        z-index: 4;
-        right: clamp(12px, 5vw, 46px);
-        bottom: clamp(12px, 4svh, 32px);
-        width: clamp(70px, 16vw, 145px);
-        filter: drop-shadow(0 9px 12px rgb(168 72 100 / 15%));
-      }
 
       .sr-only {
         position: absolute;
@@ -742,7 +646,6 @@
             <span class="title--blue">숨겨진 글자를</span><br />
             <span class="title--yellow">찾아라!</span>
           </h1>
-          <img class="home-family" src="./assets/images/home_family.png?v=1" alt="코리락쿠마 가족" />
           <div class="magnifier-stage" aria-hidden="true">
             <img class="magnifier" src="./assets/images/magnifier.png?v=3" alt="" />
           </div>
@@ -764,15 +667,11 @@
             <li>영어는 대문자로 작성해야 합니다.</li>
             <li>스테이지는 점차 업데이트 될 예정입니다.</li>
           </ol>
-          <img class="rules-travel" src="./assets/images/rules_travel.png?v=1" alt="여행 중인 코리락쿠마" />
         </div>
       </section>
 
       <section class="view view--stages" data-view="stages" aria-label="스테이지 선택 화면" aria-hidden="true">
         <div class="screen stage-screen">
-          <img class="stage-decoration stage-decoration--cute" src="./assets/images/stage_cute.png?v=1" alt="" />
-          <img class="stage-decoration stage-decoration--food" src="./assets/images/stage_food.png?v=1" alt="" />
-          <img class="stage-decoration stage-decoration--strawberry" src="./assets/images/stage_strawberry.png?v=1" alt="" />
           <h2 class="page-title">스테이지</h2>
           <div class="stage-list" aria-label="스테이지 목록">
             <button class="stage-card stage-card--active" type="button" data-go="stage1">1</button>
@@ -799,9 +698,6 @@
 
       <section class="view view--play" data-view="stage1" aria-label="Stage 1 플레이 화면" aria-hidden="true">
         <div class="screen play-screen">
-          <img class="play-decoration play-decoration--one" src="./assets/images/play_bunny.png?v=1" alt="" />
-          <img class="play-decoration play-decoration--two" src="./assets/images/play_bunny.png?v=1" alt="" />
-          <img class="play-decoration play-decoration--three" src="./assets/images/play_bunny.png?v=1" alt="" />
           <header class="topbar">
             <button class="btn topbar__left" type="button" data-go="stages">돌아가기</button>
             <button class="btn topbar__center" type="button" id="hintButton">힌트</button>
@@ -825,7 +721,6 @@
       <section class="view view--correct" data-view="correct" aria-label="정답 화면" aria-hidden="true">
         <div class="screen success-screen">
           <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
-          <img class="correct-proud" src="./assets/images/correct_proud.png?v=1" alt="의기양양한 코리락쿠마" />
           <header class="topbar">
             <div></div>
             <div></div>
@@ -869,7 +764,6 @@
           <div class="wrong-visual">
             <img src="./assets/images/incorrect.jpg" alt="오답 캐릭터 이미지" />
           </div>
-          <img class="wrong-extra" src="./assets/images/wrong_messy.png?v=1" alt="꼬질꼬질한 코리락쿠마" />
         </div>
       </section>
     </main>
