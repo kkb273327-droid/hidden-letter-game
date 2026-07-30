@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#eef7ff" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>숨겨진 글자를 찾아라!</title>
     <style>
       @font-face {
@@ -629,7 +632,7 @@
         place-items: center;
         padding: 18px;
         visibility: hidden;
-        background: rgb(12 22 31 / 55%);
+        background: rgb(255 210 223 / 88%) url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
         opacity: 0;
         transition: opacity 200ms ease, visibility 200ms ease;
       }
@@ -902,6 +905,45 @@
 
         .answer-bar {
           grid-template-columns: auto minmax(0, 1fr) 66px;
+        }
+
+        .view--wrong {
+          overflow: hidden;
+          padding: 6px;
+        }
+
+        .view--wrong .screen {
+          display: grid;
+          grid-template-rows: auto auto minmax(0, 1fr);
+          align-content: start;
+          width: min(100%, 430px);
+          height: calc(100svh - 12px);
+          min-height: 0;
+          overflow: hidden;
+          padding: 10px;
+        }
+
+        .wrong-title {
+          margin: clamp(14px, 4svh, 28px) 0 8px;
+          font-size: clamp(24px, 9vw, 36px);
+          line-height: 1.05;
+        }
+
+        .wrong-gallery {
+          grid-template-columns: minmax(44px, 0.42fr) minmax(132px, 1.55fr) minmax(44px, 0.42fr);
+          gap: 4px;
+          width: min(92%, 360px);
+          max-height: 52svh;
+          margin: 4px auto 0;
+          align-self: start;
+        }
+
+        .wrong-main {
+          max-height: min(42svh, 290px);
+        }
+
+        .wrong-side {
+          max-height: min(18svh, 130px);
         }
       }
 
