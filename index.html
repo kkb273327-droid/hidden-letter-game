@@ -249,7 +249,7 @@
       .floating-character {
         position: absolute;
         z-index: 0;
-        width: clamp(54px, 12vw, 98px);
+        width: clamp(70px, 15vw, 125px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 18%));
@@ -260,13 +260,13 @@
       }
 
       .home-character--large {
-        width: clamp(104px, 21vw, 190px);
+        width: clamp(130px, 25vw, 230px);
       }
 
       .home-character--medium {
         width: auto;
-        max-width: clamp(84px, 17vw, 150px);
-        max-height: clamp(58px, 12vw, 112px);
+        max-width: clamp(105px, 20vw, 185px);
+        max-height: clamp(74px, 15vw, 138px);
       }
 
       .home-float-left-up {
@@ -399,7 +399,7 @@
       }
 
       .rules-character {
-        width: clamp(58px, 14vw, 108px);
+        width: clamp(78px, 17vw, 145px);
       }
 
       .rules-screen .float-a {
@@ -420,6 +420,22 @@
       .rules-screen .float-f {
         right: 8%;
         bottom: 17%;
+      }
+
+      .rules-extra-row {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        gap: clamp(36px, 12vw, 120px);
+        width: min(100%, 560px);
+        margin: clamp(10px, 2svh, 18px) auto 0;
+      }
+
+      .rules-extra-row img {
+        width: clamp(90px, 18vw, 155px);
+        height: auto;
+        filter: drop-shadow(0 8px 10px rgb(166 73 100 / 16%));
       }
 
       .success-screen {
@@ -480,11 +496,11 @@
       }
 
       .stage-character {
-        width: clamp(58px, 14vw, 112px);
+        width: clamp(82px, 18vw, 150px);
       }
 
       .stage-character--big {
-        width: clamp(88px, 18vw, 160px);
+        width: clamp(125px, 23vw, 220px);
       }
 
       .stage-screen .float-a {
@@ -550,7 +566,7 @@
       .play-helper {
         position: absolute;
         z-index: 0;
-        width: clamp(48px, 10vw, 86px);
+        width: clamp(70px, 14vw, 124px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 15%));
@@ -693,7 +709,7 @@
       .correct-side {
         position: absolute;
         z-index: 3;
-        width: clamp(50px, 11vw, 92px);
+        width: clamp(78px, 15vw, 140px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 16%));
@@ -717,6 +733,18 @@
       .correct-side--bottom-right {
         right: clamp(10px, 10vw, 150px);
         bottom: clamp(18px, 8svh, 82px);
+      }
+
+      .correct-side--middle-left {
+        left: clamp(8px, 4vw, 58px);
+        top: 48%;
+        width: clamp(82px, 16vw, 150px);
+      }
+
+      .correct-side--middle-right {
+        right: clamp(8px, 4vw, 58px);
+        top: 48%;
+        width: clamp(82px, 16vw, 150px);
       }
 
       .success-screen .topbar {
@@ -767,7 +795,7 @@
       }
 
       .answer-check-screen {
-        background: #fff;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
       }
 
       .answer-check-grid {
@@ -795,23 +823,23 @@
       .wrong-gallery {
         position: relative;
         display: grid;
-        grid-template-columns: minmax(58px, 0.45fr) minmax(190px, 1.8fr) minmax(58px, 0.45fr);
+        grid-template-columns: minmax(78px, 0.52fr) minmax(220px, 1.95fr) minmax(78px, 0.52fr);
         align-items: center;
         gap: clamp(8px, 3vw, 22px);
-        width: min(98%, 760px);
+        width: min(100%, 840px);
         margin: 38px auto 0;
       }
 
       .wrong-main {
         width: 100%;
-        max-height: 64svh;
+        max-height: 70svh;
         object-fit: contain;
         filter: drop-shadow(0 10px 12px rgb(60 35 45 / 16%));
       }
 
       .wrong-side {
         width: 100%;
-        max-height: 24svh;
+        max-height: 32svh;
         object-fit: contain;
         filter: drop-shadow(0 8px 10px rgb(60 35 45 / 14%));
       }
@@ -937,6 +965,10 @@
             <li>영어는 대문자로 작성해야 합니다.</li>
             <li>스테이지는 점차 업데이트 될 예정입니다.</li>
           </ol>
+          <div class="rules-extra-row" aria-hidden="true">
+            <img src="./assets/images/rules_float_1.gif?v=1" alt="" />
+            <img src="./assets/images/rules_float_1.gif?v=1" alt="" />
+          </div>
         </div>
       </section>
 
@@ -1003,6 +1035,8 @@
           <img class="correct-side correct-side--top-right" src="./assets/images/correct_side_1.gif?v=1" alt="" />
           <img class="correct-side correct-side--bottom-left" src="./assets/images/correct_side_2.png?v=1" alt="" />
           <img class="correct-side correct-side--bottom-right" src="./assets/images/correct_side_2.png?v=1" alt="" />
+          <img class="correct-side correct-side--middle-left" src="./assets/images/correct_side_3.gif?v=1" alt="" />
+          <img class="correct-side correct-side--middle-right" src="./assets/images/correct_side_3.gif?v=1" alt="" />
           <header class="topbar">
             <div></div>
             <div></div>
