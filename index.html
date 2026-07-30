@@ -255,6 +255,18 @@
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 18%));
       }
 
+      .floating-character--blend {
+        mix-blend-mode: multiply;
+      }
+
+      .home-character--large {
+        width: clamp(92px, 19vw, 170px);
+      }
+
+      .home-character--medium {
+        width: clamp(78px, 16vw, 140px);
+      }
+
       .float-a {
         left: 8%;
         top: 18%;
@@ -376,6 +388,26 @@
         width: clamp(58px, 14vw, 108px);
       }
 
+      .rules-screen .float-a {
+        left: 5%;
+        top: 14%;
+      }
+
+      .rules-screen .float-b {
+        right: 5%;
+        top: 18%;
+      }
+
+      .rules-screen .float-e {
+        left: 7%;
+        bottom: 7%;
+      }
+
+      .rules-screen .float-f {
+        right: 8%;
+        bottom: 10%;
+      }
+
       .success-screen {
         position: relative;
       }
@@ -437,6 +469,40 @@
         width: clamp(58px, 14vw, 112px);
       }
 
+      .stage-character--big {
+        width: clamp(88px, 18vw, 160px);
+      }
+
+      .stage-screen .float-a {
+        left: 6%;
+        top: 38%;
+      }
+
+      .stage-screen .float-b {
+        right: 7%;
+        top: 38%;
+      }
+
+      .stage-screen .float-c {
+        left: 17%;
+        bottom: 12%;
+      }
+
+      .stage-screen .float-d {
+        right: 18%;
+        bottom: 12%;
+      }
+
+      .stage-screen .float-e {
+        left: 42%;
+        bottom: 7%;
+      }
+
+      .stage-screen .float-f {
+        right: 43%;
+        bottom: 22%;
+      }
+
       .stage-badge {
         display: grid;
         width: 46px;
@@ -460,6 +526,37 @@
         border: 2px solid #1d2933;
         border-radius: 8px;
         background: #1d2933;
+      }
+
+      .play-screen {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .play-helper {
+        position: absolute;
+        z-index: 0;
+        width: clamp(48px, 10vw, 86px);
+        pointer-events: none;
+        user-select: none;
+        filter: drop-shadow(0 8px 10px rgb(166 73 100 / 15%));
+        animation: driftThree 7s ease-in-out infinite;
+      }
+
+      .play-helper--left {
+        left: clamp(8px, 4vw, 34px);
+        bottom: clamp(74px, 13svh, 126px);
+      }
+
+      .play-helper--right {
+        right: clamp(8px, 4vw, 34px);
+        bottom: clamp(74px, 13svh, 126px);
+        animation-delay: 0.7s;
+      }
+
+      .play-screen > :not(.play-helper) {
+        position: relative;
+        z-index: 1;
       }
 
       .photo-grid img {
@@ -634,6 +731,7 @@
         border-radius: 0;
         background: transparent;
         box-shadow: none;
+        mix-blend-mode: multiply;
       }
 
       .gif-frame img {
@@ -664,7 +762,7 @@
       }
 
       .wrong-title {
-        margin: clamp(30px, 8svh, 64px) 0 20px;
+        margin: clamp(52px, 12svh, 100px) 0 24px;
         text-align: center;
         font-size: clamp(34px, 9vw, 58px);
         font-weight: 900;
@@ -673,16 +771,16 @@
       .wrong-gallery {
         position: relative;
         display: grid;
-        grid-template-columns: minmax(54px, 0.55fr) minmax(160px, 1.4fr) minmax(54px, 0.55fr);
+        grid-template-columns: minmax(58px, 0.45fr) minmax(190px, 1.8fr) minmax(58px, 0.45fr);
         align-items: center;
         gap: clamp(8px, 3vw, 22px);
-        width: min(92%, 600px);
-        margin: 8px auto 0;
+        width: min(96%, 700px);
+        margin: 26px auto 0;
       }
 
       .wrong-main {
         width: 100%;
-        max-height: 46svh;
+        max-height: 58svh;
         object-fit: contain;
         filter: drop-shadow(0 10px 12px rgb(60 35 45 / 16%));
       }
@@ -782,12 +880,10 @@
     <main class="app" aria-live="polite">
       <section class="view view--home is-active" data-view="home" aria-label="메인 화면">
         <div class="screen main-screen deco-screen">
-          <img class="floating-character float-a" src="./assets/images/home_float_1.gif?v=1" alt="" />
-          <img class="floating-character float-b" src="./assets/images/home_float_1.gif?v=1" alt="" />
-          <img class="floating-character float-c" src="./assets/images/home_float_2.gif?v=1" alt="" />
-          <img class="floating-character float-d" src="./assets/images/home_float_2.gif?v=1" alt="" />
-          <img class="floating-character float-e" src="./assets/images/home_float_3.png?v=1" alt="" />
-          <img class="floating-character float-f" src="./assets/images/home_float_3.png?v=1" alt="" />
+          <img class="floating-character floating-character--blend home-character--large float-c" src="./assets/images/home_float_2.gif?v=2" alt="" />
+          <img class="floating-character floating-character--blend home-character--large float-d" src="./assets/images/home_float_2.gif?v=2" alt="" />
+          <img class="floating-character home-character--medium float-e" src="./assets/images/home_float_3.png?v=2" alt="" />
+          <img class="floating-character home-character--medium float-f" src="./assets/images/home_float_3.png?v=2" alt="" />
           <h1 class="title title--main">
             <span class="title--blue">숨겨진 글자를</span><br />
             <span class="title--yellow">찾아라!</span>
@@ -822,10 +918,10 @@
 
       <section class="view view--stages" data-view="stages" aria-label="스테이지 선택 화면" aria-hidden="true">
         <div class="screen stage-screen deco-screen">
-          <img class="floating-character stage-character float-a" src="./assets/images/stages_float_1.gif?v=1" alt="" />
-          <img class="floating-character stage-character float-b" src="./assets/images/stages_float_1.gif?v=1" alt="" />
-          <img class="floating-character stage-character float-c" src="./assets/images/stages_float_2.png?v=1" alt="" />
-          <img class="floating-character stage-character float-d" src="./assets/images/stages_float_2.png?v=1" alt="" />
+          <img class="floating-character stage-character stage-character--big float-a" src="./assets/images/stages_float_1.gif?v=2" alt="" />
+          <img class="floating-character stage-character stage-character--big float-b" src="./assets/images/stages_float_1.gif?v=2" alt="" />
+          <img class="floating-character stage-character stage-character--big float-c" src="./assets/images/stages_float_2.png?v=2" alt="" />
+          <img class="floating-character stage-character stage-character--big float-d" src="./assets/images/stages_float_2.png?v=2" alt="" />
           <img class="floating-character stage-character float-e" src="./assets/images/stages_float_3.gif?v=1" alt="" />
           <img class="floating-character stage-character float-f" src="./assets/images/stages_float_3.gif?v=1" alt="" />
           <h2 class="page-title">스테이지</h2>
@@ -854,6 +950,8 @@
 
       <section class="view view--play" data-view="stage1" aria-label="Stage 1 플레이 화면" aria-hidden="true">
         <div class="screen play-screen">
+          <img class="play-helper play-helper--left" src="./assets/images/home_float_1.gif?v=2" alt="" />
+          <img class="play-helper play-helper--right" src="./assets/images/home_float_1.gif?v=2" alt="" />
           <header class="topbar">
             <button class="btn topbar__left" type="button" data-go="stages">돌아가기</button>
             <button class="btn topbar__center" type="button" id="hintButton">힌트</button>
@@ -931,6 +1029,7 @@
     </main>
 
     <audio id="backgroundAudio" src="./assets/audio/background_music.mp3" preload="auto" loop autoplay></audio>
+    <audio id="wrongAudio" src="./assets/audio/wrong_sound.mp3" preload="auto"></audio>
 
     <div class="modal" id="hintModal" role="dialog" aria-modal="true" aria-labelledby="hintTitle" aria-hidden="true">
       <div class="hint-card">
@@ -953,6 +1052,7 @@
       const closeHintButton = document.querySelector("#closeHintButton");
       const backgroundAudio = document.querySelector("#backgroundAudio");
       const correctAudio = document.querySelector("#correctAudio");
+      const wrongAudio = document.querySelector("#wrongAudio");
       const confettiCanvas = document.querySelector("#confettiCanvas");
       const confettiContext = confettiCanvas.getContext("2d");
       const correctAnswer = "LOVE";
@@ -975,6 +1075,8 @@
           syncSubmitState();
         }
 
+        pauseWrongAudio();
+
         if (viewName === "correct") {
           pauseBackgroundAudio();
           startConfetti();
@@ -987,6 +1089,7 @@
 
         if (viewName === "wrong") {
           pauseBackgroundAudio();
+          playWrongAudio();
           return;
         }
 
@@ -1047,6 +1150,20 @@
       function pauseCorrectAudio() {
         correctAudio.pause();
         correctAudio.currentTime = 0;
+      }
+
+      function playWrongAudio() {
+        if (!wrongAudio) return;
+
+        wrongAudio.currentTime = 0;
+        wrongAudio.play().catch(() => {});
+      }
+
+      function pauseWrongAudio() {
+        if (!wrongAudio) return;
+
+        wrongAudio.pause();
+        wrongAudio.currentTime = 0;
       }
 
       function resizeConfettiCanvas() {
