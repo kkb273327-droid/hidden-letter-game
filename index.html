@@ -1183,7 +1183,7 @@
         <h2 class="sr-only" id="hintTitle">Stage 1 힌트</h2>
         <div class="hint-main-panel" id="hintMainPanel">
           <img id="hintImage" src="./assets/images/stage1_hint.jpg?v=2" alt="Stage 1 힌트 이미지" />
-          <p class="hint-copy">힌트: 영어</p>
+          <p class="hint-copy" id="hintCopy">힌트: 영어</p>
           <div class="hint-actions hint-actions--split">
             <button class="btn" type="button" id="closeHintButton">닫기</button>
             <button class="btn btn--primary" type="button" id="hint2Button" hidden>힌트2</button>
@@ -1191,7 +1191,7 @@
         </div>
         <div class="hint-second-panel" id="hintSecondPanel" hidden>
           <button class="btn hint-back" type="button" id="backHintButton">돌아가기</button>
-          <p class="hint-second-copy" id="hintSecondCopy">마지막 글자는 '요'애요!</p>
+          <p class="hint-second-copy" id="hintSecondCopy">마지막 글자는 '요'에요!</p>
         </div>
       </div>
     </div>
@@ -1220,6 +1220,7 @@
       const hintMainPanel = document.querySelector("#hintMainPanel");
       const hintSecondPanel = document.querySelector("#hintSecondPanel");
       const hintImage = document.querySelector("#hintImage");
+      const hintCopy = document.querySelector("#hintCopy");
       const hintButton = document.querySelector("#hintButton");
       const hint2Button = document.querySelector("#hint2Button");
       const backHintButton = document.querySelector("#backHintButton");
@@ -1241,6 +1242,7 @@
             "./assets/images/stage1_photo4.jpg?v=2",
           ],
           hint: "./assets/images/stage1_hint.jpg?v=2",
+          hintLabel: "힌트: 영어",
           answerImages: [
             "./assets/images/answer_1.jpg?v=1",
             "./assets/images/answer_o.jpg?v=1",
@@ -1258,6 +1260,7 @@
             "./assets/images/stage2_photo4.jpg?v=1",
           ],
           hint: "./assets/images/stage2_hint.jpg?v=1",
+          hintLabel: "힌트: 영어",
           answerImages: [
             "./assets/images/stage2_answer_1.jpg?v=1",
             "./assets/images/stage2_answer_2.jpg?v=1",
@@ -1275,7 +1278,8 @@
             "./assets/images/stage3_photo4.jpg?v=1",
           ],
           hint: "./assets/images/stage3_hint.jpg?v=1",
-          hint2: "마지막 글자는 '요'애요!",
+          hintLabel: "힌트: 한글",
+          hint2: "마지막 글자는 '요'에요!",
           answerImages: [
             "./assets/images/stage3_answer_1.jpg?v=1",
             "./assets/images/stage3_answer_2.jpg?v=1",
@@ -1341,6 +1345,7 @@
         });
         hintImage.src = stage.hint;
         hintImage.alt = `Stage ${stageNumber} 힌트 이미지`;
+        hintCopy.textContent = stage.hintLabel || "힌트";
         hintTitle.textContent = `Stage ${stageNumber} 힌트`;
         hintSecondCopy.textContent = stage.hint2 || "";
         hint2Button.hidden = !stage.hint2;
