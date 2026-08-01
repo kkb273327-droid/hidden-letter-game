@@ -273,13 +273,13 @@
       }
 
       .home-float-left-up {
-        left: 18%;
+        left: 7%;
         top: 39%;
         animation: driftOne 6.5s ease-in-out infinite;
       }
 
       .home-float-right-down {
-        right: 24%;
+        right: 8%;
         bottom: 22%;
         animation: driftTwo 7.2s ease-in-out infinite;
       }
@@ -353,12 +353,12 @@
       .magnifier-stage {
         position: relative;
         display: grid;
-        min-height: min(53svh, 420px);
+        min-height: min(42svh, 336px);
         place-items: center;
       }
 
       .magnifier {
-        width: clamp(210px, 52vw, 336px);
+        width: clamp(168px, 42vw, 269px);
         height: auto;
         object-fit: contain;
         filter: drop-shadow(0 14px 16px rgb(39 72 98 / 20%));
@@ -1025,8 +1025,8 @@
     <main class="app" aria-live="polite">
       <section class="view view--home is-active" data-view="home" aria-label="메인 화면">
         <div class="screen main-screen deco-screen">
-          <img class="floating-character floating-character--blend home-character--large home-float-left-up" src="./assets/images/home_float_2.gif?v=3" alt="" />
-          <img class="floating-character floating-character--blend home-character--large home-float-right-down" src="./assets/images/home_float_2.gif?v=3" alt="" />
+          <img class="floating-character floating-character--blend home-character--large home-float-left-up" src="./assets/images/home_float_2_replacement.png?v=1" alt="" />
+          <img class="floating-character floating-character--blend home-character--large home-float-right-down" src="./assets/images/home_float_2_replacement.png?v=1" alt="" />
           <img class="floating-character home-character--medium float-e" src="./assets/images/home_float_3.png?v=3" alt="" />
           <img class="floating-character home-character--medium float-f" src="./assets/images/home_float_3.png?v=3" alt="" />
           <h1 class="title title--main">
@@ -1034,7 +1034,7 @@
             <span class="title--yellow">찾아라!</span>
           </h1>
           <div class="magnifier-stage" aria-hidden="true">
-            <img class="magnifier" src="./assets/images/magnifier.png?v=4" alt="" />
+            <img class="magnifier" src="./assets/images/magnifier.png?v=5" alt="" />
           </div>
           <button class="btn btn--primary btn--start" type="button" data-go="rules">시작</button>
         </div>
