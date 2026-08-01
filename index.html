@@ -1311,7 +1311,8 @@
         .stage-screen::before,
         .play-screen::before,
         .wrong-screen::before,
-        .success-screen::before {
+        .success-screen::before,
+        .answer-check-screen::before {
           height: 66px;
           border-radius: 24px;
         }
@@ -1376,12 +1377,14 @@
         .play-screen .topbar__left {
           justify-self: start;
           align-self: center;
+          transform: translateY(10px);
         }
 
         .play-screen .topbar__center {
           grid-column: 3;
           justify-self: end;
           align-self: center;
+          transform: translateY(10px);
         }
 
         .play-screen .stage-badge {
@@ -1501,6 +1504,20 @@
           width: min(72vw, 360px);
           height: min(34dvh, 330px);
           margin-top: clamp(38px, 7dvh, 64px);
+        }
+
+        .view--answer-check .topbar {
+          position: relative;
+          z-index: 7;
+          min-height: 62px;
+          align-items: center;
+          padding-inline: 18px;
+        }
+
+        .view--answer-check .topbar__left {
+          justify-self: start;
+          align-self: center;
+          transform: translate(10px, 7px);
         }
       }
 
