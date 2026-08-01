@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#eef7ff" />
+    <meta name="theme-color" content="#fff3f8" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -18,17 +18,17 @@
       }
 
       :root {
-        --blue: #2297eb;
-        --blue-dark: #1374c9;
-        --blue-soft: #dff2ff;
-        --yellow: #ffd84d;
-        --red: #ff5b5b;
-        --ink: #101820;
-        --muted: #6d7782;
-        --line: #9aa6af;
-        --disabled: #cfd4d8;
-        --panel: #ffffff;
-        --shadow: 0 14px 30px rgb(33 64 97 / 15%);
+        --blue: #f58ab8;
+        --blue-dark: #dc6798;
+        --blue-soft: #fff0f6;
+        --yellow: #fff2ac;
+        --red: #ff5f8f;
+        --ink: #5d3344;
+        --muted: #a06a80;
+        --line: #edb3ca;
+        --disabled: #ead5dd;
+        --panel: #fffafd;
+        --shadow: 0 16px 34px rgb(218 104 148 / 18%);
         font-family:
           "LovelyBaby",
           "210 러블리베이비",
@@ -49,7 +49,9 @@
 
       body {
         overflow-x: hidden;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        background:
+          linear-gradient(rgb(255 243 248 / 78%), rgb(255 232 241 / 78%)),
+          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
         color: var(--ink);
       }
 
@@ -73,6 +75,31 @@
         overflow: hidden;
       }
 
+      .app::before {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          url("./assets/images/decor_strawberry.png"),
+          url("./assets/images/decor_cherry.png"),
+          url("./assets/images/decor_ribbon.png"),
+          url("./assets/images/decor_heart.png");
+        background-position:
+          5% 8%,
+          92% 17%,
+          12% 82%,
+          88% 88%;
+        background-repeat: no-repeat;
+        background-size:
+          clamp(62px, 13vw, 120px),
+          clamp(70px, 14vw, 132px),
+          clamp(76px, 16vw, 148px),
+          clamp(58px, 12vw, 116px);
+        content: "";
+        opacity: 0.45;
+      }
+
       .view {
         position: absolute;
         inset: 0;
@@ -90,6 +117,7 @@
           opacity 240ms ease,
           transform 240ms ease,
           visibility 240ms ease;
+        z-index: 1;
       }
 
       .view.is-active {
@@ -99,19 +127,55 @@
       }
 
       .screen {
+        position: relative;
+        overflow: hidden;
         width: min(100%, 680px);
         min-height: min(760px, calc(100svh - 24px));
         margin: auto;
         padding: clamp(16px, 4vw, 28px);
-        border: 1px solid rgb(158 175 190 / 58%);
-        border-radius: 8px;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        border: 2px solid rgb(241 177 203 / 82%);
+        border-radius: 24px;
+        background:
+          linear-gradient(rgb(255 250 253 / 86%), rgb(255 244 249 / 86%)),
+          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
         box-shadow: var(--shadow);
+      }
+
+      .screen::before {
+        position: absolute;
+        top: 12px;
+        left: 14px;
+        right: 14px;
+        height: 38px;
+        border: 2px solid rgb(241 177 203 / 65%);
+        border-radius: 999px;
+        background:
+          linear-gradient(rgb(255 255 255 / 34%), rgb(255 255 255 / 10%)),
+          url("./assets/images/princess_gingham_background.png") center / 160px auto repeat;
+        content: "";
+        opacity: 0.72;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .screen::after {
+        position: absolute;
+        right: 12px;
+        bottom: 12px;
+        width: clamp(64px, 12vw, 112px);
+        aspect-ratio: 1;
+        background: url("./assets/images/decor_strawberry.png") center / contain no-repeat;
+        content: "";
+        opacity: 0.32;
+        pointer-events: none;
+        z-index: 0;
       }
 
       .view--play .screen,
       .view--wrong .screen {
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        background:
+          linear-gradient(rgb(255 250 253 / 86%), rgb(255 244 249 / 86%)),
+          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
         backdrop-filter: blur(2px);
       }
 
@@ -139,7 +203,7 @@
         text-align: center;
         font-weight: 900;
         line-height: 1.08;
-        color: #0d1821;
+        color: var(--ink);
       }
 
       .title--main {
@@ -149,15 +213,15 @@
       }
 
       .title--blue {
-        color: #ff72a5;
+        color: #f667a2;
         -webkit-text-stroke: 0;
-        text-shadow: none;
+        text-shadow: 0 3px 0 rgb(255 255 255 / 90%);
       }
 
       .title--yellow {
-        color: #ff9bbf;
+        color: #ff9fbe;
         -webkit-text-stroke: 0;
-        text-shadow: none;
+        text-shadow: 0 3px 0 rgb(255 255 255 / 90%);
       }
 
       .page-title {
@@ -166,6 +230,8 @@
         font-size: clamp(32px, 8vw, 52px);
         font-weight: 900;
         line-height: 1.1;
+        color: var(--ink);
+        text-shadow: 0 3px 0 rgb(255 255 255 / 86%);
       }
 
       .page-title::after {
@@ -174,18 +240,20 @@
         height: 4px;
         margin: 8px auto 0;
         border-radius: 999px;
-        background: #0f1720;
+        background: linear-gradient(90deg, transparent, #e982ad 18%, #e982ad 82%, transparent);
         content: "";
       }
 
       .btn {
         min-height: 44px;
         padding: 8px 18px;
-        border: 2px solid #1d2933;
-        border-radius: 8px;
-        background: linear-gradient(#ffffff, #edf2f5);
-        color: #111;
-        box-shadow: 0 3px 0 rgb(28 41 51 / 20%);
+        border: 2px solid #d985a9;
+        border-radius: 14px;
+        background:
+          linear-gradient(#fffafd, #ffe7f0),
+          url("./assets/images/princess_gingham_background.png") center / 140px auto repeat;
+        color: var(--ink);
+        box-shadow: 0 4px 0 rgb(219 116 154 / 28%), inset 0 1px 0 rgb(255 255 255 / 80%);
         font-weight: 900;
         cursor: pointer;
         transition:
@@ -200,22 +268,24 @@
       }
 
       .btn:active:not(:disabled) {
-        box-shadow: 0 1px 0 rgb(28 41 51 / 20%);
+        box-shadow: 0 1px 0 rgb(219 116 154 / 28%);
         transform: translateY(2px);
       }
 
       .btn:focus-visible,
       input:focus-visible {
-        outline: 4px solid rgb(34 151 235 / 30%);
+        outline: 4px solid rgb(245 138 184 / 28%);
         outline-offset: 2px;
       }
 
       .btn--primary {
-        border-color: #1675c5;
-        background: linear-gradient(#4db6ff, var(--blue));
+        border-color: #d86d9d;
+        background:
+          linear-gradient(#ffb9d3, var(--blue)),
+          url("./assets/images/princess_gingham_background.png") center / 130px auto repeat;
         color: #fff;
-        box-shadow: 0 5px 0 var(--blue-dark), 0 10px 18px rgb(19 116 201 / 24%);
-        text-shadow: 0 1px 0 rgb(0 0 0 / 18%);
+        box-shadow: 0 5px 0 var(--blue-dark), 0 10px 18px rgb(220 103 152 / 24%);
+        text-shadow: 0 1px 0 rgb(138 49 82 / 20%);
       }
 
       .btn--start {
@@ -227,9 +297,9 @@
 
       .btn--submit:disabled,
       .btn:disabled {
-        border-color: #aeb6bd;
-        background: linear-gradient(#d9dde0, #c8cdd1);
-        color: #888f96;
+        border-color: #d9bdc9;
+        background: linear-gradient(#f5e7ed, #ead5dd);
+        color: #a98896;
         box-shadow: none;
         cursor: not-allowed;
         text-shadow: none;
@@ -458,20 +528,22 @@
         display: grid;
         min-height: clamp(56px, 12vw, 76px);
         place-items: center;
-        border: 2px solid #74808a;
-        border-radius: 12px;
-        background: linear-gradient(#f5f8fb, #cbd2d8);
-        color: #767d84;
+        border: 2px solid #e1a7c0;
+        border-radius: 18px;
+        background:
+          linear-gradient(#fffafd, #ffe8f1),
+          url("./assets/images/princess_gingham_background.png") center / 120px auto repeat;
+        color: #b58296;
         box-shadow: inset 0 2px 2px rgb(255 255 255 / 70%);
         font-size: clamp(23px, 6vw, 36px);
         font-weight: 900;
       }
 
       .stage-card--active {
-        border-color: #1177ce;
-        background: linear-gradient(#45b8ff, #1395e6);
+        border-color: #df75a2;
+        background: linear-gradient(#ffb9d3, #f58ab8);
         color: #fff;
-        box-shadow: 0 6px 12px rgb(19 149 230 / 26%);
+        box-shadow: 0 6px 12px rgb(220 103 152 / 26%), inset 0 2px 0 rgb(255 255 255 / 38%);
         cursor: pointer;
       }
 
@@ -489,10 +561,10 @@
         width: fit-content;
         margin: 0 auto;
         padding: 9px 18px;
-        border: 4px solid #878d92;
+        border: 4px solid #d899b4;
         border-radius: 7px;
-        background: #f4f5f6;
-        color: #80868c;
+        background: #fffafd;
+        color: #b58296;
         font-size: clamp(24px, 6vw, 34px);
         font-weight: 900;
         transform: rotate(-7deg);
@@ -542,9 +614,12 @@
         height: 42px;
         margin: 6px auto -3px;
         place-items: center;
-        border: 2px solid #1f2933;
-        border-radius: 7px;
-        background: linear-gradient(#e4f1ff, #bedbfa);
+        border: 2px solid #d985a9;
+        border-radius: 12px;
+        background:
+          linear-gradient(#fffafd, #ffe7f0),
+          url("./assets/images/princess_gingham_background.png") center / 100px auto repeat;
+        color: var(--ink);
         font-size: 24px;
         font-weight: 900;
       }
@@ -556,9 +631,10 @@
         width: min(100%, 560px);
         margin: 0 auto;
         overflow: hidden;
-        border: 2px solid #1d2933;
-        border-radius: 8px;
-        background: #1d2933;
+        border: 4px solid #f0b2cc;
+        border-radius: 20px;
+        background: #f0b2cc;
+        box-shadow: 0 12px 22px rgb(218 104 148 / 18%);
       }
 
       .play-screen {
@@ -596,7 +672,7 @@
         width: 100%;
         aspect-ratio: 4 / 3;
         object-fit: cover;
-        background: #dbe2e8;
+        background: #fff3f8;
       }
 
       .answer-bar {
@@ -611,15 +687,17 @@
       .answer-label {
         font-size: clamp(21px, 5vw, 28px);
         font-weight: 900;
+        color: var(--ink);
       }
 
       .answer-input {
         min-width: 0;
         height: 48px;
         padding: 6px 12px;
-        border: 2px solid #1d2933;
-        border-radius: 9px;
-        background: #fff;
+        border: 2px solid #d985a9;
+        border-radius: 16px;
+        background: #fffafd;
+        color: var(--ink);
         font-size: clamp(20px, 5vw, 28px);
         font-weight: 900;
       }
@@ -632,7 +710,8 @@
         place-items: center;
         padding: 18px;
         visibility: hidden;
-        background: rgb(255 210 223 / 88%) url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        background:
+          rgb(255 234 242 / 90%) url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
         opacity: 0;
         transition: opacity 200ms ease, visibility 200ms ease;
       }
@@ -645,10 +724,12 @@
       .hint-card {
         width: min(92vw, 420px);
         padding: 14px;
-        border: 2px solid #111;
-        border-radius: 8px;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
-        box-shadow: 0 18px 40px rgb(0 0 0 / 20%);
+        border: 2px solid #e89ab9;
+        border-radius: 22px;
+        background:
+          linear-gradient(rgb(255 250 253 / 88%), rgb(255 241 247 / 88%)),
+          url("./assets/images/princess_gingham_background.png") center / 260px auto repeat;
+        box-shadow: 0 18px 40px rgb(190 82 124 / 22%);
         transform: scale(0.96);
         transition: transform 200ms ease;
       }
@@ -660,8 +741,8 @@
       .hint-card img {
         width: 100%;
         aspect-ratio: 1 / 1;
-        border: 2px solid #24313b;
-        border-radius: 8px;
+        border: 3px solid #efb2cc;
+        border-radius: 18px;
         object-fit: cover;
       }
 
@@ -711,12 +792,16 @@
       .success-screen {
         overflow: hidden;
         border-color: transparent;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        background:
+          linear-gradient(rgb(255 250 253 / 74%), rgb(255 236 244 / 74%)),
+          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
         box-shadow: none;
       }
 
       .view--correct {
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        background:
+          linear-gradient(rgb(255 243 248 / 80%), rgb(255 232 241 / 80%)),
+          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
         overflow: hidden;
         padding: 8px;
       }
@@ -792,11 +877,11 @@
         font-size: clamp(40px, 10svh, 72px);
         font-weight: 900;
         color: var(--red);
-        -webkit-text-stroke: 1px #761414;
+        -webkit-text-stroke: 1px #9f4668;
         text-shadow:
-          0 4px 0 #ffe164,
-          0 7px 0 #2862b8,
-          0 13px 20px rgb(20 60 120 / 16%);
+          0 4px 0 #fff1ad,
+          0 7px 0 #ffa6c6,
+          0 13px 20px rgb(190 82 124 / 16%);
       }
 
       .gif-frame {
@@ -829,7 +914,9 @@
       }
 
       .answer-check-screen {
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
+        background:
+          linear-gradient(rgb(255 250 253 / 82%), rgb(255 241 247 / 82%)),
+          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
       }
 
       .answer-check-grid {
@@ -844,7 +931,9 @@
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: cover;
-        background: #f4f7fa;
+        border: 3px solid #efb2cc;
+        border-radius: 18px;
+        background: #fffafd;
       }
 
       .wrong-title {
@@ -1448,7 +1537,7 @@
 
       function createConfettiPieces() {
         const rect = confettiCanvas.getBoundingClientRect();
-        const colors = ["#2297eb", "#ffd84d", "#ff5b5b", "#65c879", "#9057d8"];
+        const colors = ["#f58ab8", "#fff2ac", "#ff7fae", "#f3b4cf", "#b6dc80"];
 
         confettiPieces = Array.from({ length: 120 }, () => ({
           x: Math.random() * rect.width,
@@ -1563,3 +1652,4 @@
     </script>
   </body>
 </html>
+
