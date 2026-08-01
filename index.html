@@ -29,6 +29,7 @@
         --disabled: #ead5dd;
         --panel: #fffafd;
         --shadow: 0 16px 34px rgb(218 104 148 / 18%);
+        --main-bg: url("./assets/images/main_background.png?v=1") center / 360px auto repeat;
         font-family:
           "LovelyBaby",
           "210 러블리베이비",
@@ -50,8 +51,8 @@
       body {
         overflow-x: hidden;
         background:
-          linear-gradient(rgb(255 243 248 / 78%), rgb(255 232 241 / 78%)),
-          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 247 251 / 62%), rgb(255 237 246 / 62%)),
+          var(--main-bg);
         color: var(--ink);
       }
 
@@ -136,8 +137,8 @@
         border: 2px solid rgb(241 177 203 / 82%);
         border-radius: 24px;
         background:
-          linear-gradient(rgb(255 250 253 / 86%), rgb(255 244 249 / 86%)),
-          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 250 253 / 72%), rgb(255 244 249 / 72%)),
+          var(--main-bg);
         box-shadow: var(--shadow);
       }
 
@@ -174,8 +175,8 @@
       .view--play .screen,
       .view--wrong .screen {
         background:
-          linear-gradient(rgb(255 250 253 / 86%), rgb(255 244 249 / 86%)),
-          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 250 253 / 72%), rgb(255 244 249 / 72%)),
+          var(--main-bg);
         backdrop-filter: blur(2px);
       }
 
@@ -495,6 +496,13 @@
         bottom: 17%;
       }
 
+      .rules-comfy {
+        left: 50%;
+        bottom: 13%;
+        width: clamp(110px, 23vw, 190px);
+        transform: translateX(-50%);
+      }
+
       .rules-extra-row {
         position: relative;
         z-index: 1;
@@ -711,7 +719,8 @@
         padding: 18px;
         visibility: hidden;
         background:
-          rgb(255 234 242 / 90%) url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 234 242 / 76%), rgb(255 234 242 / 76%)),
+          var(--main-bg);
         opacity: 0;
         transition: opacity 200ms ease, visibility 200ms ease;
       }
@@ -727,8 +736,8 @@
         border: 2px solid #e89ab9;
         border-radius: 22px;
         background:
-          linear-gradient(rgb(255 250 253 / 88%), rgb(255 241 247 / 88%)),
-          url("./assets/images/princess_gingham_background.png") center / 260px auto repeat;
+          linear-gradient(rgb(255 250 253 / 74%), rgb(255 241 247 / 74%)),
+          var(--main-bg);
         box-shadow: 0 18px 40px rgb(190 82 124 / 22%);
         transform: scale(0.96);
         transition: transform 200ms ease;
@@ -793,15 +802,15 @@
         overflow: hidden;
         border-color: transparent;
         background:
-          linear-gradient(rgb(255 250 253 / 74%), rgb(255 236 244 / 74%)),
-          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 250 253 / 58%), rgb(255 236 244 / 58%)),
+          var(--main-bg);
         box-shadow: none;
       }
 
       .view--correct {
         background:
-          linear-gradient(rgb(255 243 248 / 80%), rgb(255 232 241 / 80%)),
-          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 243 248 / 58%), rgb(255 232 241 / 58%)),
+          var(--main-bg);
         overflow: hidden;
         padding: 8px;
       }
@@ -915,8 +924,8 @@
 
       .answer-check-screen {
         background:
-          linear-gradient(rgb(255 250 253 / 82%), rgb(255 241 247 / 82%)),
-          url("./assets/images/princess_gingham_background.png") center / 360px auto repeat;
+          linear-gradient(rgb(255 250 253 / 60%), rgb(255 241 247 / 60%)),
+          var(--main-bg);
       }
 
       .answer-check-grid {
@@ -1278,16 +1287,16 @@
         }
 
         .home-float-left-up {
-          left: -24%;
-          top: 28%;
-          width: clamp(128px, 34vw, 174px);
+          left: 2%;
+          top: 30%;
+          width: clamp(112px, 29vw, 152px);
         }
 
         .home-float-right-down {
-          right: -24%;
-          top: 29%;
+          right: 2%;
+          top: 31%;
           bottom: auto;
-          width: clamp(128px, 34vw, 174px);
+          width: clamp(112px, 29vw, 152px);
         }
 
         .magnifier-stage {
@@ -1324,6 +1333,11 @@
         .rules-screen .topbar__right {
           justify-self: end;
           align-self: center;
+        }
+
+        .rules-comfy {
+          bottom: 18%;
+          width: clamp(94px, 26vw, 132px);
         }
 
         .stage-screen .page-title {
@@ -1413,6 +1427,7 @@
           grid-template-columns: auto 1fr auto;
           min-height: 62px;
           align-items: center;
+          padding-inline: 14px;
         }
 
         .view--wrong .topbar__left,
@@ -1428,23 +1443,23 @@
         }
 
         .wrong-gallery {
-          grid-template-columns: minmax(60px, 0.5fr) minmax(168px, 1.62fr) minmax(60px, 0.5fr);
+          grid-template-columns: minmax(72px, 0.68fr) minmax(218px, 2fr) minmax(72px, 0.68fr);
           justify-content: center;
           justify-items: center;
           align-items: center;
-          gap: clamp(4px, 1.4vw, 8px);
-          width: min(98%, 410px);
-          height: min(48dvh, 370px);
-          max-height: min(48dvh, 370px);
+          gap: 0;
+          width: min(100%, 430px);
+          height: min(58dvh, 470px);
+          max-height: min(58dvh, 470px);
           margin: 0 auto;
         }
 
         .wrong-main {
-          max-height: min(48dvh, 370px);
+          max-height: min(58dvh, 470px);
         }
 
         .wrong-side {
-          max-height: min(27dvh, 210px);
+          max-height: min(38dvh, 310px);
         }
 
         .view--correct .screen {
@@ -1456,6 +1471,7 @@
           grid-template-columns: 1fr auto;
           min-height: 62px;
           align-items: center;
+          padding-inline: 14px;
         }
 
         .success-screen .topbar__right {
@@ -1472,7 +1488,7 @@
 
         .success-content > [data-go="answerCheck"] {
           position: absolute;
-          top: -61px;
+          top: -56px;
           left: 50%;
           z-index: 7;
           transform: translateX(-50%);
@@ -1485,7 +1501,7 @@
         .gif-frame {
           width: min(72vw, 360px);
           height: min(34dvh, 330px);
-          margin-top: -2px;
+          margin-top: clamp(20px, 5dvh, 46px);
         }
       }
 
@@ -1537,6 +1553,7 @@
           <img class="floating-character rules-character float-b" src="./assets/images/rules_float_1.gif?v=1" alt="" />
           <img class="floating-character rules-character float-e" src="./assets/images/rules_float_2.gif?v=1" alt="" />
           <img class="floating-character rules-character float-f" src="./assets/images/rules_float_2.gif?v=1" alt="" />
+          <img class="floating-character rules-comfy" src="./assets/images/rules_comfy.png?v=1" alt="" />
           <header class="topbar">
             <div></div>
             <h2 class="page-title">게임 설명</h2>
