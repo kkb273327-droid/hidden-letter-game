@@ -81,8 +81,8 @@
         z-index: 0;
         pointer-events: none;
         background-image:
-          url("./assets/images/decor_strawberry.png"),
-          url("./assets/images/decor_cherry.png"),
+          url("./assets/images/theme_strawberry.png"),
+          url("./assets/images/theme_cherry.png"),
           url("./assets/images/decor_ribbon.png"),
           url("./assets/images/decor_heart.png");
         background-position:
@@ -97,7 +97,7 @@
           clamp(76px, 16vw, 148px),
           clamp(58px, 12vw, 116px);
         content: "";
-        opacity: 0.45;
+        opacity: 0.34;
       }
 
       .view {
@@ -164,7 +164,7 @@
         bottom: 12px;
         width: clamp(64px, 12vw, 112px);
         aspect-ratio: 1;
-        background: url("./assets/images/decor_strawberry.png") center / contain no-repeat;
+        background: url("./assets/images/theme_strawberry.png") center / contain no-repeat;
         content: "";
         opacity: 0.32;
         pointer-events: none;
@@ -343,14 +343,14 @@
       }
 
       .home-float-left-up {
-        left: 7%;
-        top: 39%;
+        left: 3%;
+        top: 37%;
         animation: driftOne 6.5s ease-in-out infinite;
       }
 
       .home-float-right-down {
-        right: 8%;
-        bottom: 22%;
+        right: 3%;
+        bottom: 26%;
         animation: driftTwo 7.2s ease-in-out infinite;
       }
 
@@ -476,13 +476,13 @@
       }
 
       .rules-screen .float-a {
-        left: 5%;
-        top: 14%;
+        left: 3%;
+        top: 20%;
       }
 
       .rules-screen .float-b {
-        right: 5%;
-        top: 18%;
+        right: 3%;
+        top: 24%;
       }
 
       .rules-screen .float-e {
@@ -579,13 +579,13 @@
       }
 
       .stage-screen .float-a {
-        left: 6%;
-        top: 38%;
+        left: 4%;
+        top: 44%;
       }
 
       .stage-screen .float-b {
-        right: 7%;
-        top: 38%;
+        right: 4%;
+        top: 44%;
       }
 
       .stage-screen .float-c {
@@ -827,8 +827,8 @@
 
       .correct-side {
         position: absolute;
-        z-index: 3;
-        width: clamp(109px, 21vw, 196px);
+        z-index: 1;
+        width: clamp(82px, 14vw, 142px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 16%));
@@ -836,12 +836,12 @@
 
       .correct-side--top-left {
         left: clamp(12px, 8vw, 120px);
-        top: clamp(72px, 16svh, 150px);
+        top: clamp(136px, 20svh, 190px);
       }
 
       .correct-side--top-right {
         right: clamp(12px, 8vw, 120px);
-        top: clamp(72px, 16svh, 150px);
+        top: clamp(136px, 20svh, 190px);
       }
 
       .correct-side--bottom-left {
@@ -855,15 +855,15 @@
       }
 
       .correct-side--middle-left {
-        left: clamp(8px, 4vw, 58px);
-        top: 48%;
-        width: clamp(115px, 22vw, 210px);
+        left: clamp(8px, 3vw, 34px);
+        top: 68%;
+        width: clamp(72px, 13vw, 124px);
       }
 
       .correct-side--middle-right {
-        right: clamp(8px, 4vw, 58px);
-        top: 48%;
-        width: clamp(115px, 22vw, 210px);
+        right: clamp(8px, 3vw, 34px);
+        top: 68%;
+        width: clamp(72px, 13vw, 124px);
       }
 
       .success-screen .topbar {
@@ -885,8 +885,8 @@
       }
 
       .gif-frame {
-        width: min(92vw, 760px);
-        height: min(58svh, 650px);
+        width: min(82vw, 560px);
+        height: min(46svh, 500px);
         overflow: hidden;
         border: 0;
         border-radius: 0;
@@ -994,9 +994,29 @@
       }
 
       @media (max-width: 520px) {
+        .app::before {
+          background-size: 54px, 58px, 62px, 52px;
+          opacity: 0.2;
+        }
+
         .screen {
           min-height: calc(100svh - 16px);
           padding: 12px;
+        }
+
+        .screen::before {
+          top: 14px;
+          left: 16px;
+          right: 16px;
+          height: 44px;
+          opacity: 0.52;
+        }
+
+        .screen::after {
+          width: 52px;
+          right: 24px;
+          bottom: 24px;
+          opacity: 0.28;
         }
 
         .view {
@@ -1018,13 +1038,164 @@
         }
 
         .description {
-          padding-left: 24px;
+          position: relative;
+          z-index: 2;
+          padding-left: 22px;
           font-size: 16px;
-          line-height: 1.4;
+          line-height: 1.36;
+        }
+
+        .rules-character {
+          width: 86px;
+          opacity: 0.8;
+        }
+
+        .rules-screen .float-a,
+        .rules-screen .float-b {
+          display: none;
+        }
+
+        .rules-screen .float-e {
+          left: 12%;
+          bottom: 19%;
+        }
+
+        .rules-screen .float-f {
+          right: 10%;
+          bottom: 19%;
+        }
+
+        .rules-extra-row {
+          gap: 34px;
+          margin-top: 4px;
+        }
+
+        .rules-extra-row img {
+          width: 104px;
+        }
+
+        .stage-list {
+          position: relative;
+          z-index: 2;
+          gap: 8px;
+          margin-top: 62px;
+        }
+
+        .stage-card {
+          min-height: 56px;
+          border-radius: 18px;
+          font-size: 28px;
+        }
+
+        .coming-soon {
+          position: relative;
+          z-index: 2;
+        }
+
+        .stage-character {
+          width: 92px;
+          opacity: 0.82;
+        }
+
+        .stage-character--big {
+          width: 124px;
+        }
+
+        .stage-screen .float-a {
+          left: 8%;
+          top: 47%;
+        }
+
+        .stage-screen .float-b {
+          right: 8%;
+          top: 47%;
+        }
+
+        .stage-screen .float-c {
+          left: 14%;
+          bottom: 18%;
+        }
+
+        .stage-screen .float-d {
+          right: 14%;
+          bottom: 18%;
+        }
+
+        .stage-screen .float-e {
+          left: 32%;
+          bottom: 7%;
+        }
+
+        .stage-screen .float-f {
+          right: 18%;
+          bottom: 7%;
         }
 
         .answer-bar {
           grid-template-columns: auto minmax(0, 1fr) 66px;
+        }
+
+        .view--correct {
+          padding: 4px;
+        }
+
+        .view--correct .screen {
+          height: calc(100dvh - 8px);
+          padding: 8px 10px;
+        }
+
+        .success-content {
+          gap: 6px;
+          align-content: start;
+        }
+
+        .success-title {
+          position: relative;
+          z-index: 4;
+          font-size: clamp(38px, 12vw, 58px);
+        }
+
+        .correct-side {
+          z-index: 1;
+          width: 76px;
+          opacity: 0.84;
+        }
+
+        .correct-side--top-left {
+          left: 6%;
+          top: 18%;
+        }
+
+        .correct-side--top-right {
+          right: 6%;
+          top: 18%;
+        }
+
+        .correct-side--middle-left,
+        .correct-side--middle-right {
+          display: none;
+        }
+
+        .correct-side--bottom-left {
+          left: 8%;
+          bottom: 9%;
+        }
+
+        .correct-side--bottom-right {
+          right: 8%;
+          bottom: 9%;
+        }
+
+        .gif-frame {
+          position: relative;
+          z-index: 2;
+          width: min(72vw, 310px);
+          height: min(34dvh, 310px);
+          margin-top: 8px;
+        }
+
+        .confetti-canvas {
+          z-index: 3;
         }
 
         .view--wrong {
@@ -1224,7 +1395,7 @@
             <button class="btn btn--primary" type="button" data-go="answerCheck">정답 확인하기</button>
             <h2 class="success-title">정답!!</h2>
             <div class="gif-frame">
-              <img src="./assets/images/correct_character.png?v=1" alt="정답 축하 애니메이션" />
+              <img src="./assets/images/correct_character.png?v=2" alt="정답 축하 애니메이션" />
             </div>
             <audio id="correctAudio" src="./assets/audio/correct_song.mp3" preload="none"></audio>
           </div>
