@@ -49,7 +49,7 @@
 
       body {
         overflow-x: hidden;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         color: var(--ink);
       }
 
@@ -105,13 +105,13 @@
         padding: clamp(16px, 4vw, 28px);
         border: 1px solid rgb(158 175 190 / 58%);
         border-radius: 8px;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         box-shadow: var(--shadow);
       }
 
       .view--play .screen,
       .view--wrong .screen {
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         backdrop-filter: blur(2px);
       }
 
@@ -252,7 +252,7 @@
       .floating-character {
         position: absolute;
         z-index: 0;
-        width: clamp(70px, 15vw, 125px);
+        width: clamp(98px, 21vw, 175px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 18%));
@@ -263,13 +263,13 @@
       }
 
       .home-character--large {
-        width: clamp(130px, 25vw, 230px);
+        width: clamp(182px, 35vw, 322px);
       }
 
       .home-character--medium {
         width: auto;
-        max-width: clamp(105px, 20vw, 185px);
-        max-height: clamp(74px, 15vw, 138px);
+        max-width: clamp(147px, 28vw, 259px);
+        max-height: clamp(104px, 21vw, 193px);
       }
 
       .home-float-left-up {
@@ -353,12 +353,12 @@
       .magnifier-stage {
         position: relative;
         display: grid;
-        min-height: min(38svh, 300px);
+        min-height: min(53svh, 420px);
         place-items: center;
       }
 
       .magnifier {
-        width: clamp(150px, 37vw, 240px);
+        width: clamp(210px, 52vw, 336px);
         height: auto;
         object-fit: contain;
         filter: drop-shadow(0 14px 16px rgb(39 72 98 / 20%));
@@ -402,7 +402,7 @@
       }
 
       .rules-character {
-        width: clamp(78px, 17vw, 145px);
+        width: clamp(109px, 24vw, 203px);
       }
 
       .rules-screen .float-a {
@@ -436,7 +436,7 @@
       }
 
       .rules-extra-row img {
-        width: clamp(90px, 18vw, 155px);
+        width: clamp(126px, 25vw, 217px);
         height: auto;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 16%));
       }
@@ -499,11 +499,11 @@
       }
 
       .stage-character {
-        width: clamp(82px, 18vw, 150px);
+        width: clamp(115px, 25vw, 210px);
       }
 
       .stage-character--big {
-        width: clamp(125px, 23vw, 220px);
+        width: clamp(175px, 32vw, 308px);
       }
 
       .stage-screen .float-a {
@@ -569,7 +569,7 @@
       .play-helper {
         position: absolute;
         z-index: 0;
-        width: clamp(70px, 14vw, 124px);
+        width: clamp(98px, 20vw, 174px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 15%));
@@ -632,7 +632,7 @@
         place-items: center;
         padding: 18px;
         visibility: hidden;
-        background: rgb(255 210 223 / 88%) url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: rgb(255 210 223 / 88%) url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         opacity: 0;
         transition: opacity 200ms ease, visibility 200ms ease;
       }
@@ -647,7 +647,7 @@
         padding: 14px;
         border: 2px solid #111;
         border-radius: 8px;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         box-shadow: 0 18px 40px rgb(0 0 0 / 20%);
         transform: scale(0.96);
         transition: transform 200ms ease;
@@ -711,12 +711,12 @@
       .success-screen {
         overflow: hidden;
         border-color: transparent;
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         box-shadow: none;
       }
 
       .view--correct {
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
         overflow: hidden;
         padding: 8px;
       }
@@ -743,7 +743,7 @@
       .correct-side {
         position: absolute;
         z-index: 3;
-        width: clamp(78px, 15vw, 140px);
+        width: clamp(109px, 21vw, 196px);
         pointer-events: none;
         user-select: none;
         filter: drop-shadow(0 8px 10px rgb(166 73 100 / 16%));
@@ -772,13 +772,13 @@
       .correct-side--middle-left {
         left: clamp(8px, 4vw, 58px);
         top: 48%;
-        width: clamp(82px, 16vw, 150px);
+        width: clamp(115px, 22vw, 210px);
       }
 
       .correct-side--middle-right {
         right: clamp(8px, 4vw, 58px);
         top: 48%;
-        width: clamp(82px, 16vw, 150px);
+        width: clamp(115px, 22vw, 210px);
       }
 
       .success-screen .topbar {
@@ -800,8 +800,8 @@
       }
 
       .gif-frame {
-        width: min(88vw, 620px);
-        height: min(52svh, 520px);
+        width: min(92vw, 760px);
+        height: min(58svh, 650px);
         overflow: hidden;
         border: 0;
         border-radius: 0;
@@ -829,7 +829,7 @@
       }
 
       .answer-check-screen {
-        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 180px auto repeat;
+        background: #ffd2df url("./assets/images/pink_dots_background.png") center / 252px auto repeat;
       }
 
       .answer-check-grid {
@@ -866,14 +866,14 @@
 
       .wrong-main {
         width: 100%;
-        max-height: 48svh;
+        max-height: 67svh;
         object-fit: contain;
         filter: drop-shadow(0 10px 12px rgb(60 35 45 / 16%));
       }
 
       .wrong-side {
         width: 100%;
-        max-height: 22svh;
+        max-height: 31svh;
         object-fit: contain;
         filter: drop-shadow(0 8px 10px rgb(60 35 45 / 14%));
       }
@@ -1034,7 +1034,7 @@
             <span class="title--yellow">찾아라!</span>
           </h1>
           <div class="magnifier-stage" aria-hidden="true">
-            <img class="magnifier" src="./assets/images/magnifier.png?v=3" alt="" />
+            <img class="magnifier" src="./assets/images/magnifier.png?v=4" alt="" />
           </div>
           <button class="btn btn--primary btn--start" type="button" data-go="rules">시작</button>
         </div>
