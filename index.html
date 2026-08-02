@@ -629,6 +629,13 @@
         margin: clamp(24px, 6svh, 54px) auto 0;
       }
 
+      .stage-slot {
+        position: relative;
+        display: grid;
+        min-width: 0;
+        padding-top: clamp(22px, 4vw, 34px);
+      }
+
       .stage-card {
         position: relative;
         display: grid;
@@ -647,21 +654,20 @@
 
       .stage-card__icon {
         position: absolute;
-        top: 3px;
+        top: 0;
         left: 50%;
-        z-index: 2;
-        width: clamp(22px, 5vw, 34px);
-        max-height: clamp(22px, 5vw, 34px);
+        z-index: 3;
+        width: clamp(33px, 7.5vw, 51px);
+        max-height: clamp(33px, 7.5vw, 51px);
         object-fit: contain;
         pointer-events: none;
-        transform: translateX(-50%);
+        transform: translate(-50%, 5%);
         filter: drop-shadow(0 2px 3px rgb(128 58 88 / 18%));
       }
 
       .stage-card__number {
         position: relative;
         z-index: 1;
-        transform: translateY(8px);
       }
 
       .stage-card--active {
@@ -677,35 +683,13 @@
       }
 
       .lock {
-        position: relative;
         display: block;
         width: clamp(26px, 7vw, 36px);
         height: clamp(26px, 7vw, 36px);
       }
 
-      .lock::before,
-      .lock::after {
-        position: absolute;
-        left: 50%;
-        content: "";
-        transform: translateX(-50%);
-      }
-
-      .lock::before {
-        top: 1px;
-        width: 58%;
-        height: 50%;
-        border: 4px solid currentColor;
-        border-bottom: 0;
-        border-radius: 999px 999px 0 0;
-      }
-
-      .lock::after {
-        bottom: 2px;
-        width: 78%;
-        height: 58%;
-        border-radius: 7px;
-        background: currentColor;
+      .lock path {
+        fill: currentColor;
       }
 
       .stage-badge {
@@ -1068,6 +1052,19 @@
         filter: drop-shadow(0 8px 10px rgb(60 35 45 / 14%));
       }
 
+      .wrong-gallery--single {
+        grid-template-columns: minmax(0, 1fr);
+        width: min(82vw, 440px);
+        height: min(52svh, 450px);
+      }
+
+      .wrong-comfy {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 12px 14px rgb(60 35 45 / 15%));
+      }
+
       .wrong-dim {
         filter: grayscale(0.85);
         opacity: 0.34;
@@ -1251,12 +1248,8 @@
         }
 
         .stage-card__icon {
-          width: 24px;
-          max-height: 24px;
-        }
-
-        .stage-card__number {
-          transform: translateY(7px);
+          width: 36px;
+          max-height: 36px;
         }
 
         .lock {
@@ -1388,6 +1381,17 @@
 
         .wrong-side {
           max-height: min(16dvh, 100px);
+        }
+
+        .wrong-gallery--single {
+          grid-template-columns: minmax(0, 1fr);
+          width: min(78vw, 350px);
+          height: min(44dvh, 340px);
+          max-height: min(44dvh, 340px);
+        }
+
+        .wrong-comfy {
+          max-height: min(44dvh, 340px);
         }
 
         .main-screen {
@@ -1620,6 +1624,17 @@
           max-height: min(38dvh, 310px);
         }
 
+        .wrong-gallery--single {
+          grid-template-columns: minmax(0, 1fr);
+          width: min(82vw, 420px);
+          height: min(50dvh, 430px);
+          max-height: min(50dvh, 430px);
+        }
+
+        .wrong-comfy {
+          max-height: min(50dvh, 430px);
+        }
+
         .view--correct .screen {
           grid-template-rows: 66px minmax(0, 1fr);
           padding-top: 10px;
@@ -1752,56 +1767,57 @@
         <div class="screen stage-screen deco-screen">
           <h2 class="page-title">스테이지</h2>
           <div class="stage-list" aria-label="스테이지 목록">
-            <button class="stage-card stage-card--active" type="button" data-stage="1">
+            <div class="stage-slot">
               <img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" />
-              <span class="stage-card__number">1</span>
-            </button>
-            <button class="stage-card stage-card--active" type="button" data-stage="2">
+              <button class="stage-card stage-card--active" type="button" data-stage="1"><span class="stage-card__number">1</span></button>
+            </div>
+            <div class="stage-slot">
               <img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" />
-              <span class="stage-card__number">2</span>
-            </button>
-            <button class="stage-card stage-card--active" type="button" data-stage="3">
+              <button class="stage-card stage-card--active" type="button" data-stage="2"><span class="stage-card__number">2</span></button>
+            </div>
+            <div class="stage-slot">
               <img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" />
-              <span class="stage-card__number">3</span>
-            </button>
-            <button class="stage-card stage-card--active" type="button" data-stage="4">
-              <img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" />
-              <span class="stage-card__number">4</span>
-            </button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="6 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="7 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="8 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="9 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="10 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="11 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="12 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="13 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="14 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="15 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="16 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="17 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="18 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="19 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="20 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="21 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="22 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="23 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="24 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="25 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="26 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="27 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="28 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="29 잠금"><span class="lock" aria-hidden="true"></span></button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="30 잠금"><span class="lock" aria-hidden="true"></span></button>
+              <button class="stage-card stage-card--active" type="button" data-stage="3"><span class="stage-card__number">3</span></button>
+            </div>
+            <div class="stage-slot">
+              <img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" />
+              <button class="stage-card stage-card--active" type="button" data-stage="4"><span class="stage-card__number">4</span></button>
+            </div>
+            <div class="stage-slot">
+              <img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" />
+              <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button>
+            </div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="6 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="7 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="8 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="9 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="10 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="11 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="12 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="13 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="14 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="15 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="16 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="17 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="18 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="19 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="20 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="21 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="22 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="23 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="24 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="25 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="26 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="27 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="28 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="29 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
+            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="30 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
           </div>
         </div>
       </section>
 
       <section class="view view--play" data-view="stage1" aria-label="Stage 1 플레이 화면" aria-hidden="true">
         <div class="screen play-screen">
-          <img class="play-helper play-helper--left" src="./assets/images/home_float_1.gif?v=2" alt="" />
-          <img class="play-helper play-helper--right" src="./assets/images/home_float_1.gif?v=2" alt="" />
           <header class="topbar">
             <button class="btn btn--icon btn--icon-nav topbar__left" type="button" data-go="stages">돌아가기</button>
             <button class="btn btn--icon btn--icon-hint topbar__center" type="button" id="hintButton">힌트</button>
@@ -1825,10 +1841,6 @@
       <section class="view view--correct" data-view="correct" aria-label="정답 화면" aria-hidden="true">
         <div class="screen success-screen">
           <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
-          <img class="correct-side correct-side--top-left" src="./assets/images/correct_side_1.gif?v=1" alt="" />
-          <img class="correct-side correct-side--top-right" src="./assets/images/correct_side_1.gif?v=1" alt="" />
-          <img class="correct-side correct-side--bottom-left" src="./assets/images/correct_side_2.png?v=1" alt="" />
-          <img class="correct-side correct-side--bottom-right" src="./assets/images/correct_side_2.png?v=1" alt="" />
           <img class="correct-side correct-side--middle-left" src="./assets/images/correct_side_3.gif?v=1" alt="" />
           <img class="correct-side correct-side--middle-right" src="./assets/images/correct_side_3.gif?v=1" alt="" />
           <header class="topbar">
@@ -1870,10 +1882,8 @@
             <button class="btn btn--icon btn--icon-nav topbar__right" type="button" data-go="home">홈</button>
           </header>
           <h2 class="wrong-title">다시 생각해봐요</h2>
-          <div class="wrong-gallery">
-            <img class="wrong-side" src="./assets/images/wrong_side.png?v=1" alt="" />
-            <img class="wrong-main" src="./assets/images/wrong_main.png?v=1" alt="오답 코리락쿠마" />
-            <img class="wrong-side" src="./assets/images/wrong_side.png?v=1" alt="" />
+          <div class="wrong-gallery wrong-gallery--single">
+            <img class="wrong-comfy" src="./assets/images/rules_comfy.png?v=1" alt="오답 코리락쿠마" />
           </div>
         </div>
       </section>
