@@ -1146,9 +1146,9 @@
 
         .btn--icon {
           display: inline-grid;
-          min-width: 58px;
-          min-height: 58px;
-          padding: 34px 2px 0;
+          min-width: 72px;
+          min-height: 76px;
+          padding: 50px 2px 0;
           place-items: center;
           border: 0;
           border-radius: 0;
@@ -1170,11 +1170,11 @@
 
         .btn--icon::before {
           top: 0;
-          width: clamp(30px, 9vw, 42px);
+          width: clamp(45px, 13.5vw, 63px);
         }
 
         .btn--icon-check::before {
-          width: clamp(34px, 10vw, 48px);
+          width: clamp(51px, 15vw, 72px);
         }
 
         .btn--icon:disabled {
@@ -1228,18 +1228,18 @@
         }
 
         .rules-deco {
-          width: clamp(66px, 20vw, 92px);
+          width: clamp(70px, 21vw, 98px);
           opacity: 0.9;
         }
 
         .rules-deco--top-left {
-          top: 86px;
-          left: 16px;
+          top: 96px;
+          left: 14px;
         }
 
         .rules-deco--bottom-right {
-          right: 16px;
-          bottom: 22px;
+          right: 12px;
+          bottom: 12px;
         }
 
         .stage-list {
@@ -1492,8 +1492,12 @@
         }
 
         .rules-screen .topbar {
-          position: relative;
-          min-height: 62px;
+          position: absolute;
+          top: 16px;
+          left: 18px;
+          right: 18px;
+          z-index: 5;
+          min-height: 64px;
           align-items: center;
         }
 
@@ -1506,8 +1510,13 @@
         }
 
         .rules-screen .topbar__right {
+          transform: translateY(-7px);
           justify-self: end;
           align-self: center;
+        }
+
+        .rules-screen .description {
+          margin-top: 158px;
         }
 
         .rules-comfy {
@@ -1700,8 +1709,8 @@
         .view--play .btn--icon,
         .view--rules .btn--icon,
         .modal .btn--icon {
-          min-height: 58px;
-          padding: 34px 2px 0;
+          min-height: 76px;
+          padding: 50px 2px 0;
           border: 0;
           border-radius: 0;
           background: transparent;
