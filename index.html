@@ -1144,13 +1144,50 @@
           font-size: 16px;
         }
 
+        .btn--icon {
+          display: inline-grid;
+          min-width: 58px;
+          min-height: 58px;
+          padding: 34px 2px 0;
+          place-items: center;
+          border: 0;
+          border-radius: 0;
+          background: transparent;
+          box-shadow: none;
+          color: var(--ink);
+          line-height: 1;
+          overflow: visible;
+          text-shadow: 0 2px 0 rgb(255 255 255 / 88%);
+        }
+
+        .btn--icon.btn--primary {
+          border: 0;
+          background: transparent;
+          box-shadow: none;
+          color: var(--ink);
+          text-shadow: 0 2px 0 rgb(255 255 255 / 88%);
+        }
+
         .btn--icon::before {
-          top: -18px;
-          width: clamp(24px, 8vw, 34px);
+          top: 0;
+          width: clamp(30px, 9vw, 42px);
         }
 
         .btn--icon-check::before {
-          width: clamp(28px, 9vw, 40px);
+          width: clamp(34px, 10vw, 48px);
+        }
+
+        .btn--icon:disabled {
+          border: 0;
+          background: transparent;
+          box-shadow: none;
+          color: #a98896;
+          opacity: 0.56;
+        }
+
+        .btn--icon:active:not(:disabled) {
+          box-shadow: none;
+          transform: translateY(1px);
         }
 
         .description {
@@ -1191,18 +1228,18 @@
         }
 
         .rules-deco {
-          width: clamp(78px, 24vw, 108px);
-          opacity: 0.86;
+          width: clamp(66px, 20vw, 92px);
+          opacity: 0.9;
         }
 
         .rules-deco--top-left {
-          top: 12%;
-          left: 2%;
+          top: 86px;
+          left: 16px;
         }
 
         .rules-deco--bottom-right {
-          right: 3%;
-          bottom: 5%;
+          right: 16px;
+          bottom: 22px;
         }
 
         .stage-list {
@@ -1263,7 +1300,7 @@
         }
 
         .answer-bar {
-          grid-template-columns: auto minmax(0, 1fr) 66px;
+          grid-template-columns: auto minmax(0, 1fr) 72px;
         }
 
         .view--correct {
@@ -1655,6 +1692,21 @@
           justify-self: start;
           align-self: center;
           transform: translate(10px, 7px);
+        }
+
+        .view--wrong .btn--icon,
+        .view--correct .btn--icon,
+        .view--answer-check .btn--icon,
+        .view--play .btn--icon,
+        .view--rules .btn--icon,
+        .modal .btn--icon {
+          min-height: 58px;
+          padding: 34px 2px 0;
+          border: 0;
+          border-radius: 0;
+          background: transparent;
+          box-shadow: none;
+          overflow: visible;
         }
       }
 
