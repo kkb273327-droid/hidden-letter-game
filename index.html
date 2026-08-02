@@ -624,15 +624,15 @@
       .stage-list {
         display: grid;
         grid-template-columns: repeat(5, minmax(48px, 1fr));
-        gap: clamp(8px, 2vw, 16px);
+        gap: clamp(8px, 1.8vw, 14px);
         width: min(100%, 520px);
-        margin: clamp(26px, 8svh, 72px) auto 28px;
+        margin: clamp(24px, 6svh, 54px) auto 0;
       }
 
       .stage-card {
         position: relative;
         display: grid;
-        min-height: clamp(56px, 12vw, 76px);
+        min-height: clamp(54px, 10vw, 72px);
         place-items: center;
         border: 2px solid #e1a7c0;
         border-radius: 18px;
@@ -643,6 +643,25 @@
         box-shadow: inset 0 2px 2px rgb(255 255 255 / 70%);
         font-size: clamp(23px, 6vw, 36px);
         font-weight: 900;
+      }
+
+      .stage-card__icon {
+        position: absolute;
+        top: 3px;
+        left: 50%;
+        z-index: 2;
+        width: clamp(22px, 5vw, 34px);
+        max-height: clamp(22px, 5vw, 34px);
+        object-fit: contain;
+        pointer-events: none;
+        transform: translateX(-50%);
+        filter: drop-shadow(0 2px 3px rgb(128 58 88 / 18%));
+      }
+
+      .stage-card__number {
+        position: relative;
+        z-index: 1;
+        transform: translateY(8px);
       }
 
       .stage-card--active {
@@ -658,60 +677,35 @@
       }
 
       .lock {
+        position: relative;
+        display: block;
         width: clamp(26px, 7vw, 36px);
         height: clamp(26px, 7vw, 36px);
       }
 
-      .coming-soon {
-        display: flex;
-        width: fit-content;
-        margin: 0 auto;
-        padding: 9px 18px;
-        border: 4px solid #d899b4;
+      .lock::before,
+      .lock::after {
+        position: absolute;
+        left: 50%;
+        content: "";
+        transform: translateX(-50%);
+      }
+
+      .lock::before {
+        top: 1px;
+        width: 58%;
+        height: 50%;
+        border: 4px solid currentColor;
+        border-bottom: 0;
+        border-radius: 999px 999px 0 0;
+      }
+
+      .lock::after {
+        bottom: 2px;
+        width: 78%;
+        height: 58%;
         border-radius: 7px;
-        background: #fffafd;
-        color: #b58296;
-        font-size: clamp(24px, 6vw, 34px);
-        font-weight: 900;
-        transform: rotate(-7deg);
-      }
-
-      .stage-character {
-        width: clamp(115px, 25vw, 210px);
-      }
-
-      .stage-character--big {
-        width: clamp(175px, 32vw, 308px);
-      }
-
-      .stage-screen .float-a {
-        left: 4%;
-        top: 44%;
-      }
-
-      .stage-screen .float-b {
-        right: 4%;
-        top: 44%;
-      }
-
-      .stage-screen .float-c {
-        left: 17%;
-        bottom: 12%;
-      }
-
-      .stage-screen .float-d {
-        right: 18%;
-        bottom: 12%;
-      }
-
-      .stage-screen .float-e {
-        left: 34%;
-        bottom: 7%;
-      }
-
-      .stage-screen .float-f {
-        right: 43%;
-        bottom: 22%;
+        background: currentColor;
       }
 
       .stage-badge {
@@ -1246,58 +1240,28 @@
         .stage-list {
           position: relative;
           z-index: 2;
-          gap: 8px;
-          margin-top: 62px;
+          gap: 7px;
+          margin-top: 42px;
         }
 
         .stage-card {
-          min-height: 56px;
-          border-radius: 18px;
-          font-size: 28px;
+          min-height: 52px;
+          border-radius: 15px;
+          font-size: 24px;
         }
 
-        .coming-soon {
-          position: relative;
-          z-index: 2;
+        .stage-card__icon {
+          width: 24px;
+          max-height: 24px;
         }
 
-        .stage-character {
-          width: 92px;
-          opacity: 0.82;
+        .stage-card__number {
+          transform: translateY(7px);
         }
 
-        .stage-character--big {
-          width: 124px;
-        }
-
-        .stage-screen .float-a {
-          left: 8%;
-          top: 47%;
-        }
-
-        .stage-screen .float-b {
-          right: 8%;
-          top: 47%;
-        }
-
-        .stage-screen .float-c {
-          left: 14%;
-          bottom: 18%;
-        }
-
-        .stage-screen .float-d {
-          right: 14%;
-          bottom: 18%;
-        }
-
-        .stage-screen .float-e {
-          left: 32%;
-          bottom: 7%;
-        }
-
-        .stage-screen .float-f {
-          right: 18%;
-          bottom: 7%;
+        .lock {
+          width: 25px;
+          height: 25px;
         }
 
         .answer-bar {
@@ -1786,25 +1750,51 @@
 
       <section class="view view--stages" data-view="stages" aria-label="스테이지 선택 화면" aria-hidden="true">
         <div class="screen stage-screen deco-screen">
-          <img class="floating-character stage-character stage-character--big float-a" src="./assets/images/stages_float_1.gif?v=2" alt="" />
-          <img class="floating-character stage-character stage-character--big float-b" src="./assets/images/stages_float_1.gif?v=2" alt="" />
-          <img class="floating-character stage-character stage-character--big float-c" src="./assets/images/stages_float_2.png?v=2" alt="" />
-          <img class="floating-character stage-character stage-character--big float-d" src="./assets/images/stages_float_2.png?v=2" alt="" />
-          <img class="floating-character stage-character float-e" src="./assets/images/stages_float_3.gif?v=1" alt="" />
-          <img class="floating-character stage-character float-f" src="./assets/images/stages_float_3.gif?v=1" alt="" />
           <h2 class="page-title">스테이지</h2>
           <div class="stage-list" aria-label="스테이지 목록">
-            <button class="stage-card stage-card--active" type="button" data-stage="1">1</button>
-            <button class="stage-card stage-card--active" type="button" data-stage="2">2</button>
-            <button class="stage-card stage-card--active" type="button" data-stage="3">3</button>
-            <button class="stage-card stage-card--active" type="button" data-stage="4">4</button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 준비 중">
-              <svg class="lock" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M17 10h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V8a5 5 0 0 1 10 0v2Zm-8 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V18h1.5v-1.2A1.5 1.5 0 0 0 12 14Z" />
-              </svg>
+            <button class="stage-card stage-card--active" type="button" data-stage="1">
+              <img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" />
+              <span class="stage-card__number">1</span>
             </button>
+            <button class="stage-card stage-card--active" type="button" data-stage="2">
+              <img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" />
+              <span class="stage-card__number">2</span>
+            </button>
+            <button class="stage-card stage-card--active" type="button" data-stage="3">
+              <img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" />
+              <span class="stage-card__number">3</span>
+            </button>
+            <button class="stage-card stage-card--active" type="button" data-stage="4">
+              <img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" />
+              <span class="stage-card__number">4</span>
+            </button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="6 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="7 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="8 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="9 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="10 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="11 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="12 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="13 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="14 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="15 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="16 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="17 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="18 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="19 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="20 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="21 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="22 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="23 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="24 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="25 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="26 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="27 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="28 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="29 잠금"><span class="lock" aria-hidden="true"></span></button>
+            <button class="stage-card stage-card--locked" type="button" disabled aria-label="30 잠금"><span class="lock" aria-hidden="true"></span></button>
           </div>
-          <div class="coming-soon">준비 중</div>
         </div>
       </section>
 
