@@ -428,6 +428,78 @@
         place-items: center;
       }
 
+      .home-feature {
+        position: relative;
+        display: grid;
+        width: min(82vw, 430px);
+        margin: 0 auto;
+        place-items: center;
+      }
+
+      .home-main-character {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 14px 18px rgb(166 73 100 / 20%));
+      }
+
+      .thought-cloud {
+        position: absolute;
+        top: 0;
+        right: 2%;
+        z-index: 2;
+        width: 34%;
+        aspect-ratio: 1.55;
+        border-radius: 46% 54% 50% 48% / 56% 52% 48% 44%;
+        background: #f6b9eb;
+        filter: drop-shadow(0 7px 8px rgb(166 73 100 / 12%));
+      }
+
+      .thought-cloud::before,
+      .thought-cloud::after {
+        position: absolute;
+        border-radius: 999px;
+        background: #f6b9eb;
+        content: "";
+      }
+
+      .thought-cloud::before {
+        left: -11%;
+        top: 22%;
+        width: 44%;
+        height: 56%;
+      }
+
+      .thought-cloud::after {
+        right: -7%;
+        top: 12%;
+        width: 46%;
+        height: 64%;
+      }
+
+      .thought-dot {
+        position: absolute;
+        z-index: 2;
+        border-radius: 999px;
+        background: #f6b9eb;
+        content: "";
+      }
+
+      .thought-dot--one {
+        right: 31%;
+        top: 31%;
+        width: 7%;
+        aspect-ratio: 1;
+      }
+
+      .thought-dot--two {
+        right: 36%;
+        top: 43%;
+        width: 4.7%;
+        aspect-ratio: 1;
+      }
+
       .magnifier {
         width: clamp(168px, 42vw, 269px);
         height: auto;
@@ -1303,6 +1375,27 @@
           min-height: min(32dvh, 284px);
         }
 
+        .home-feature {
+          width: min(86vw, 390px);
+          align-self: center;
+        }
+
+        .thought-cloud {
+          top: -1%;
+          right: -2%;
+          width: 35%;
+        }
+
+        .thought-dot--one {
+          right: 32%;
+          top: 31%;
+        }
+
+        .thought-dot--two {
+          right: 37%;
+          top: 43%;
+        }
+
         .magnifier {
           width: clamp(132px, 34vw, 204px);
         }
@@ -1548,16 +1641,15 @@
     <main class="app" aria-live="polite">
       <section class="view view--home is-active" data-view="home" aria-label="메인 화면">
         <div class="screen main-screen deco-screen">
-          <img class="floating-character floating-character--blend home-character--large home-float-left-up" src="./assets/images/home_float_2_replacement.png?v=1" alt="" />
-          <img class="floating-character floating-character--blend home-character--large home-float-right-down" src="./assets/images/home_float_2_replacement.png?v=1" alt="" />
-          <img class="floating-character home-character--medium float-e" src="./assets/images/home_float_3.png?v=3" alt="" />
-          <img class="floating-character home-character--medium float-f" src="./assets/images/home_float_3.png?v=3" alt="" />
           <h1 class="title title--main">
             <span class="title--blue">숨겨진 글자를</span><br />
             <span class="title--yellow">찾아라!</span>
           </h1>
-          <div class="magnifier-stage" aria-hidden="true">
-            <img class="magnifier" src="./assets/images/magnifier.png?v=5" alt="" />
+          <div class="home-feature" aria-hidden="true">
+            <img class="home-main-character" src="./assets/images/home_main_character.png?v=1" alt="" />
+            <span class="thought-cloud"></span>
+            <span class="thought-dot thought-dot--one"></span>
+            <span class="thought-dot thought-dot--two"></span>
           </div>
           <button class="btn btn--primary btn--start" type="button" data-go="rules">시작</button>
         </div>
