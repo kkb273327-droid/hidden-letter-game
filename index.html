@@ -1602,11 +1602,7 @@
             <button class="stage-card stage-card--active" type="button" data-stage="1">1</button>
             <button class="stage-card stage-card--active" type="button" data-stage="2">2</button>
             <button class="stage-card stage-card--active" type="button" data-stage="3">3</button>
-            <button class="stage-card stage-card--locked" type="button" disabled aria-label="4 준비 중">
-              <svg class="lock" viewBox="0 0 24 24" aria-hidden="true">
-                <path fill="currentColor" d="M17 10h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V8a5 5 0 0 1 10 0v2Zm-8 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V18h1.5v-1.2A1.5 1.5 0 0 0 12 14Z" />
-              </svg>
-            </button>
+            <button class="stage-card stage-card--active" type="button" data-stage="4">4</button>
             <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 준비 중">
               <svg class="lock" viewBox="0 0 24 24" aria-hidden="true">
                 <path fill="currentColor" d="M17 10h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h1V8a5 5 0 0 1 10 0v2Zm-8 0h6V8a3 3 0 0 0-6 0v2Zm3 4a1.5 1.5 0 0 0-.75 2.8V18h1.5v-1.2A1.5 1.5 0 0 0 12 14Z" />
@@ -1810,6 +1806,24 @@
             "./assets/images/stage3_answer_4.jpg?v=1",
           ],
         },
+        4: {
+          answer: "응원해요",
+          inputMode: "text",
+          photos: [
+            "./assets/images/stage4_photo1.jpg?v=1",
+            "./assets/images/stage4_photo2.jpg?v=1",
+            "./assets/images/stage4_photo3.jpg?v=1",
+            "./assets/images/stage4_photo4.jpg?v=1",
+          ],
+          hint: "./assets/images/stage4_hint.jpg?v=1",
+          hint2: "이번에도 마지막 글자는 '요'에요!",
+          answerImages: [
+            "./assets/images/stage4_answer_1.jpg?v=1",
+            "./assets/images/stage4_answer_2.jpg?v=1",
+            "./assets/images/stage4_answer_3.jpg?v=1",
+            "./assets/images/stage4_answer_4.jpg?v=1",
+          ],
+        },
       };
       let activeView = "home";
       let currentStage = 1;
@@ -1868,7 +1882,7 @@
         });
         hintImage.src = stage.hint;
         hintImage.alt = `Stage ${stageNumber} 힌트 이미지`;
-        hintCopy.textContent = stage.hintLabel || "힌트";
+        hintCopy.textContent = getHintLabel(stage.answer);
         hintTitle.textContent = `Stage ${stageNumber} 힌트`;
         hintSecondCopy.textContent = stage.hint2 || "";
         hint2Button.hidden = !stage.hint2;
@@ -1876,6 +1890,15 @@
         showMainHintPanel();
         answerInput.value = "";
         syncSubmitState();
+      }
+
+      function getHintLabel(answer) {
+        const value = String(answer).trim();
+
+        if (/^\d+$/.test(value)) return "힌트: 숫자";
+        if (/^[A-Za-z]+$/.test(value)) return "힌트: 영어";
+        if (/^[가-힣ㄱ-ㅎㅏ-ㅣ]+$/.test(value)) return "힌트: 한글";
+        return "힌트";
       }
 
       function syncSubmitState() {
