@@ -246,6 +246,7 @@
       }
 
       .btn {
+        position: relative;
         min-height: 44px;
         padding: 8px 18px;
         border: 2px solid #d985a9;
@@ -287,6 +288,38 @@
         color: #fff;
         box-shadow: 0 5px 0 var(--blue-dark), 0 10px 18px rgb(220 103 152 / 24%);
         text-shadow: 0 1px 0 rgb(138 49 82 / 20%);
+      }
+
+      .btn--icon::before {
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        z-index: 3;
+        width: clamp(28px, 7vw, 42px);
+        aspect-ratio: 1;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: "";
+        pointer-events: none;
+        transform: translateX(-50%);
+      }
+
+      .btn--icon-submit::before {
+        background-image: url("./assets/images/button_icon_submit.png?v=1");
+      }
+
+      .btn--icon-nav::before {
+        background-image: url("./assets/images/button_icon_nav.png?v=1");
+      }
+
+      .btn--icon-hint::before {
+        background-image: url("./assets/images/button_icon_hint.png?v=1");
+      }
+
+      .btn--icon-check::before {
+        width: clamp(32px, 8vw, 48px);
+        background-image: url("./assets/images/button_icon_check.gif?v=1");
       }
 
       .btn--start {
@@ -539,6 +572,26 @@
       .rules-screen .float-f {
         right: 8%;
         bottom: 17%;
+      }
+
+      .rules-deco {
+        position: absolute;
+        z-index: 0;
+        width: clamp(96px, 18vw, 160px);
+        height: auto;
+        pointer-events: none;
+        user-select: none;
+        filter: drop-shadow(0 8px 10px rgb(166 73 100 / 14%));
+      }
+
+      .rules-deco--top-left {
+        top: clamp(78px, 12svh, 118px);
+        left: clamp(12px, 3vw, 28px);
+      }
+
+      .rules-deco--bottom-right {
+        right: clamp(14px, 4vw, 36px);
+        bottom: clamp(18px, 5svh, 54px);
       }
 
       .rules-comfy {
@@ -1091,6 +1144,15 @@
           font-size: 16px;
         }
 
+        .btn--icon::before {
+          top: -18px;
+          width: clamp(24px, 8vw, 34px);
+        }
+
+        .btn--icon-check::before {
+          width: clamp(28px, 9vw, 40px);
+        }
+
         .description {
           position: relative;
           z-index: 2;
@@ -1126,6 +1188,21 @@
 
         .rules-extra-row img {
           width: 104px;
+        }
+
+        .rules-deco {
+          width: clamp(78px, 24vw, 108px);
+          opacity: 0.86;
+        }
+
+        .rules-deco--top-left {
+          top: 12%;
+          left: 2%;
+        }
+
+        .rules-deco--bottom-right {
+          right: 3%;
+          bottom: 5%;
         }
 
         .stage-list {
@@ -1622,15 +1699,12 @@
 
       <section class="view view--rules" data-view="rules" aria-label="게임 설명 화면" aria-hidden="true">
         <div class="screen rules-screen deco-screen">
-          <img class="floating-character rules-character float-a" src="./assets/images/rules_float_1.gif?v=1" alt="" />
-          <img class="floating-character rules-character float-b" src="./assets/images/rules_float_1.gif?v=1" alt="" />
-          <img class="floating-character rules-character float-e" src="./assets/images/rules_float_2.gif?v=1" alt="" />
-          <img class="floating-character rules-character float-f" src="./assets/images/rules_float_2.gif?v=1" alt="" />
-          <img class="floating-character rules-comfy" src="./assets/images/rules_comfy.png?v=1" alt="" />
+          <img class="rules-deco rules-deco--top-left" src="./assets/images/rules_deco_top.gif?v=1" alt="" />
+          <img class="rules-deco rules-deco--bottom-right" src="./assets/images/rules_deco_bottom.gif?v=1" alt="" />
           <header class="topbar">
             <div></div>
             <h2 class="page-title">게임 설명</h2>
-            <button class="btn topbar__right" type="button" data-go="stages">다음</button>
+            <button class="btn btn--icon btn--icon-submit topbar__right" type="button" data-go="stages">다음</button>
           </header>
           <ol class="description">
             <li>이 게임은 현실과 연동되어 있습니다.</li>
@@ -1639,10 +1713,6 @@
             <li>영어는 대문자로 작성해야 합니다.</li>
             <li>스테이지는 점차 업데이트 될 예정입니다.</li>
           </ol>
-          <div class="rules-extra-row" aria-hidden="true">
-            <img src="./assets/images/rules_float_1.gif?v=1" alt="" />
-            <img src="./assets/images/rules_float_1.gif?v=1" alt="" />
-          </div>
         </div>
       </section>
 
@@ -1675,8 +1745,8 @@
           <img class="play-helper play-helper--left" src="./assets/images/home_float_1.gif?v=2" alt="" />
           <img class="play-helper play-helper--right" src="./assets/images/home_float_1.gif?v=2" alt="" />
           <header class="topbar">
-            <button class="btn topbar__left" type="button" data-go="stages">돌아가기</button>
-            <button class="btn topbar__center" type="button" id="hintButton">힌트</button>
+            <button class="btn btn--icon btn--icon-nav topbar__left" type="button" data-go="stages">돌아가기</button>
+            <button class="btn btn--icon btn--icon-hint topbar__center" type="button" id="hintButton">힌트</button>
             <div></div>
           </header>
           <div class="stage-badge" id="stageBadge">1</div>
@@ -1689,7 +1759,7 @@
           <form class="answer-bar" id="answerForm" autocomplete="off">
             <label class="answer-label" for="answerInput">정답:</label>
             <input class="answer-input" id="answerInput" name="answer" type="text" inputmode="latin" aria-label="정답 입력" />
-            <button class="btn btn--primary btn--submit" type="submit" data-submit disabled>제출</button>
+            <button class="btn btn--primary btn--icon btn--icon-submit btn--submit" type="submit" data-submit disabled>제출</button>
           </form>
         </div>
       </section>
@@ -1705,8 +1775,8 @@
           <img class="correct-side correct-side--middle-right" src="./assets/images/correct_side_3.gif?v=1" alt="" />
           <header class="topbar">
             <div></div>
-            <button class="btn btn--primary topbar__center" type="button" data-go="answerCheck">정답 확인하기</button>
-            <button class="btn topbar__right" type="button" data-go="home">홈</button>
+            <button class="btn btn--primary btn--icon btn--icon-check topbar__center" type="button" data-go="answerCheck">정답 확인하기</button>
+            <button class="btn btn--icon btn--icon-nav topbar__right" type="button" data-go="home">홈</button>
           </header>
           <div class="success-content">
             <h2 class="success-title">정답!!</h2>
@@ -1721,7 +1791,7 @@
       <section class="view view--answer-check" data-view="answerCheck" aria-label="정답 확인 화면" aria-hidden="true">
         <div class="screen answer-check-screen">
           <header class="topbar">
-            <button class="btn topbar__left" type="button" data-go="correct">돌아가기</button>
+            <button class="btn btn--icon btn--icon-nav topbar__left" type="button" data-go="correct">돌아가기</button>
             <div></div>
             <div></div>
           </header>
@@ -1737,9 +1807,9 @@
       <section class="view view--wrong" data-view="wrong" aria-label="오답 화면" aria-hidden="true">
         <div class="screen wrong-screen">
           <header class="topbar">
-            <button class="btn topbar__left" type="button" data-go="stage1">돌아가기</button>
+            <button class="btn btn--icon btn--icon-nav topbar__left" type="button" data-go="stage1">돌아가기</button>
             <div></div>
-            <button class="btn topbar__right" type="button" data-go="home">홈</button>
+            <button class="btn btn--icon btn--icon-nav topbar__right" type="button" data-go="home">홈</button>
           </header>
           <h2 class="wrong-title">다시 생각해봐요</h2>
           <div class="wrong-gallery">
@@ -1761,12 +1831,12 @@
           <img id="hintImage" src="./assets/images/stage1_hint.jpg?v=2" alt="Stage 1 힌트 이미지" />
           <p class="hint-copy" id="hintCopy">힌트: 영어</p>
           <div class="hint-actions hint-actions--split">
-            <button class="btn" type="button" id="closeHintButton">닫기</button>
-            <button class="btn btn--primary" type="button" id="hint2Button" hidden>힌트2</button>
+            <button class="btn btn--icon btn--icon-nav" type="button" id="closeHintButton">닫기</button>
+            <button class="btn btn--primary btn--icon btn--icon-hint" type="button" id="hint2Button" hidden>힌트2</button>
           </div>
         </div>
         <div class="hint-second-panel" id="hintSecondPanel" hidden>
-          <button class="btn hint-back" type="button" id="backHintButton">돌아가기</button>
+          <button class="btn btn--icon btn--icon-nav hint-back" type="button" id="backHintButton">돌아가기</button>
           <p class="hint-second-copy" id="hintSecondCopy">마지막 글자는 '요'에요!</p>
         </div>
       </div>
