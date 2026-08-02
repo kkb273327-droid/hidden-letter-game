@@ -1032,6 +1032,11 @@
         font-weight: 900;
       }
 
+      .view--wrong .topbar {
+        position: relative;
+        z-index: 20;
+      }
+
       .wrong-gallery {
         position: relative;
         display: grid;
@@ -1040,6 +1045,7 @@
         gap: clamp(6px, 2.4vw, 18px);
         width: min(96%, 740px);
         margin: clamp(8px, 2svh, 18px) auto 0;
+        pointer-events: none;
       }
 
       .wrong-main {
@@ -1068,6 +1074,7 @@
         object-fit: contain;
         filter: drop-shadow(0 12px 14px rgb(60 35 45 / 15%));
         transform: translateY(-10svh) scale(1.75);
+        pointer-events: none;
       }
 
       .wrong-dim {
