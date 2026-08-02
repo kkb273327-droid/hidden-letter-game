@@ -457,6 +457,20 @@
         text-shadow: 0 6px 10px rgb(166 73 100 / 12%);
         transform: rotate(45deg);
         transform-origin: 58% 82%;
+        animation: questionFloat 3.2s ease-in-out infinite;
+      }
+
+      @keyframes questionFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(45deg);
+        }
+        35% {
+          transform: translate(7px, -9px) rotate(39deg);
+        }
+        70% {
+          transform: translate(-5px, 5px) rotate(50deg);
+        }
       }
 
       .magnifier {
