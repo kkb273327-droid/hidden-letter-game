@@ -446,57 +446,48 @@
 
       .thought-cloud {
         position: absolute;
-        top: 0;
-        right: 2%;
+        top: -4%;
+        right: -3%;
         z-index: 2;
-        width: 34%;
-        aspect-ratio: 1.55;
-        border-radius: 46% 54% 50% 48% / 56% 52% 48% 44%;
-        background: #f6b9eb;
+        width: 43%;
+        aspect-ratio: 1.7;
+        background:
+          radial-gradient(circle at 15% 56%, #ffe5ff 0 21%, transparent 22%),
+          radial-gradient(circle at 29% 36%, #ffe5ff 0 25%, transparent 26%),
+          radial-gradient(circle at 45% 27%, #ffe5ff 0 27%, transparent 28%),
+          radial-gradient(circle at 62% 25%, #ffe5ff 0 28%, transparent 29%),
+          radial-gradient(circle at 79% 34%, #ffe5ff 0 26%, transparent 27%),
+          radial-gradient(circle at 88% 55%, #ffe5ff 0 24%, transparent 25%),
+          radial-gradient(circle at 67% 68%, #ffe5ff 0 27%, transparent 28%),
+          radial-gradient(circle at 43% 66%, #ffe5ff 0 29%, transparent 30%),
+          radial-gradient(circle at 25% 65%, #ffe5ff 0 24%, transparent 25%);
         filter: drop-shadow(0 7px 8px rgb(166 73 100 / 12%));
       }
 
       .thought-cloud::before,
       .thought-cloud::after {
-        position: absolute;
-        border-radius: 999px;
-        background: #f6b9eb;
-        content: "";
-      }
-
-      .thought-cloud::before {
-        left: -11%;
-        top: 22%;
-        width: 44%;
-        height: 56%;
-      }
-
-      .thought-cloud::after {
-        right: -7%;
-        top: 12%;
-        width: 46%;
-        height: 64%;
+        content: none;
       }
 
       .thought-dot {
         position: absolute;
         z-index: 2;
         border-radius: 999px;
-        background: #f6b9eb;
+        background: #ffe5ff;
         content: "";
       }
 
       .thought-dot--one {
         right: 31%;
-        top: 31%;
-        width: 7%;
+        top: 29%;
+        width: 6%;
         aspect-ratio: 1;
       }
 
       .thought-dot--two {
         right: 36%;
-        top: 43%;
-        width: 4.7%;
+        top: 40%;
+        width: 4.3%;
         aspect-ratio: 1;
       }
 
@@ -1376,24 +1367,28 @@
         }
 
         .home-feature {
-          width: min(86vw, 390px);
+          width: min(92vw, 412px);
           align-self: center;
         }
 
+        .home-main-character {
+          transform: translateX(-11%);
+        }
+
         .thought-cloud {
-          top: -1%;
-          right: -2%;
-          width: 35%;
+          top: -5%;
+          right: -1%;
+          width: 47%;
         }
 
         .thought-dot--one {
-          right: 32%;
-          top: 31%;
+          right: 34%;
+          top: 28%;
         }
 
         .thought-dot--two {
-          right: 37%;
-          top: 43%;
+          right: 39%;
+          top: 39%;
         }
 
         .magnifier {
