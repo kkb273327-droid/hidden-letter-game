@@ -633,6 +633,10 @@
         position: relative;
         display: grid;
         min-width: 0;
+        align-items: end;
+      }
+
+      .stage-slot--active {
         padding-top: clamp(22px, 4vw, 34px);
       }
 
@@ -1054,8 +1058,8 @@
 
       .wrong-gallery--single {
         grid-template-columns: minmax(0, 1fr);
-        width: min(82vw, 440px);
-        height: min(52svh, 450px);
+        width: min(96vw, 760px);
+        height: min(62svh, 720px);
       }
 
       .wrong-comfy {
@@ -1063,6 +1067,7 @@
         height: 100%;
         object-fit: contain;
         filter: drop-shadow(0 12px 14px rgb(60 35 45 / 15%));
+        transform: scale(2.5);
       }
 
       .wrong-dim {
@@ -1317,7 +1322,7 @@
           z-index: 2;
           width: min(72vw, 310px);
           height: min(34dvh, 310px);
-          margin-top: 8px;
+          margin-top: 34px;
         }
 
         .confetti-canvas {
@@ -1385,13 +1390,13 @@
 
         .wrong-gallery--single {
           grid-template-columns: minmax(0, 1fr);
-          width: min(78vw, 350px);
-          height: min(44dvh, 340px);
-          max-height: min(44dvh, 340px);
+          width: min(96vw, 520px);
+          height: min(58dvh, 520px);
+          max-height: min(58dvh, 520px);
         }
 
         .wrong-comfy {
-          max-height: min(44dvh, 340px);
+          max-height: min(58dvh, 520px);
         }
 
         .main-screen {
@@ -1626,13 +1631,13 @@
 
         .wrong-gallery--single {
           grid-template-columns: minmax(0, 1fr);
-          width: min(82vw, 420px);
-          height: min(50dvh, 430px);
-          max-height: min(50dvh, 430px);
+          width: min(96vw, 640px);
+          height: min(60dvh, 620px);
+          max-height: min(60dvh, 620px);
         }
 
         .wrong-comfy {
-          max-height: min(50dvh, 430px);
+          max-height: min(60dvh, 620px);
         }
 
         .view--correct .screen {
@@ -1672,7 +1677,7 @@
         .gif-frame {
           width: min(72vw, 360px);
           height: min(34dvh, 330px);
-          margin-top: clamp(38px, 7dvh, 64px);
+          margin-top: clamp(76px, 11dvh, 108px);
         }
 
         .view--answer-check .topbar {
@@ -1766,53 +1771,7 @@
       <section class="view view--stages" data-view="stages" aria-label="스테이지 선택 화면" aria-hidden="true">
         <div class="screen stage-screen deco-screen">
           <h2 class="page-title">스테이지</h2>
-          <div class="stage-list" aria-label="스테이지 목록">
-            <div class="stage-slot">
-              <img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" />
-              <button class="stage-card stage-card--active" type="button" data-stage="1"><span class="stage-card__number">1</span></button>
-            </div>
-            <div class="stage-slot">
-              <img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" />
-              <button class="stage-card stage-card--active" type="button" data-stage="2"><span class="stage-card__number">2</span></button>
-            </div>
-            <div class="stage-slot">
-              <img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" />
-              <button class="stage-card stage-card--active" type="button" data-stage="3"><span class="stage-card__number">3</span></button>
-            </div>
-            <div class="stage-slot">
-              <img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" />
-              <button class="stage-card stage-card--active" type="button" data-stage="4"><span class="stage-card__number">4</span></button>
-            </div>
-            <div class="stage-slot">
-              <img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" />
-              <button class="stage-card stage-card--locked" type="button" disabled aria-label="5 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button>
-            </div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="6 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="7 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="8 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="9 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="10 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="11 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="12 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="13 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="14 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="15 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="16 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="17 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="18 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="19 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="20 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="21 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="22 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="23 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="24 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="25 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_1.gif?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="26 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_2.png?v=2" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="27 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/stages_float_3.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="28 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_2.png?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="29 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-            <div class="stage-slot"><img class="stage-card__icon" src="./assets/images/correct_side_1.gif?v=1" alt="" /><button class="stage-card stage-card--locked" type="button" disabled aria-label="30 잠금"><svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg></button></div>
-          </div>
+          <div class="stage-list" aria-label="스테이지 목록"></div>
         </div>
       </section>
 
@@ -1915,7 +1874,7 @@
       const answerInput = document.querySelector("#answerInput");
       const answerForm = document.querySelector("#answerForm");
       const submitButtons = [...document.querySelectorAll("[data-submit]")];
-      const stageButtons = [...document.querySelectorAll("[data-stage]")];
+      const stageList = document.querySelector(".stage-list");
       const stageBadge = document.querySelector("#stageBadge");
       const stagePhotos = [
         document.querySelector("#stagePhoto1"),
@@ -2020,11 +1979,53 @@
           ],
         },
       };
+      const totalStageSlots = 30;
+      const stageIconCycle = [
+        "./assets/images/stages_float_1.gif?v=2",
+        "./assets/images/stages_float_2.png?v=2",
+        "./assets/images/stages_float_3.gif?v=1",
+        "./assets/images/correct_side_2.png?v=1",
+        "./assets/images/correct_side_1.gif?v=1",
+      ];
+      const lockIconSvg = `<svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg>`;
       let activeView = "home";
       let currentStage = 1;
       let audioUnlocked = true;
       let confettiPieces = [];
       let confettiAnimationId = 0;
+
+      function renderStageList() {
+        stageList.textContent = "";
+
+        for (let stageNumber = 1; stageNumber <= totalStageSlots; stageNumber += 1) {
+          const slot = document.createElement("div");
+          slot.className = "stage-slot";
+          const button = document.createElement("button");
+          button.className = "stage-card";
+          button.type = "button";
+
+          if (stages[stageNumber]) {
+            slot.classList.add("stage-slot--active");
+            const icon = document.createElement("img");
+            icon.className = "stage-card__icon";
+            icon.src = stageIconCycle[(stageNumber - 1) % stageIconCycle.length];
+            icon.alt = "";
+            slot.append(icon);
+
+            button.classList.add("stage-card--active");
+            button.dataset.stage = String(stageNumber);
+            button.innerHTML = `<span class="stage-card__number">${stageNumber}</span>`;
+          } else {
+            button.classList.add("stage-card--locked");
+            button.disabled = true;
+            button.setAttribute("aria-label", `${stageNumber} 잠금`);
+            button.innerHTML = lockIconSvg;
+          }
+
+          slot.append(button);
+          stageList.append(slot);
+        }
+      }
 
       function setView(viewName) {
         activeView = viewName;
@@ -2299,6 +2300,7 @@
         }
       });
 
+      renderStageList();
       setStage(1);
       syncSubmitState();
     </script>
