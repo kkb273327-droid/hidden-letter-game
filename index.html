@@ -2195,7 +2195,6 @@
       let confettiAnimationId = 0;
       let loadingFrameId = 0;
       let loadingTextTimer = 0;
-      let loadingImageTimer = 0;
 
       function shuffleItems(items) {
         const shuffled = [...items];
@@ -2217,10 +2216,8 @@
 
       function clearLoadingTimers() {
         window.clearInterval(loadingTextTimer);
-        window.clearInterval(loadingImageTimer);
         window.cancelAnimationFrame(loadingFrameId);
         loadingTextTimer = 0;
-        loadingImageTimer = 0;
         loadingFrameId = 0;
       }
 
@@ -2232,10 +2229,9 @@
         setLoadingProgress(0);
         loadingTitle.textContent = `Stage ${stageNumber} 준비 중`;
 
-        const shuffledImages = shuffleItems(loadingImages);
-        let imageIndex = 0;
+        const selectedImage = shuffleItems(loadingImages)[0];
         let textIndex = 0;
-        loadingImage.src = shuffledImages[imageIndex];
+        loadingImage.src = selectedImage;
         loadingImage.alt = `Stage ${stageNumber} 로딩 이미지`;
         loadingText.textContent = loadingMessages[textIndex];
 
@@ -2245,11 +2241,6 @@
           textIndex = (textIndex + 1) % loadingMessages.length;
           loadingText.textContent = loadingMessages[textIndex];
         }, 500);
-
-        loadingImageTimer = window.setInterval(() => {
-          imageIndex = (imageIndex + 1) % shuffledImages.length;
-          loadingImage.src = shuffledImages[imageIndex];
-        }, 850);
 
         const startedAt = performance.now();
         const duration = 4000;
