@@ -454,6 +454,17 @@
         }
       }
 
+      @keyframes loadingFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-1deg);
+        }
+
+        50% {
+          transform: translateY(-8px) rotate(1.5deg);
+        }
+      }
+
       .magnifier-stage {
         position: relative;
         display: grid;
@@ -694,6 +705,102 @@
 
       .lock path {
         fill: currentColor;
+      }
+
+      .loading-screen {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        align-items: center;
+        justify-items: center;
+        gap: clamp(14px, 3svh, 26px);
+      }
+
+      .loading-title {
+        position: relative;
+        z-index: 1;
+        margin: clamp(12px, 3svh, 28px) 0 0;
+        text-align: center;
+        font-size: clamp(28px, 8vw, 48px);
+        font-weight: 900;
+        color: #f667a2;
+        text-shadow: 0 3px 0 rgb(255 255 255 / 86%);
+      }
+
+      .loading-card {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: min(78vw, 360px);
+        aspect-ratio: 0.72;
+        padding: clamp(16px, 4vw, 26px);
+        border: 3px solid #d1789e;
+        border-radius: 24px;
+        background:
+          linear-gradient(rgb(255 255 255 / 34%), rgb(255 241 248 / 26%)),
+          var(--main-bg);
+        box-shadow:
+          inset 0 0 0 6px rgb(255 255 255 / 42%),
+          0 14px 24px rgb(168 64 105 / 18%);
+      }
+
+      .loading-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 12px 14px rgb(166 73 100 / 20%));
+        animation: loadingFloat 1.4s ease-in-out infinite;
+      }
+
+      .loading-status {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        width: min(84vw, 420px);
+        gap: 8px;
+        justify-items: center;
+      }
+
+      .loading-text {
+        min-height: 34px;
+        color: #fffafd;
+        font-size: clamp(26px, 8vw, 42px);
+        font-weight: 900;
+        line-height: 1;
+        text-shadow:
+          0 3px 0 #8f5a38,
+          0 0 5px rgb(93 51 68 / 42%);
+      }
+
+      .loading-bar {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: clamp(24px, 6vw, 34px);
+        border: 3px solid #8f5a38;
+        border-radius: 999px;
+        background: #fff7dc;
+        box-shadow: inset 0 2px 4px rgb(93 51 68 / 16%);
+      }
+
+      .loading-bar__fill {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #ff8aad, #ffb05f);
+        transition: width 120ms linear;
+      }
+
+      .loading-percent {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: #fffafd;
+        font-size: clamp(15px, 4.5vw, 22px);
+        font-weight: 900;
+        line-height: 1;
+        text-shadow: 0 2px 0 #8f5a38;
       }
 
       .stage-badge {
@@ -1269,6 +1376,45 @@
           height: 25px;
         }
 
+        .loading-screen {
+          min-height: calc(100dvh - 16px);
+          grid-template-rows: auto minmax(0, 1fr) auto;
+          gap: 10px;
+          padding: 14px 14px 22px;
+        }
+
+        .loading-screen::before {
+          height: 66px;
+          border-radius: 22px;
+        }
+
+        .loading-title {
+          margin-top: 12px;
+          font-size: clamp(30px, 9vw, 40px);
+        }
+
+        .loading-card {
+          width: min(76vw, 282px);
+          max-height: 50dvh;
+          align-self: center;
+          padding: 16px;
+          border-radius: 22px;
+        }
+
+        .loading-status {
+          width: min(84vw, 330px);
+          margin-bottom: 2px;
+        }
+
+        .loading-text {
+          min-height: 30px;
+          font-size: clamp(28px, 8.4vw, 36px);
+        }
+
+        .loading-bar {
+          height: 28px;
+        }
+
         .answer-bar {
           grid-template-columns: auto minmax(0, 1fr) 72px;
         }
@@ -1782,6 +1928,22 @@
         </div>
       </section>
 
+      <section class="view view--loading" data-view="loading" aria-label="로딩 화면" aria-hidden="true">
+        <div class="screen loading-screen">
+          <h2 class="loading-title" id="loadingTitle">Stage 1 준비 중</h2>
+          <div class="loading-card" aria-hidden="true">
+            <img class="loading-image" id="loadingImage" src="./assets/images/loading_1.png?v=1" alt="" />
+          </div>
+          <div class="loading-status" aria-live="polite">
+            <div class="loading-text" id="loadingText">Loading</div>
+            <div class="loading-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="loading-bar__fill" id="loadingBarFill"></div>
+              <span class="loading-percent" id="loadingPercent">0%</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="view view--play" data-view="stage1" aria-label="Stage 1 플레이 화면" aria-hidden="true">
         <div class="screen play-screen">
           <header class="topbar">
@@ -1906,6 +2068,12 @@
       const backHintButton = document.querySelector("#backHintButton");
       const hintSecondCopy = document.querySelector("#hintSecondCopy");
       const closeHintButton = document.querySelector("#closeHintButton");
+      const loadingTitle = document.querySelector("#loadingTitle");
+      const loadingImage = document.querySelector("#loadingImage");
+      const loadingText = document.querySelector("#loadingText");
+      const loadingPercent = document.querySelector("#loadingPercent");
+      const loadingBar = document.querySelector(".loading-bar");
+      const loadingBarFill = document.querySelector("#loadingBarFill");
       const backgroundAudio = document.querySelector("#backgroundAudio");
       const correctAudio = document.querySelector("#correctAudio");
       const wrongAudio = document.querySelector("#wrongAudio");
@@ -2012,12 +2180,96 @@
         "./assets/images/correct_side_2.png?v=1",
         "./assets/images/correct_side_1.gif?v=1",
       ];
+      const loadingImages = [
+        "./assets/images/loading_1.png?v=1",
+        "./assets/images/loading_2.png?v=1",
+        "./assets/images/loading_3.png?v=1",
+        "./assets/images/loading_4.png?v=1",
+      ];
+      const loadingMessages = ["Loading", "Loading.", "Loading..", "Loading..."];
       const lockIconSvg = `<svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg>`;
       let activeView = "home";
       let currentStage = 1;
       let audioUnlocked = true;
       let confettiPieces = [];
       let confettiAnimationId = 0;
+      let loadingFrameId = 0;
+      let loadingTextTimer = 0;
+      let loadingImageTimer = 0;
+
+      function shuffleItems(items) {
+        const shuffled = [...items];
+
+        for (let index = shuffled.length - 1; index > 0; index -= 1) {
+          const randomIndex = Math.floor(Math.random() * (index + 1));
+          [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+        }
+
+        return shuffled;
+      }
+
+      function setLoadingProgress(percent) {
+        const progress = Math.max(0, Math.min(100, Math.round(percent)));
+        loadingPercent.textContent = `${progress}%`;
+        loadingBarFill.style.width = `${progress}%`;
+        loadingBar.setAttribute("aria-valuenow", String(progress));
+      }
+
+      function clearLoadingTimers() {
+        window.clearInterval(loadingTextTimer);
+        window.clearInterval(loadingImageTimer);
+        window.cancelAnimationFrame(loadingFrameId);
+        loadingTextTimer = 0;
+        loadingImageTimer = 0;
+        loadingFrameId = 0;
+      }
+
+      function startStageLoading(stageNumber) {
+        if (!stages[stageNumber]) return;
+
+        clearLoadingTimers();
+        setStage(stageNumber);
+        setLoadingProgress(0);
+        loadingTitle.textContent = `Stage ${stageNumber} 준비 중`;
+
+        const shuffledImages = shuffleItems(loadingImages);
+        let imageIndex = 0;
+        let textIndex = 0;
+        loadingImage.src = shuffledImages[imageIndex];
+        loadingImage.alt = `Stage ${stageNumber} 로딩 이미지`;
+        loadingText.textContent = loadingMessages[textIndex];
+
+        setView("loading");
+
+        loadingTextTimer = window.setInterval(() => {
+          textIndex = (textIndex + 1) % loadingMessages.length;
+          loadingText.textContent = loadingMessages[textIndex];
+        }, 500);
+
+        loadingImageTimer = window.setInterval(() => {
+          imageIndex = (imageIndex + 1) % shuffledImages.length;
+          loadingImage.src = shuffledImages[imageIndex];
+        }, 850);
+
+        const startedAt = performance.now();
+        const duration = 4000;
+
+        function animateLoading(now) {
+          const progress = Math.min(1, (now - startedAt) / duration);
+          setLoadingProgress(progress * 100);
+
+          if (progress < 1) {
+            loadingFrameId = window.requestAnimationFrame(animateLoading);
+            return;
+          }
+
+          setLoadingProgress(100);
+          clearLoadingTimers();
+          setView("stage1");
+        }
+
+        loadingFrameId = window.requestAnimationFrame(animateLoading);
+      }
 
       function renderStageList() {
         stageList.textContent = "";
@@ -2054,6 +2306,10 @@
 
       function setView(viewName) {
         activeView = viewName;
+
+        if (viewName !== "loading") {
+          clearLoadingTimers();
+        }
 
         views.forEach((view) => {
           const isActive = view.dataset.view === viewName;
@@ -2274,8 +2530,7 @@
         const stageButton = event.target.closest("[data-stage]");
 
         if (stageButton) {
-          setStage(Number(stageButton.dataset.stage));
-          setView("stage1");
+          startStageLoading(Number(stageButton.dataset.stage));
           return;
         }
 
