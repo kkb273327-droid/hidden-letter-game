@@ -791,6 +791,10 @@
         transition: width 120ms linear;
       }
 
+      .loading-bar__fill.is-resetting {
+        transition: none;
+      }
+
       .loading-percent {
         position: absolute;
         inset: 0;
@@ -2207,8 +2211,10 @@
         return shuffled;
       }
 
-      function setLoadingProgress(percent) {
+      function setLoadingProgress(percent, instant = false) {
         const progress = Math.max(0, Math.min(100, Math.round(percent)));
+
+        loadingBarFill.classList.toggle("is-resetting", instant);
         loadingPercent.textContent = `${progress}%`;
         loadingBarFill.style.width = `${progress}%`;
         loadingBar.setAttribute("aria-valuenow", String(progress));
@@ -2226,7 +2232,7 @@
 
         clearLoadingTimers();
         setStage(stageNumber);
-        setLoadingProgress(0);
+        setLoadingProgress(0, true);
         loadingTitle.textContent = `Stage ${stageNumber} 준비 중`;
 
         const selectedImage = shuffleItems(loadingImages)[0];
@@ -2236,6 +2242,7 @@
         loadingText.textContent = loadingMessages[textIndex];
 
         setView("loading");
+        loadingBarFill.offsetWidth;
 
         loadingTextTimer = window.setInterval(() => {
           textIndex = (textIndex + 1) % loadingMessages.length;
@@ -2246,6 +2253,7 @@
         const duration = 4000;
 
         function animateLoading(now) {
+          loadingBarFill.classList.remove("is-resetting");
           const progress = Math.min(1, (now - startedAt) / duration);
           setLoadingProgress(progress * 100);
 
