@@ -824,11 +824,18 @@
       }
 
       .photo-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 5px;
         width: min(100%, 560px);
         margin: 0 auto;
+      }
+
+      .photo-carousel {
+        display: grid;
+        gap: 10px;
+        justify-items: center;
+      }
+
+      .photo-carousel__frame {
+        width: 100%;
         overflow: hidden;
         border: 4px solid #f0b2cc;
         border-radius: 20px;
@@ -867,11 +874,52 @@
         z-index: 1;
       }
 
-      .photo-grid img {
+      .photo-carousel__image {
+        display: block;
         width: 100%;
         aspect-ratio: 4 / 3;
         object-fit: cover;
         background: #fff3f8;
+      }
+
+      .photo-carousel__controls {
+        display: grid;
+        grid-template-columns: 46px minmax(64px, auto) 46px;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        min-height: 44px;
+      }
+
+      .photo-carousel__arrow {
+        display: grid;
+        width: 46px;
+        height: 42px;
+        place-items: center;
+        border: 2px solid #d985a9;
+        border-radius: 14px;
+        background:
+          linear-gradient(#fffafd, #ffe7f0),
+          url("./assets/images/princess_gingham_background.png") center / 86px auto repeat;
+        color: #8e4460;
+        font-family: inherit;
+        font-size: 34px;
+        font-weight: 900;
+        line-height: 1;
+        box-shadow: 0 5px 0 #ca7198;
+      }
+
+      .photo-carousel__arrow[hidden] {
+        display: block;
+        visibility: hidden;
+      }
+
+      .photo-carousel__counter {
+        color: var(--ink);
+        font-size: clamp(20px, 5vw, 28px);
+        font-weight: 900;
+        line-height: 1;
+        text-align: center;
       }
 
       .answer-bar {
@@ -1121,20 +1169,20 @@
       }
 
       .answer-check-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
         width: min(100%, 620px);
         margin: clamp(36px, 8svh, 70px) auto 0;
       }
 
-      .answer-check-grid img {
+      .answer-check-grid .photo-carousel__frame {
         width: 100%;
-        aspect-ratio: 1 / 1;
-        object-fit: cover;
         border: 3px solid #efb2cc;
         border-radius: 18px;
         background: #fffafd;
+      }
+
+      .answer-check-grid .photo-carousel__image {
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
       }
 
       .wrong-title {
@@ -1958,11 +2006,15 @@
             <div></div>
           </header>
           <div class="stage-badge" id="stageBadge">1</div>
-          <div class="photo-grid" aria-label="Stage 1 사진 네 장">
-            <img id="stagePhoto1" src="./assets/images/stage1_photo1.jpg?v=2" alt="Stage 1 단서 사진 1" />
-            <img id="stagePhoto2" src="./assets/images/stage1_photo2.jpg?v=2" alt="Stage 1 단서 사진 2" />
-            <img id="stagePhoto3" src="./assets/images/stage1_photo3.jpg?v=2" alt="Stage 1 단서 사진 3" />
-            <img id="stagePhoto4" src="./assets/images/stage1_photo4.jpg?v=2" alt="Stage 1 단서 사진 4" />
+          <div class="photo-grid photo-carousel" aria-label="Stage 단서 사진">
+            <div class="photo-carousel__frame">
+              <img class="photo-carousel__image" id="stagePhotoCurrent" src="./assets/images/stage1_photo1.jpg?v=2" alt="Stage 1 단서 사진 1" />
+            </div>
+            <div class="photo-carousel__controls" aria-label="단서 사진 이동">
+              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="-1" aria-label="이전 단서 사진">‹</button>
+              <span class="photo-carousel__counter" id="stagePhotoCounter">1/4</span>
+              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="1" aria-label="다음 단서 사진">›</button>
+            </div>
           </div>
           <form class="answer-bar" id="answerForm" autocomplete="off">
             <label class="answer-label" for="answerInput">정답:</label>
@@ -1999,11 +2051,15 @@
             <div></div>
             <div></div>
           </header>
-          <div class="answer-check-grid" aria-label="정답 확인 사진 네 장">
-            <img id="answerCheck1" src="./assets/images/answer_1.jpg?v=1" alt="정답 확인 사진 1" />
-            <img id="answerCheck2" src="./assets/images/answer_o.jpg?v=1" alt="정답 확인 사진 2" />
-            <img id="answerCheck3" src="./assets/images/answer_v.jpg?v=1" alt="정답 확인 사진 3" />
-            <img id="answerCheck4" src="./assets/images/answer_e.jpg?v=1" alt="정답 확인 사진 4" />
+          <div class="answer-check-grid photo-carousel" aria-label="정답 확인 사진">
+            <div class="photo-carousel__frame">
+              <img class="photo-carousel__image" id="answerCheckCurrent" src="./assets/images/answer_1.jpg?v=1" alt="정답 확인 사진 1" />
+            </div>
+            <div class="photo-carousel__controls" aria-label="정답 확인 사진 이동">
+              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="-1" aria-label="이전 정답 확인 사진">‹</button>
+              <span class="photo-carousel__counter" id="answerCheckCounter">1/4</span>
+              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="1" aria-label="다음 정답 확인 사진">›</button>
+            </div>
           </div>
         </div>
       </section>
@@ -2051,18 +2107,11 @@
       const submitButtons = [...document.querySelectorAll("[data-submit]")];
       const stageList = document.querySelector(".stage-list");
       const stageBadge = document.querySelector("#stageBadge");
-      const stagePhotos = [
-        document.querySelector("#stagePhoto1"),
-        document.querySelector("#stagePhoto2"),
-        document.querySelector("#stagePhoto3"),
-        document.querySelector("#stagePhoto4"),
-      ];
-      const answerCheckImages = [
-        document.querySelector("#answerCheck1"),
-        document.querySelector("#answerCheck2"),
-        document.querySelector("#answerCheck3"),
-        document.querySelector("#answerCheck4"),
-      ];
+      const stagePhotoImage = document.querySelector("#stagePhotoCurrent");
+      const stagePhotoCounter = document.querySelector("#stagePhotoCounter");
+      const answerCheckImage = document.querySelector("#answerCheckCurrent");
+      const answerCheckCounter = document.querySelector("#answerCheckCounter");
+      const carouselButtons = [...document.querySelectorAll("[data-carousel]")];
       const hintModal = document.querySelector("#hintModal");
       const hintTitle = document.querySelector("#hintTitle");
       const hintMainPanel = document.querySelector("#hintMainPanel");
@@ -2375,6 +2424,26 @@
             "./assets/images/stage16_answer_4.jpg?v=1",
           ],
         },
+        17: {
+          answer: "DONUT",
+          inputMode: "latin",
+          photos: [
+            "./assets/images/stage17_photo1.jpg?v=1",
+            "./assets/images/stage17_photo2.jpg?v=1",
+            "./assets/images/stage17_photo3.jpg?v=1",
+            "./assets/images/stage17_photo4.jpg?v=1",
+            "./assets/images/stage17_photo5.jpg?v=1",
+          ],
+          hint: "./assets/images/stage17_hint.jpg?v=1",
+          hint2: "첫 번째, 세 번째, 마지막 사진은 손가락과 다른 사물을 함께 봐야해요!\n네 번째 사진은 좌측 손만 보면 돼요!",
+          answerImages: [
+            "./assets/images/stage17_answer_1.jpg?v=1",
+            "./assets/images/stage17_answer_2.jpg?v=1",
+            "./assets/images/stage17_answer_3.jpg?v=1",
+            "./assets/images/stage17_answer_4.jpg?v=1",
+            "./assets/images/stage17_answer_5.jpg?v=1",
+          ],
+        },
       };
       const totalStageSlots = 30;
       const stageIconCycle = [
@@ -2399,6 +2468,8 @@
       let confettiAnimationId = 0;
       let loadingFrameId = 0;
       let loadingTextTimer = 0;
+      let stagePhotoIndex = 0;
+      let answerCheckIndex = 0;
 
       function shuffleItems(items) {
         const shuffled = [...items];
@@ -2521,6 +2592,11 @@
           syncSubmitState();
         }
 
+        if (viewName === "answerCheck") {
+          answerCheckIndex = 0;
+          renderAnswerCheckCarousel();
+        }
+
         pauseWrongAudio();
 
         if (viewName === "correct") {
@@ -2542,25 +2618,75 @@
         playBackgroundAudio();
       }
 
+      function formatHintText(text) {
+        return String(text || "").replace(/\\/g, "\n");
+      }
+
+      function clampCarouselIndex(index, total) {
+        return Math.max(0, Math.min(index, Math.max(0, total - 1)));
+      }
+
+      function updateCarouselButtons(type, index, total) {
+        carouselButtons
+          .filter((button) => button.dataset.carousel === type)
+          .forEach((button) => {
+            const direction = Number(button.dataset.direction);
+            button.hidden = (direction < 0 && index === 0) || (direction > 0 && index >= total - 1);
+          });
+      }
+
+      function renderStagePhotoCarousel() {
+        const stage = stages[currentStage];
+        if (!stage) return;
+
+        const photos = stage.photos;
+        stagePhotoIndex = clampCarouselIndex(stagePhotoIndex, photos.length);
+        stagePhotoImage.src = photos[stagePhotoIndex];
+        stagePhotoImage.alt = `Stage ${currentStage} 단서 사진 ${stagePhotoIndex + 1}`;
+        stagePhotoCounter.textContent = `${stagePhotoIndex + 1}/${photos.length}`;
+        updateCarouselButtons("stage", stagePhotoIndex, photos.length);
+      }
+
+      function renderAnswerCheckCarousel() {
+        const stage = stages[currentStage];
+        if (!stage) return;
+
+        const images = stage.answerImages;
+        answerCheckIndex = clampCarouselIndex(answerCheckIndex, images.length);
+        answerCheckImage.src = images[answerCheckIndex];
+        answerCheckImage.alt = `Stage ${currentStage} 정답 확인 사진 ${answerCheckIndex + 1}`;
+        answerCheckCounter.textContent = `${answerCheckIndex + 1}/${images.length}`;
+        updateCarouselButtons("answer", answerCheckIndex, images.length);
+      }
+
+      function moveCarousel(type, direction) {
+        if (type === "stage") {
+          stagePhotoIndex += direction;
+          renderStagePhotoCarousel();
+          return;
+        }
+
+        if (type === "answer") {
+          answerCheckIndex += direction;
+          renderAnswerCheckCarousel();
+        }
+      }
+
       function setStage(stageNumber) {
         const stage = stages[stageNumber];
         if (!stage) return;
 
         currentStage = stageNumber;
         stageBadge.textContent = String(stageNumber);
-        stagePhotos.forEach((image, index) => {
-          image.src = stage.photos[index];
-          image.alt = `Stage ${stageNumber} 단서 사진 ${index + 1}`;
-        });
-        answerCheckImages.forEach((image, index) => {
-          image.src = stage.answerImages[index];
-          image.alt = `Stage ${stageNumber} 정답 확인 사진 ${index + 1}`;
-        });
+        stagePhotoIndex = 0;
+        answerCheckIndex = 0;
+        renderStagePhotoCarousel();
+        renderAnswerCheckCarousel();
         hintImage.src = stage.hint;
         hintImage.alt = `Stage ${stageNumber} 힌트 이미지`;
         hintCopy.textContent = getHintLabel(stage.answer);
         hintTitle.textContent = `Stage ${stageNumber} 힌트`;
-        hintSecondCopy.textContent = stage.hint2 || "";
+        hintSecondCopy.textContent = formatHintText(stage.hint2);
         hint2Button.hidden = !stage.hint2;
         answerInput.inputMode = stage.inputMode || "text";
         showMainHintPanel();
@@ -2727,6 +2853,13 @@
         const routeButton = event.target.closest("[data-go]");
         const submitButton = event.target.closest("[data-submit]");
         const stageButton = event.target.closest("[data-stage]");
+        const carouselButton = event.target.closest("[data-carousel]");
+
+        if (carouselButton) {
+          moveCarousel(carouselButton.dataset.carousel, Number(carouselButton.dataset.direction));
+          playBackgroundAudio();
+          return;
+        }
 
         if (stageButton) {
           startStageLoading(Number(stageButton.dataset.stage));
