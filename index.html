@@ -917,6 +917,11 @@
         filter: drop-shadow(0 5px 0 rgb(202 113 152 / 38%));
       }
 
+      .photo-carousel__arrow--left img {
+        width: 130%;
+        height: 130%;
+      }
+
       .photo-carousel__counter {
         color: var(--ink);
         font-size: clamp(20px, 5vw, 28px);
@@ -2014,7 +2019,7 @@
               <img class="photo-carousel__image" id="stagePhotoCurrent" src="./assets/images/stage1_photo1.jpg?v=2" alt="Stage 1 단서 사진 1" />
             </div>
             <div class="photo-carousel__controls" aria-label="단서 사진 이동">
-              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="-1" aria-label="이전 단서 사진">
+              <button class="photo-carousel__arrow photo-carousel__arrow--left" type="button" data-carousel="stage" data-direction="-1" aria-label="이전 단서 사진">
                 <img src="./assets/images/carousel_left.png?v=1" alt="" />
               </button>
               <span class="photo-carousel__counter" id="stagePhotoCounter">1/4</span>
@@ -2063,7 +2068,7 @@
               <img class="photo-carousel__image" id="answerCheckCurrent" src="./assets/images/answer_1.jpg?v=1" alt="정답 확인 사진 1" />
             </div>
             <div class="photo-carousel__controls" aria-label="정답 확인 사진 이동">
-              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="-1" aria-label="이전 정답 확인 사진">
+              <button class="photo-carousel__arrow photo-carousel__arrow--left" type="button" data-carousel="answer" data-direction="-1" aria-label="이전 정답 확인 사진">
                 <img src="./assets/images/carousel_left.png?v=1" alt="" />
               </button>
               <span class="photo-carousel__counter" id="answerCheckCounter">1/4</span>
