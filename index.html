@@ -893,25 +893,28 @@
 
       .photo-carousel__arrow {
         display: grid;
-        width: 46px;
-        height: 42px;
+        width: 50px;
+        height: 46px;
         place-items: center;
-        border: 2px solid #d985a9;
-        border-radius: 14px;
-        background:
-          linear-gradient(#fffafd, #ffe7f0),
-          url("./assets/images/princess_gingham_background.png") center / 86px auto repeat;
-        color: #8e4460;
+        padding: 0;
+        border: 0;
+        background: transparent;
         font-family: inherit;
-        font-size: 34px;
-        font-weight: 900;
-        line-height: 1;
-        box-shadow: 0 5px 0 #ca7198;
+        cursor: pointer;
       }
 
       .photo-carousel__arrow[hidden] {
         display: block;
         visibility: hidden;
+      }
+
+      .photo-carousel__arrow img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        pointer-events: none;
+        filter: drop-shadow(0 5px 0 rgb(202 113 152 / 38%));
       }
 
       .photo-carousel__counter {
@@ -2011,9 +2014,13 @@
               <img class="photo-carousel__image" id="stagePhotoCurrent" src="./assets/images/stage1_photo1.jpg?v=2" alt="Stage 1 단서 사진 1" />
             </div>
             <div class="photo-carousel__controls" aria-label="단서 사진 이동">
-              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="-1" aria-label="이전 단서 사진">‹</button>
+              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="-1" aria-label="이전 단서 사진">
+                <img src="./assets/images/carousel_left.png?v=1" alt="" />
+              </button>
               <span class="photo-carousel__counter" id="stagePhotoCounter">1/4</span>
-              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="1" aria-label="다음 단서 사진">›</button>
+              <button class="photo-carousel__arrow" type="button" data-carousel="stage" data-direction="1" aria-label="다음 단서 사진">
+                <img src="./assets/images/carousel_right.png?v=1" alt="" />
+              </button>
             </div>
           </div>
           <form class="answer-bar" id="answerForm" autocomplete="off">
@@ -2056,9 +2063,13 @@
               <img class="photo-carousel__image" id="answerCheckCurrent" src="./assets/images/answer_1.jpg?v=1" alt="정답 확인 사진 1" />
             </div>
             <div class="photo-carousel__controls" aria-label="정답 확인 사진 이동">
-              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="-1" aria-label="이전 정답 확인 사진">‹</button>
+              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="-1" aria-label="이전 정답 확인 사진">
+                <img src="./assets/images/carousel_left.png?v=1" alt="" />
+              </button>
               <span class="photo-carousel__counter" id="answerCheckCounter">1/4</span>
-              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="1" aria-label="다음 정답 확인 사진">›</button>
+              <button class="photo-carousel__arrow" type="button" data-carousel="answer" data-direction="1" aria-label="다음 정답 확인 사진">
+                <img src="./assets/images/carousel_right.png?v=1" alt="" />
+              </button>
             </div>
           </div>
         </div>
