@@ -996,17 +996,34 @@
 
       .hint-card img {
         width: 100%;
-        aspect-ratio: 1 / 1;
+        max-height: min(42svh, 270px);
+        aspect-ratio: 4 / 3;
         border: 3px solid #efb2cc;
         border-radius: 18px;
-        object-fit: cover;
+        object-fit: contain;
+        background: #fffafd;
       }
 
       .hint-copy {
-        margin: 12px 0 8px;
+        margin: 10px 0 6px;
         text-align: center;
         font-size: clamp(24px, 7vw, 34px);
         font-weight: 900;
+      }
+
+      .hint-description {
+        margin: 0 0 10px;
+        padding: 0 8px;
+        color: var(--ink);
+        text-align: center;
+        font-size: clamp(19px, 5vw, 28px);
+        font-weight: 900;
+        line-height: 1.3;
+        white-space: pre-line;
+      }
+
+      .hint-description[hidden] {
+        display: none;
       }
 
       .hint-actions {
@@ -1036,6 +1053,12 @@
         left: 0;
       }
 
+      .hint-next {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
       .hint-second-copy {
         margin: 64px 0 18px;
         padding: 0 10px;
@@ -1044,6 +1067,27 @@
         font-weight: 900;
         line-height: 1.25;
         white-space: pre-line;
+      }
+
+      .hint-extra-photos {
+        width: 100%;
+        margin-top: 76px;
+      }
+
+      .hint-extra-photos[hidden] {
+        display: none;
+      }
+
+      .hint-extra-photos .photo-carousel__frame {
+        border-width: 3px;
+        border-color: #efb2cc;
+        background: #fffafd;
+      }
+
+      .hint-extra-photos .photo-carousel__image {
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+        background: #fffafd;
       }
 
       .success-screen {
@@ -1076,10 +1120,28 @@
         position: relative;
         z-index: 2;
         display: grid;
-        grid-template-rows: auto auto minmax(0, 1fr);
+        grid-template-rows: auto minmax(0, 1fr);
         gap: clamp(8px, 1.5svh, 14px);
         place-items: center;
         min-height: 0;
+      }
+
+      .success-message {
+        width: min(92%, 620px);
+        margin: 0;
+        padding: clamp(18px, 4vw, 28px);
+        border: 2px solid #efb2cc;
+        border-radius: 22px;
+        background:
+          linear-gradient(rgb(255 250 253 / 78%), rgb(255 241 247 / 78%)),
+          var(--main-bg);
+        color: var(--ink);
+        text-align: center;
+        font-size: clamp(25px, 6.5vw, 44px);
+        font-weight: 900;
+        line-height: 1.35;
+        white-space: pre-line;
+        box-shadow: 0 12px 26px rgb(190 82 124 / 16%);
       }
 
       .correct-side {
@@ -2038,9 +2100,6 @@
 
       <section class="view view--correct" data-view="correct" aria-label="정답 화면" aria-hidden="true">
         <div class="screen success-screen">
-          <canvas class="confetti-canvas" id="confettiCanvas" aria-hidden="true"></canvas>
-          <img class="correct-side correct-side--middle-left" src="./assets/images/correct_side_3.gif?v=1" alt="" />
-          <img class="correct-side correct-side--middle-right" src="./assets/images/correct_side_3.gif?v=1" alt="" />
           <header class="topbar">
             <div></div>
             <button class="btn btn--primary btn--icon btn--icon-check topbar__center" type="button" data-go="answerCheck">정답 확인하기</button>
@@ -2048,9 +2107,11 @@
           </header>
           <div class="success-content">
             <h2 class="success-title">정답!!</h2>
-            <div class="gif-frame">
-              <img src="./assets/images/correct_character.png?v=2" alt="정답 축하 애니메이션" />
-            </div>
+            <p class="success-message">9/6에 이곳에
+같이 가줄 수 있어?
+9/5-6 계획 내가 다 짜올게
+만약 긍정적이라면
+ㅇ 하나만 카톡으로 보내주길 바라</p>
             <audio id="correctAudio" src="./assets/audio/correct_song.mp3" preload="none"></audio>
           </div>
         </div>
@@ -2104,6 +2165,7 @@
         <div class="hint-main-panel" id="hintMainPanel">
           <img id="hintImage" src="./assets/images/stage1_hint.jpg?v=2" alt="Stage 1 힌트 이미지" />
           <p class="hint-copy" id="hintCopy">힌트: 영어</p>
+          <p class="hint-description" id="hintDescription" hidden></p>
           <div class="hint-actions hint-actions--split">
             <button class="btn btn--icon btn--icon-nav" type="button" id="closeHintButton">닫기</button>
             <button class="btn btn--primary btn--icon btn--icon-hint" type="button" id="hint2Button" hidden>힌트2</button>
@@ -2111,7 +2173,22 @@
         </div>
         <div class="hint-second-panel" id="hintSecondPanel" hidden>
           <button class="btn btn--icon btn--icon-nav hint-back" type="button" id="backHintButton">돌아가기</button>
+          <button class="btn btn--primary btn--icon btn--icon-hint hint-next" type="button" id="nextHintButton" hidden>힌트3</button>
           <p class="hint-second-copy" id="hintSecondCopy">마지막 글자는 '요'에요!</p>
+          <div class="hint-extra-photos photo-carousel" id="hintExtraPhotos" aria-label="추가 힌트 사진" hidden>
+            <div class="photo-carousel__frame">
+              <img class="photo-carousel__image" id="hintPhotoCurrent" src="./assets/images/stage1_hint.jpg?v=2" alt="추가 힌트 사진 1" />
+            </div>
+            <div class="photo-carousel__controls" aria-label="추가 힌트 사진 이동">
+              <button class="photo-carousel__arrow photo-carousel__arrow--left" type="button" data-carousel="hint" data-direction="-1" aria-label="이전 추가 힌트 사진">
+                <img src="./assets/images/carousel_left.png?v=1" alt="" />
+              </button>
+              <span class="photo-carousel__counter" id="hintPhotoCounter">1/1</span>
+              <button class="photo-carousel__arrow" type="button" data-carousel="hint" data-direction="1" aria-label="다음 추가 힌트 사진">
+                <img src="./assets/images/carousel_right.png?v=1" alt="" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2134,10 +2211,15 @@
       const hintSecondPanel = document.querySelector("#hintSecondPanel");
       const hintImage = document.querySelector("#hintImage");
       const hintCopy = document.querySelector("#hintCopy");
+      const hintDescription = document.querySelector("#hintDescription");
       const hintButton = document.querySelector("#hintButton");
       const hint2Button = document.querySelector("#hint2Button");
       const backHintButton = document.querySelector("#backHintButton");
+      const nextHintButton = document.querySelector("#nextHintButton");
       const hintSecondCopy = document.querySelector("#hintSecondCopy");
+      const hintExtraPhotos = document.querySelector("#hintExtraPhotos");
+      const hintPhotoImage = document.querySelector("#hintPhotoCurrent");
+      const hintPhotoCounter = document.querySelector("#hintPhotoCounter");
       const closeHintButton = document.querySelector("#closeHintButton");
       const loadingTitle = document.querySelector("#loadingTitle");
       const loadingImage = document.querySelector("#loadingImage");
@@ -2149,7 +2231,7 @@
       const correctAudio = document.querySelector("#correctAudio");
       const wrongAudio = document.querySelector("#wrongAudio");
       const confettiCanvas = document.querySelector("#confettiCanvas");
-      const confettiContext = confettiCanvas.getContext("2d");
+      const confettiContext = confettiCanvas?.getContext("2d");
       const stages = {
         1: {
           answer: "LOVE",
@@ -2512,6 +2594,47 @@
             "./assets/images/stage19_answer_9.jpg?v=1",
           ],
         },
+        20: {
+          answer: "MOODLARGO",
+          inputMode: "latin",
+          photos: [
+            "./assets/images/stage20_photo1.jpg?v=1",
+            "./assets/images/stage20_photo2.jpg?v=1",
+            "./assets/images/stage20_photo3.jpg?v=1",
+            "./assets/images/stage20_photo4.jpg?v=1",
+            "./assets/images/stage20_photo5.jpg?v=1",
+            "./assets/images/stage20_photo6.jpg?v=1",
+            "./assets/images/stage20_photo7.jpg?v=1",
+            "./assets/images/stage20_photo8.jpg?v=1",
+            "./assets/images/stage20_photo9.jpg?v=1",
+          ],
+          hint: "./assets/images/stage20_hint.jpg?v=1",
+          hintText: "사진처럼 약지에 끼는\n반지를 만드는 곳이에요!",
+          hint2: "두 번째 사진은 손잡이를 제외한 모양을 봐주시고,\n네 번째 사진은 하얀색 몸체의 모양만 봐주시고,\n여섯 번째 사진은 토끼 귀와 초밥이 만든 모양을 봐주시고,\n마지막 사진은 흰색 부분이 만든 모양을 봐주세요!",
+          hint3: "여덟 번째 사진만 소문자이고,\n나머지 다른 사진은 모두 대문자에요!",
+          hint4Images: [
+            "./assets/images/stage20_hint4_1.jpg?v=1",
+            "./assets/images/stage20_hint4_2.jpg?v=1",
+            "./assets/images/stage20_hint4_3.jpg?v=1",
+            "./assets/images/stage20_hint4_4.jpg?v=1",
+            "./assets/images/stage20_hint4_5.jpg?v=1",
+            "./assets/images/stage20_hint4_6.jpg?v=1",
+            "./assets/images/stage20_hint4_7.jpg?v=1",
+            "./assets/images/stage20_hint4_8.jpg?v=1",
+            "./assets/images/stage20_hint4_9.jpg?v=1",
+          ],
+          answerImages: [
+            "./assets/images/stage20_answer_1.jpg?v=1",
+            "./assets/images/stage20_answer_2.jpg?v=1",
+            "./assets/images/stage20_answer_3.jpg?v=1",
+            "./assets/images/stage20_answer_4.jpg?v=1",
+            "./assets/images/stage20_answer_5.jpg?v=1",
+            "./assets/images/stage20_answer_6.jpg?v=1",
+            "./assets/images/stage20_answer_7.jpg?v=1",
+            "./assets/images/stage20_answer_8.jpg?v=1",
+            "./assets/images/stage20_answer_9.jpg?v=1",
+          ],
+        },
       };
       const totalStageSlots = 30;
       const stageIconCycle = [
@@ -2538,6 +2661,8 @@
       let loadingTextTimer = 0;
       let stagePhotoIndex = 0;
       let answerCheckIndex = 0;
+      let hintPhotoIndex = 0;
+      let activeHintLevel = 2;
 
       function shuffleItems(items) {
         const shuffled = [...items];
@@ -2727,6 +2852,18 @@
         updateCarouselButtons("answer", answerCheckIndex, images.length);
       }
 
+      function renderHintPhotoCarousel() {
+        const stage = stages[currentStage];
+        const images = stage?.hint4Images || [];
+        if (!images.length) return;
+
+        hintPhotoIndex = clampCarouselIndex(hintPhotoIndex, images.length);
+        hintPhotoImage.src = images[hintPhotoIndex];
+        hintPhotoImage.alt = `Stage ${currentStage} 힌트4 사진 ${hintPhotoIndex + 1}`;
+        hintPhotoCounter.textContent = `${hintPhotoIndex + 1}/${images.length}`;
+        updateCarouselButtons("hint", hintPhotoIndex, images.length);
+      }
+
       function moveCarousel(type, direction) {
         if (type === "stage") {
           stagePhotoIndex += direction;
@@ -2737,6 +2874,12 @@
         if (type === "answer") {
           answerCheckIndex += direction;
           renderAnswerCheckCarousel();
+          return;
+        }
+
+        if (type === "hint") {
+          hintPhotoIndex += direction;
+          renderHintPhotoCarousel();
         }
       }
 
@@ -2753,8 +2896,11 @@
         hintImage.src = stage.hint;
         hintImage.alt = `Stage ${stageNumber} 힌트 이미지`;
         hintCopy.textContent = getHintLabel(stage.answer);
+        hintDescription.textContent = formatHintText(stage.hintText);
+        hintDescription.hidden = !stage.hintText;
         hintTitle.textContent = `Stage ${stageNumber} 힌트`;
-        hintSecondCopy.textContent = formatHintText(stage.hint2);
+        hintSecondCopy.textContent = "";
+        hintExtraPhotos.hidden = true;
         hint2Button.hidden = !stage.hint2;
         answerInput.inputMode = stage.inputMode || "text";
         showMainHintPanel();
@@ -2795,12 +2941,45 @@
       function showMainHintPanel() {
         hintMainPanel.hidden = false;
         hintSecondPanel.hidden = true;
+        activeHintLevel = 2;
+        hintExtraPhotos.hidden = true;
+      }
+
+      function showHintPanel(level = 2) {
+        const stage = stages[currentStage];
+        if (!stage) return;
+
+        hintMainPanel.hidden = true;
+        hintSecondPanel.hidden = false;
+        activeHintLevel = level;
+        hintExtraPhotos.hidden = true;
+        hintSecondCopy.hidden = false;
+        nextHintButton.hidden = true;
+
+        if (level === 2) {
+          hintSecondCopy.textContent = formatHintText(stage.hint2);
+          nextHintButton.textContent = "힌트3";
+          nextHintButton.hidden = !stage.hint3;
+        } else if (level === 3) {
+          hintSecondCopy.textContent = formatHintText(stage.hint3);
+          nextHintButton.textContent = "힌트4";
+          nextHintButton.hidden = !stage.hint4Images?.length;
+        } else if (level === 4) {
+          hintSecondCopy.hidden = true;
+          hintExtraPhotos.hidden = false;
+          hintPhotoIndex = 0;
+          renderHintPhotoCarousel();
+        }
+
+        backHintButton.focus();
       }
 
       function showSecondHintPanel() {
-        hintMainPanel.hidden = true;
-        hintSecondPanel.hidden = false;
-        backHintButton.focus();
+        showHintPanel(2);
+      }
+
+      function showNextHintPanel() {
+        showHintPanel(activeHintLevel + 1);
       }
 
       function closeHint() {
@@ -2855,6 +3034,8 @@
       }
 
       function resizeConfettiCanvas() {
+        if (!confettiCanvas || !confettiContext) return;
+
         const rect = confettiCanvas.getBoundingClientRect();
         const ratio = window.devicePixelRatio || 1;
         confettiCanvas.width = Math.max(1, Math.floor(rect.width * ratio));
@@ -2863,6 +3044,8 @@
       }
 
       function createConfettiPieces() {
+        if (!confettiCanvas) return;
+
         const rect = confettiCanvas.getBoundingClientRect();
         const colors = ["#f58ab8", "#fff2ac", "#ff7fae", "#f3b4cf", "#b6dc80"];
 
@@ -2880,6 +3063,8 @@
       }
 
       function drawConfetti() {
+        if (!confettiCanvas || !confettiContext) return;
+
         const rect = confettiCanvas.getBoundingClientRect();
         confettiContext.clearRect(0, 0, rect.width, rect.height);
 
@@ -2913,6 +3098,8 @@
 
       function stopConfetti() {
         cancelAnimationFrame(confettiAnimationId);
+        if (!confettiCanvas || !confettiContext) return;
+
         confettiContext.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
       }
 
@@ -2961,6 +3148,7 @@
       hintButton.addEventListener("click", openHint);
       closeHintButton.addEventListener("click", closeHint);
       hint2Button.addEventListener("click", showSecondHintPanel);
+      nextHintButton.addEventListener("click", showNextHintPanel);
       backHintButton.addEventListener("click", showMainHintPanel);
 
       hintModal.addEventListener("click", (event) => {
