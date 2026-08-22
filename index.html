@@ -1164,6 +1164,49 @@
         height: 250%;
       }
 
+      .hint-extra-photos .hint-carousel-arrow,
+      .hint-extra-photos .hint-carousel-arrow:hover,
+      .hint-extra-photos .hint-carousel-arrow:active,
+      .hint-extra-photos .hint-carousel-arrow:focus,
+      .hint-extra-photos .hint-carousel-arrow:focus-visible {
+        display: grid !important;
+        width: 66px !important;
+        height: 66px !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        place-items: center !important;
+        overflow: visible !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        background: none !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        border: 0 !important;
+        border-color: transparent !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        color: transparent !important;
+        outline: 0 !important;
+        text-shadow: none !important;
+        transform: none !important;
+      }
+
+      .hint-extra-photos .hint-carousel-arrow::before,
+      .hint-extra-photos .hint-carousel-arrow::after {
+        display: none !important;
+        content: none !important;
+      }
+
+      .hint-extra-photos .hint-carousel-arrow img {
+        display: block !important;
+        max-width: none !important;
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+
       .success-screen {
         overflow: hidden;
         border-color: transparent;
@@ -2254,11 +2297,11 @@
               <img class="photo-carousel__image" id="hintPhotoCurrent" src="./assets/images/stage1_hint.jpg?v=2" alt="추가 힌트 사진 1" />
             </div>
             <div class="photo-carousel__controls" aria-label="추가 힌트 사진 이동">
-              <button class="photo-carousel__arrow photo-carousel__arrow--left" type="button" data-carousel="hint" data-direction="-1" aria-label="이전 추가 힌트 사진">
+              <button class="photo-carousel__arrow photo-carousel__arrow--left hint-carousel-arrow" type="button" data-carousel="hint" data-direction="-1" aria-label="이전 추가 힌트 사진" style="appearance:none !important;-webkit-appearance:none !important;background:none !important;background-color:transparent !important;background-image:none !important;border:0 !important;border-color:transparent !important;border-radius:0 !important;box-shadow:none !important;outline:0 !important;padding:0 !important;margin:0 !important;min-width:0 !important;min-height:0 !important;">
                 <img src="./assets/images/carousel_left.png?v=1" alt="" />
               </button>
               <span class="photo-carousel__counter" id="hintPhotoCounter">1/1</span>
-              <button class="photo-carousel__arrow" type="button" data-carousel="hint" data-direction="1" aria-label="다음 추가 힌트 사진">
+              <button class="photo-carousel__arrow hint-carousel-arrow" type="button" data-carousel="hint" data-direction="1" aria-label="다음 추가 힌트 사진" style="appearance:none !important;-webkit-appearance:none !important;background:none !important;background-color:transparent !important;background-image:none !important;border:0 !important;border-color:transparent !important;border-radius:0 !important;box-shadow:none !important;outline:0 !important;padding:0 !important;margin:0 !important;min-width:0 !important;min-height:0 !important;">
                 <img src="./assets/images/carousel_right.png?v=1" alt="" />
               </button>
             </div>
