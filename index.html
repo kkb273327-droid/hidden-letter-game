@@ -322,6 +322,10 @@
         background-image: url("./assets/images/button_icon_check.gif?v=1");
       }
 
+      .btn[hidden] {
+        display: none !important;
+      }
+
       .btn--start {
         min-width: min(280px, 72vw);
         min-height: 68px;
@@ -994,6 +998,11 @@
         transform: scale(1);
       }
 
+      .hint-main-panel {
+        position: relative;
+        padding-top: 84px;
+      }
+
       .hint-card img {
         width: 100%;
         max-height: min(42svh, 270px);
@@ -1033,6 +1042,10 @@
       }
 
       .hint-actions--split {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
         justify-content: space-between;
       }
 
@@ -1092,6 +1105,8 @@
 
       .hint-extra-photos .photo-carousel__controls,
       .hint-extra-photos .photo-carousel__arrow {
+        appearance: none;
+        -webkit-appearance: none;
         border: 0;
         outline: 0;
         background: transparent;
@@ -1099,6 +1114,7 @@
       }
 
       .hint-extra-photos .photo-carousel__arrow {
+        padding: 0;
         border-radius: 0;
         -webkit-tap-highlight-color: transparent;
       }
