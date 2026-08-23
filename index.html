@@ -2224,7 +2224,7 @@
           </header>
           <div class="success-content">
             <h2 class="success-title">정답!!</h2>
-            <p class="success-message">9/6에 이곳에
+            <p class="success-message" id="successMessage">9/6에 이곳에
 같이 가줄 수 있어?
 9/5-6 계획 내가 다 짜올게
 만약 긍정적이라면
@@ -2338,6 +2338,7 @@
       const hintPhotoImage = document.querySelector("#hintPhotoCurrent");
       const hintPhotoCounter = document.querySelector("#hintPhotoCounter");
       const closeHintButton = document.querySelector("#closeHintButton");
+      const successMessage = document.querySelector("#successMessage");
       const loadingTitle = document.querySelector("#loadingTitle");
       const loadingImage = document.querySelector("#loadingImage");
       const loadingText = document.querySelector("#loadingText");
@@ -2751,6 +2752,40 @@
             "./assets/images/stage20_answer_8.jpg?v=1",
             "./assets/images/stage20_answer_9.jpg?v=1",
           ],
+          successMessage: "9/6에 이곳에\n같이 가줄 수 있어?\n9/5-6 계획 내가 다 짜올게\n만약 긍정적이라면\nㅇ 만 카톡으로 보내주길 바라",
+        },
+        21: {
+          answer: "TOMORROW",
+          inputMode: "latin",
+          photos: [
+            "./assets/images/stage21_photo1.jpg?v=1",
+            "./assets/images/stage21_photo2.jpg?v=1",
+            "./assets/images/stage21_photo3.jpg?v=1",
+            "./assets/images/stage21_photo4.jpg?v=1",
+            "./assets/images/stage21_photo5.jpg?v=1",
+            "./assets/images/stage21_photo6.jpg?v=1",
+            "./assets/images/stage21_photo7.jpg?v=1",
+            "./assets/images/stage21_photo8.jpg?v=1",
+          ],
+          hint: "./assets/images/stage21_hint.jpg?v=1",
+          hintText: "3/28 기준 3/29을\n칭하는 말이에요!",
+          hint2: "두 번째 사진은\n병뚜껑 전체 모양을,\n네 번째 사진은\n가운데 모양을,\n일곱 번째 사진은\n빨간 체리(꼭지 제외)의\n모양을 봐주세요!",
+          hint3: "모든 사진\n다 대문자에요!",
+          hint4Images: [
+            "./assets/images/stage21_hint4_1.jpg?v=1",
+            "./assets/images/stage21_hint4_2.jpg?v=1",
+          ],
+          answerImages: [
+            "./assets/images/stage21_answer_1.jpg?v=1",
+            "./assets/images/stage21_answer_2.jpg?v=1",
+            "./assets/images/stage21_answer_3.jpg?v=1",
+            "./assets/images/stage21_answer_4.jpg?v=1",
+            "./assets/images/stage21_answer_5.jpg?v=1",
+            "./assets/images/stage21_answer_6.jpg?v=1",
+            "./assets/images/stage21_answer_7.jpg?v=1",
+            "./assets/images/stage21_answer_8.jpg?v=1",
+          ],
+          successMessage: "내일 점심 때 수원에서\n나와 만나줄 수 있어?\n내가 올라갈게\n긍정적이라면\n. 하나만 보내주길 바라\n미안해 누나",
         },
       };
       const totalStageSlots = 30;
@@ -2767,6 +2802,7 @@
         "./assets/images/loading_3.png?v=1",
         "./assets/images/loading_4.png?v=1",
       ];
+      const defaultSuccessMessage = "9/6에 이곳에\n같이 가줄 수 있어?\n9/5-6 계획 내가 다 짜올게\n만약 긍정적이라면\nㅇ 만 카톡으로 보내주길 바라";
       const loadingMessages = ["Loading", "Loading.", "Loading..", "Loading..."];
       const lockIconSvg = `<svg class="lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h1.2A2.8 2.8 0 0 1 21 11.8v7.4A2.8 2.8 0 0 1 18.2 22H5.8A2.8 2.8 0 0 1 3 19.2v-7.4A2.8 2.8 0 0 1 5.8 9H7V7a5 5 0 0 1 10 0v2Zm-7.5 0h5V7a2.5 2.5 0 0 0-5 0v2ZM12 14a1.6 1.6 0 0 0-.8 2.98V19h1.6v-2.02A1.6 1.6 0 0 0 12 14Z" /></svg>`;
       let activeView = "home";
@@ -2911,6 +2947,7 @@
 
         if (viewName === "correct") {
           pauseBackgroundAudio();
+          successMessage.textContent = formatHintText(stages[currentStage]?.successMessage || defaultSuccessMessage);
           startConfetti();
           playCorrectAudio();
           return;
