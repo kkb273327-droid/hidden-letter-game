@@ -1013,6 +1013,10 @@
         background: #fffafd;
       }
 
+      .hint-card img[hidden] {
+        display: none;
+      }
+
       .hint-copy {
         margin: 10px 0 6px;
         text-align: center;
@@ -2787,6 +2791,21 @@
           ],
           successMessage: "내일 점심 때 수원에서\n나와 만나줄 수 있어?\n내가 올라갈게\n긍정적이라면\n. 하나만 보내주길 바라\n미안해 누나",
         },
+        22: {
+          answer: "재맞고",
+          photos: [
+            "./assets/images/stage22_photo1.jpg?v=1",
+            "./assets/images/stage22_photo2.jpg?v=1",
+            "./assets/images/stage22_photo3.jpg?v=1",
+          ],
+          hintText: "처음 본 말일거야!\n초성은 ㅈㅁㄱ에요!",
+          answerImages: [
+            "./assets/images/stage22_answer_1.jpg?v=1",
+            "./assets/images/stage22_answer_2.jpg?v=1",
+            "./assets/images/stage22_answer_3.jpg?v=1",
+          ],
+          successMessage: "'재학생맞춤형고용서비스'라는\n프로그램으로\n졸업유예생도 신청 가능해!\n\n취업 준비하면서 수당까지\n받을 수 있는 프로그램이야\n\n참여하면 월 수당 최대\n20만원까지 지급된다고 해\n\n누나에게도 유용한 정보라고\n생각해서 문제로 만들어서 공유해!",
+        },
       };
       const totalStageSlots = 30;
       const stageIconCycle = [
@@ -3047,15 +3066,23 @@
         answerCheckIndex = 0;
         renderStagePhotoCarousel();
         renderAnswerCheckCarousel();
-        hintImage.src = stage.hint;
-        hintImage.alt = `Stage ${stageNumber} 힌트 이미지`;
+        if (stage.hint) {
+          hintImage.hidden = false;
+          hintImage.src = stage.hint;
+          hintImage.alt = `Stage ${stageNumber} 힌트 이미지`;
+        } else {
+          hintImage.hidden = true;
+          hintImage.removeAttribute("src");
+          hintImage.alt = "";
+        }
         hintCopy.textContent = getHintLabel(stage.answer);
         hintDescription.textContent = formatHintText(stage.hintText);
         hintDescription.hidden = !stage.hintText;
         hintTitle.textContent = `Stage ${stageNumber} 힌트`;
         hintSecondCopy.textContent = "";
         hintExtraPhotos.hidden = true;
-        hint2Button.hidden = !stage.hint2;
+        hint2Button.textContent = stage.hint2 ? "힌트2" : "문제";
+        hint2Button.hidden = false;
         answerInput.inputMode = stage.inputMode || "text";
         showMainHintPanel();
         answerInput.value = "";
@@ -3112,12 +3139,12 @@
 
         if (level === 2) {
           hintSecondCopy.textContent = formatHintText(stage.hint2);
-          nextHintButton.textContent = "힌트3";
-          nextHintButton.hidden = !stage.hint3;
+          nextHintButton.textContent = stage.hint3 ? "힌트3" : "문제";
+          nextHintButton.hidden = false;
         } else if (level === 3) {
           hintSecondCopy.textContent = formatHintText(stage.hint3);
-          nextHintButton.textContent = "힌트4";
-          nextHintButton.hidden = !stage.hint4Images?.length;
+          nextHintButton.textContent = stage.hint4Images?.length ? "힌트4" : "문제";
+          nextHintButton.hidden = false;
         } else if (level === 4) {
           hintSecondCopy.hidden = true;
           hintExtraPhotos.hidden = false;
@@ -3131,17 +3158,32 @@
       }
 
       function showSecondHintPanel() {
+        if (!stages[currentStage]?.hint2) {
+          returnToProblem();
+          return;
+        }
+
         showHintPanel(2);
       }
 
       function showNextHintPanel() {
-        if (activeHintLevel >= 4) {
-          closeHint();
-          setView("stage1");
+        const stage = stages[currentStage];
+        const isLastHint =
+          activeHintLevel >= 4 ||
+          (activeHintLevel === 2 && !stage?.hint3) ||
+          (activeHintLevel === 3 && !stage?.hint4Images?.length);
+
+        if (isLastHint) {
+          returnToProblem();
           return;
         }
 
         showHintPanel(activeHintLevel + 1);
+      }
+
+      function returnToProblem() {
+        closeHint();
+        setView("stage1");
       }
 
       function showPreviousHintPanel() {
